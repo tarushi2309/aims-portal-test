@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    <title>Mentify - Login Page</title>
+    <meta content="" name="description" />
+    <meta content="" name="keywords" />
+
+    <!-- Favicons -->
+    <link href="../static/assets/img/favicon.png" rel="icon" />
+    <link href="../static/assets/img/apple-touch-icon.png" rel="apple-touch-icon" />
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Montserrat:300,400,500,600,700"
+      rel="stylesheet"
+    />
+
+    <!-- Vendor CSS Files -->
+    <link href="../static/assets/vendor/aos/aos.css" rel="stylesheet" />
+    <link
+      href="../static/assets/vendor/bootstrap/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="../static/assets/vendor/bootstrap-icons/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link
+      href="../static/assets/vendor/glightbox/css/glightbox.min.css"
+      rel="stylesheet"
+    />
+    <link href="../static/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet" />
+
+    <!-- Template Main CSS File -->
+    <link href="../static/assets/css/style.css" rel="stylesheet" />
+  </head>
+</html>
+
+<body>
+  <!-- ======= Header ======= -->
+  <header
+    id="header"
+    class="fixed-top d-flex align-items-center header-transparent"
+  >
+    <div class="container d-flex align-items-center">
+      <h1 class="logo me-auto"><a href="/">AIMS</a></h1>
+    </div>
+  </header>
+  <!-- End Header -->
+
+  <section class="vh-100" style="background-color: #ffffff">
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+          <div class="card" style="background-color: #bcf1ff">
+            <div class="card-body p-5 text-center">
+              <h3 class="mb-5" style="font-family: Open Sans; color: #000408">
+                Welcome Back!
+              </h3>
+
+              <form action="/process_otp/{{email_id}}" method="post">
+                <div class="msg">{{ msg }}</div>
+              <div class="form-outline">
+                <input
+                  type="text"
+                  id="typeEmailX-2"
+                  name="otp"
+                  class="form-control form-control-lg"
+                  placeholder="OTP"
+                />
+                <label class="form-label" for="typeEmailX-2"></label>
+              </div>
+                <u
+                  ><b
+                    ><a href="signup_main" style="color: #00304e"
+                      >Sign Up</a
+                    ></b
+                  ></u
+                >
+              </p>
+
+              <button
+                class="btn btn-primary btn-md btn-block"
+                type="submit"
+                style="background: #00304e"
+              >
+                Login
+              </button>
+            </form>
+              <!-- <a href="#" class="btn-get-started scrollto" type="submit"
+                  >Sign Up</a
+                > -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</body>

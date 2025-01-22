@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    <title>Student - Dashboard</title>
+    <meta content="" name="description" />
+    <meta content="" name="keywords" />
+
+    <!-- Favicons -->
+    <link href="../static/assets/img/favicon.png" rel="icon" />
+    <link href="../static/assets/img/apple-touch-icon.png" rel="apple-touch-icon" />
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Montserrat:300,400,500,600,700"
+      rel="stylesheet"
+    />
+
+    <!-- Vendor CSS Files -->
+    <link href="../static/assets/vendor/aos/aos.css" rel="stylesheet" />
+    <link
+      href="../static/assets/vendor/bootstrap/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="../static/assets/vendor/bootstrap-icons/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link
+      href="../static/assets/vendor/glightbox/css/glightbox.min.css"
+      rel="stylesheet"
+    />
+    <link href="../static/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet" />
+
+    <!-- Template Main CSS File -->
+    <link href="../static/assets/css/style.css" rel="stylesheet" />
+  </head>
+  <style>
+    li::marker {
+      font-size: 0;
+    }
+
+    section {
+      padding: 60px 0;
+    }
+
+    .carousel-item {
+      height: 32rem;
+      background: rgb(209, 237, 255);
+      color: rgb(0, 0, 0);
+      position: relative;
+      background-position: center;
+      background-size: 10px;
+    }
+    .overlay-image {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      top: 0;
+      background-position: right center;
+      background-repeat: no-repeat;
+      background-size: 30%;
+      margin-right: 40px;
+    }
+
+    a {
+      text-decoration: inherit;
+      color: inherit;
+      text-decoration: None;
+    }
+    a:hover {
+      text-decoration: none;
+      color: inherit;
+    }
+  </style>
+
+  <body>
+    <!-- ======= Header ======= -->
+    <header
+      id="header"
+      class="fixed-top d-flex align-items-center header-transparent"
+    >
+      <div class="container d-flex align-items-center">
+        <h1 class="logo me-auto"><a href="/">Aims</a></h1>
+        <br>
+        <h2 class="logo me-auto">Welcome {{mentee['mentee_name']}}</a></h2>
+        <nav id="navbar" class="navbar order-last order-lg-0">
+          <ul>
+            <li><a class="nav-link scrollto active" href="{{ url_for('dashboard_mentee', username=mentee['username']) }}">Home</a></li>
+            <li><a href="{{ url_for('profile_mentee', username=mentee['username'],msg='') }}">Profile</a></li>
+            <li><a href="{{ url_for('my_courses', username=mentee['username'],msg='') }}">My Courses</a></li>
+            <li><a href="{{ url_for('logout')}}">Logout</a></li>
+          </ul>
+          <i class="bi bi-list mobile-nav-toggle"></i>
+        </nav>
+      </div>
+    </header>
+    <!-- End Header -->
+
+    <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+      <ol class="carousel-indicators">
+        <li
+          data-bs-target="#myCarousel"
+          data-bs-slide-to="0"
+          class="active"
+        ></li>
+        <li data-bs-target="#myCarousel" data-bs-slide-to="1"></li>
+        <li data-bs-target="#myCarousel" data-bs-slide-to="2"></li>
+      </ol>
+
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <a href=""
+            ><div
+              class="overlay-image"
+              style="
+                background-image: url('../static/assets/img/webdev1-removebg-preview.png');
+              "
+            ></div>
+            <div
+              class="container"
+              style="
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                padding-bottom: 50px;
+              "
+            >
+              <h1 style="margin-left: 100px">Data Science</h1>
+              <p style="margin-left: 100px; margin-bottom: 150px">
+                Learn from the best!
+              </p>
+            </div>
+          </a>
+        </div>
+
+        <div class="carousel-item">
+          <a href=""
+            ><div
+              class="overlay-image"
+              style="
+                background-image: url('../static/assets/img/webdev-removebg-preview.png');
+              "
+            ></div>
+            <div
+              class="container"
+              style="
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                padding-bottom: 50px;
+              "
+            >
+              <h1 style="margin-left: 100px">Software Development</h1>
+              <p style="margin-left: 100px; margin-bottom: 150px">
+                Learn from the best!
+              </p>
+            </div>
+          </a>
+        </div>
+
+        <div class="carousel-item">
+          <a href=""
+            ><div
+              class="overlay-image"
+              style="
+                background-image: url('../static/assets/img/ML_img-removebg-preview.png');
+              "
+            ></div>
+            <div
+              class="container"
+              style="
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                padding-bottom: 50px;
+              "
+            >
+              <h1 style="margin-left: 100px">Machine Learning and AI</h1>
+              <p style="margin-left: 100px; margin-bottom: 150px">
+                Learn from the best!
+              </p>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <a
+        href="#myCarousel"
+        class="carousel-control-prev"
+        role="button"
+        data-bs-slide="prev"
+      >
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      </a>
+      <a
+        href="#myCarousel"
+        class="carousel-control-next"
+        role="button"
+        data-bs-slide="next"
+      >
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <main>
+      <section id="services" class="services section-bg">
+        <div class="container" data-aos="fade-up">
+          <header class="section-header">
+            <h3>Mentorship Programs</h3>
+            <p>
+              Sort and filter as per your interests! We offer a variety of
+              programs, and would love to help you find the right one.
+            </p>
+          </header>
+
+          <div class="justify-content-center align-items-center">
+            <form method="POST" action="{{url_for('search_sort_filter')}}?username={{mentee['username']}}">
+              <label for="filter" class="border-transparent"></label>
+
+              <select name="filter" id="filter-form">
+                <option value="none" {% if selected_filter == 'none' %}selected{% endif %}>Filter - None</option>
+                {% for tag_list in tags %}
+                <option value="{{ tag_list.tag_name }}" {% if selected_filter == tag_list.tag_name %}selected{% endif %}>{{ tag_list.tag_name }}</option>
+                {% endfor %}
+              </select>
+              
+              <select name="sort" id="sort-form">
+                <option value="valuation" {% if sort_option == 'valuation' %}selected{% endif %}>Sort - None</option>
+                <option value="valuation" {% if sort_option == 'valuation' %}selected{% endif %}>Most popular</option>
+                <option value="equity" {% if sort_option == 'equity' %}selected{% endif %}>Low to high price</option>
+                <option value="investment" {% if sort_option == 'investment' %}selected{% endif %}>High to low price</option>
+              </select>
+              
+              <input
+                type="text"
+                name="search_term"
+                id="search-form" 
+                style="
+                background-color: rgb(216, 237, 250);
+                border-color: #000000;
+                border-width: 1px;
+                "
+                placeholder="Search.."
+                value="{{ search_term }}"
+              />
+              <select name="search_type">
+                <option value="mentor" {% if search_type == 'mentor' %}selected{% endif %}>Search by mentor</option>
+                <option value="course" {% if search_type == 'course' %}selected{% endif %}>Search by course</option>
+              </select>
+              
+             <button type="submit">Apply</button>
+            </form>
+          </div>
+          
+          <br />
+
+         <div class="row g-5">
+            {% for course in data %}
+            <div class="col-md-6 col-lg-4 wow bounceInUp" data-aos="zoom-in" data-aos-delay="100">
+                <div class="box">
+                    <div class="icon" style="background: rgb(209, 237, 255)">
+                        <!-- Add appropriate icon or image for the course -->
+                    </div>
+                    <h3 class="title"><a href="{{ url_for('view_course') }}?viewer=mentee&course_id={{course['course_id']}}&mentee_id={{mentee['mentee_id']}}&isapproval=no">{{ course.course_name }}</a></h3>
+                    <h5 style="font-size: small">Course starts: {{ course.course_start }}</h5>
+                    <h5 style="font-size: small">Price: {{ course.course_price }} INR</h5>
+                    <p class="description">{{ course.course_desc }}</p>
+                    
+                </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </section>
+      <!-- End Services Section -->
+    </main>
+
+    <!-- ======= Footer ======= -->
+    <footer id="footer" class="section-bg">
+      <div class="container">
+        <div class="copyright">
+          &copy; Copyright <strong>Mentify 2024</strong>
+        </div>
+      </div>
+    </footer>
+    <!-- End  Footer -->
+
+    <a
+      href="#"
+      class="back-to-top d-flex align-items-center justify-content-center"
+      ><i class="bi bi-arrow-up-short"></i
+    ></a>
+
+    <!-- Vendor JS Files -->
+    <script src="../static/assets/vendor/purecounter/purecounter_vanilla.js"></script>
+    <script src="../static/assets/vendor/aos/aos.js"></script>
+    <script src="../static/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../static/assets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="../static/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="../static/assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="../static/assets/vendor/php-email-form/validate.js"></script>
+
+    <!-- Template Main JS File -->
+    <script src="../static/assets/js/main.js"></script>
+  </body>
+</html>

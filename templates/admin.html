@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+  <title>Mentify - Dashboard</title>
+  <meta content="" name="description" />
+  <meta content="" name="keywords" />
+
+  <!-- Favicons -->
+  <link href="../static/assets/img/favicon.png" rel="icon" />
+  <link href="../static/assets/img/apple-touch-icon.png" rel="apple-touch-icon" />
+
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Montserrat:300,400,500,600,700"
+    rel="stylesheet" />
+
+  <!-- Vendor CSS Files -->
+  <link href="../static/assets/vendor/aos/aos.css" rel="stylesheet" />
+  <link href="../static/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="../static/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
+  <link href="../static/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet" />
+  <link href="../static/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet" />
+
+  <!-- Template Main CSS File -->
+  <link href="../static/assets/css/style.css" rel="stylesheet" />
+</head>
+
+<body>
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top d-flex align-items-center header-transparent">
+    <div class="container d-flex align-items-center">
+      <h1 class="logo me-auto"><a href="/">Mentify</a></h1>
+      <nav id="navbar" class="navbar order-last order-lg-0">
+        <ul>
+          <li><a class="nav-link scrollto active" href="">Home</a></li>
+          <li>
+            <a href="">Approvals & Tags</a>
+          </li>
+          <!-- <li><a href="#services">Update Tags</a></li> -->
+          <li><a href="">Logout</a></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav>
+    </div>
+  </header>
+  <!-- End Header -->
+
+  <main style="margin-top: 10%">
+    <section id="services" class="services section-bg">
+      <div class="container" data-aos="fade-up">
+        <header class="section-header">
+          <h3>Mentors to be approved</h3>
+        </header>
+
+        
+
+        <br />
+
+        <div class="row g-5">
+          {% for mentor in mentors %}
+          <div class="col-md-6 col-lg-4 wow bounceInUp" data-aos="zoom-in" data-aos-delay="100">
+            <div class="box">
+              <div class="icon" style="background: rgb(209, 237, 255)">
+                <i class="bi bi-person-circle" style="color: #1985f0"></i>
+              </div>
+              <h3 class="title"><a href="{{ url_for('view_mentor_profile') }}?viewer=admin&username={{mentor.username}}&mentee_id=0">{{mentor.mentor_name}}</a></h3>
+              <p class="description">{{mentor.interests}}</p>
+              <!-- <button class="btn btn-primary btn-md btn-block" type="submit" style="background: #00304e">
+                  View Profile
+              </button> -->
+            </div>
+          </div>
+          {% endfor %}
+
+          
+          </div>
+    </section>
+    <br>
+    <main style="margin-top: 10%">
+      <section id="services" class="services section-bg">
+        <div class="container" data-aos="fade-up">
+          <header class="section-header">
+            <h3>Courses to be approved</h3>
+          </header>
+  
+         
+  
+          <br />
+  
+          <div class="row g-5">
+            {% for course in courses %}
+            <div class="col-md-6 col-lg-4 wow bounceInUp" data-aos="zoom-in" data-aos-delay="100">
+              <div class="box">
+                <div class="icon" style="background: rgb(209, 237, 255)">
+                  <i class="bi bi-journal-text" style="color: #1985f0"></i>
+                </div>
+                <h3 class="title"><a href="{{ url_for('view_course') }}?viewer=admin&course_id={{course['course_id']}}&mentee_id=0&isapproval=yes">{{course.course_name}}</a></h3>
+                <p class="description">{{course.course_desc}}</p>
+                <!-- <button class="btn btn-primary btn-md btn-block" type="submit" style="background: #00304e">
+                    View Profile
+                </button> -->
+              </div>
+            </div>
+            {% endfor %}
+  
+           
+            </div>
+      </section>
+      <br>
+      <section id="services" class="services section-bg">
+        <div class="container" data-aos="fade-up">
+          <header class="section-header">
+            <h3>Mentee Complaints to be resolved</h3>
+          </header>
+  
+          
+  
+          <br />
+  
+          <div class="row g-5">
+            {% for complaint in mentee_complaints %}
+            <div class="col-md-6 col-lg-4 wow bounceInUp" data-aos="zoom-in" data-aos-delay="100">
+              <div class="box">
+                <div class="icon" style="background: rgb(209, 237, 255)">
+                  <i class="bi bi-journal-text" style="color: #1985f0"></i>
+                </div>
+                <h3 class="title"><a href="{{ url_for('view_mentee_complaint') }}?&complaint_id={{complaint['complaint_id']}}">View Complaint</a></h3>
+                <p class="description">{{complaint.complaint_desc}}</p>
+                <!-- <button class="btn btn-primary btn-md btn-block" type="submit" style="background: #00304e">
+                    View Profile
+                </button> -->
+              </div>
+            </div>
+            {% endfor %}
+  
+           
+            </div>
+      </section>
+      <br>
+      <section id="services" class="services section-bg">
+        <div class="container" data-aos="fade-up">
+          <header class="section-header">
+            <h3>Mentor Complaints to be resolved</h3>
+          </header>
+  
+          
+  
+          <br />
+  
+          <div class="row g-5">
+            {% for complaint in mentor_complaints %}
+            <div class="col-md-6 col-lg-4 wow bounceInUp" data-aos="zoom-in" data-aos-delay="100">
+              <div class="box">
+                <div class="icon" style="background: rgb(209, 237, 255)">
+                  <i class="bi bi-journal-text" style="color: #1985f0"></i>
+                </div>
+                <h3 class="title"><a href="{{ url_for('view_mentor_complaint') }}?&complaint_id={{complaint['complaint_id']}}">View Complaint</a></h3>
+                <p class="description">{{complaint.complaint_desc}}</p>
+                <!-- <button class="btn btn-primary btn-md btn-block" type="submit" style="background: #00304e">
+                    View Profile
+                </button> -->
+              </div>
+            </div>
+            {% endfor %}
+  
+           
+            </div>
+      </section>
+    <!-- End Services Section -->
+    <br>
+    <section style="background-color: #ffffff; margin-top: 3%">
+      <header class="section-header">
+        <h3>Add program Tags</h3>
+      </header>
+      <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center">
+          <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+            <div class="card" style="background-color: #bcf1ff">
+              <div class="card-body p-5 text-center">
+
+                <form action="/add_tag" method="post">
+                <div class="form-outline">
+                  <input type="text" id="typeEmailX-2" class="form-control form-control-lg" placeholder="Enter tag" name="tag"/>
+                  <label class="form-label" for=""></label>
+                </div>
+
+                <button class="btn btn-primary btn-md btn-block" type="submit" style="background: #00304e">
+                  Add
+                </button>
+              </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer" class="section-bg">
+    <div class="container">
+      <div class="copyright">
+        &copy; Copyright <strong>Mentify 2024</strong>
+      </div>
+    </div>
+  </footer>
+  <!-- End  Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="../static/assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="../static/assets/vendor/aos/aos.js"></script>
+  <script src="../static/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../static/assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="../static/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="../static/assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="../static/assets/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="../static/assets/js/main.js"></script>
+</body>
+
+</html>

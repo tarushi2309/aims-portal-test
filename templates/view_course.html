@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+  <title>Mentify - Dashboard</title>
+  <meta content="" name="description" />
+  <meta content="" name="keywords" />
+
+  <!-- Favicons -->
+  <link href="../static/assets/img/favicon.png" rel="icon" />
+  <link href="../static/assets/img/apple-touch-icon.png" rel="apple-touch-icon" />
+
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Montserrat:300,400,500,600,700"
+    rel="stylesheet" />
+
+  <!-- Vendor CSS Files -->
+  <link href="../static/assets/vendor/aos/aos.css" rel="stylesheet" />
+  <link href="../static/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="../static/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
+  <link href="../static/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet" />
+  <link href="../static/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet" />
+
+  <!-- Template Main CSS File -->
+  <link href="../static/assets/css/style.css" rel="stylesheet" />
+</head>
+<style>
+  li::marker {
+    font-size: 0;
+  }
+
+  section {
+    padding: 60px 0;
+  }
+
+  .carousel-item {
+    height: 32rem;
+    background: rgb(209, 237, 255);
+    color: rgb(0, 0, 0);
+    position: relative;
+    background-position: center;
+    background-size: 10px;
+  }
+
+  .overlay-image {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    background-position: right center;
+    background-repeat: no-repeat;
+    background-size: 30%;
+    margin-right: 40px;
+  }
+
+  a {
+    text-decoration: inherit;
+    color: inherit;
+    text-decoration: None;
+  }
+
+  a:hover {
+    text-decoration: none;
+    color: inherit;
+  }
+</style>
+
+<body>
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top d-flex align-items-center header-transparent">
+    <div class="container d-flex align-items-center">
+      <h1 class="logo me-auto"><a href="/">Mentify</a></h1>
+      <nav id="navbar" class="navbar order-last order-lg-0">
+        <ul>
+          <li>{%if viewer=='mentor'%}
+            <a class="nav-link scrollto" href="{{ url_for('dashboard_mentor',username=mentor['username']) }}">Home</a>
+            {%elif viewer=='admin'%}
+            <a class="nav-link scrollto" href="{{ url_for('admin') }}">Home</a>
+            {%elif viewer=='mentee'%}
+            <a class="nav-link scrollto" href="{{ url_for('dashboard_mentee',username=mentee['username']) }}">Home</a>
+            {%endif%}
+
+          </li>
+          <li>{%if viewer=='mentor'%}<a href="{{url_for('profile_mentor', username=mentor['username'])}}">Profile</a>{%elif viewer=='mentee'%}<a href="{{url_for('profile_mentee', username=mentee['username'])}}">Profile</a>{%endif%}</li>
+          <li>{%if viewer=='mentor'%}
+            <a href="{{url_for('create_program', username=mentor['username'])}}">Create Program</a>
+            {%elif viewer=='mentee'%}
+            <a href="{{ url_for('my_courses', username=mentee['username'],msg='') }}">My Courses</a>
+          {%endif%}</li>
+          <li><a href="">Logout</a></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav>
+    </div>
+  </header>
+  <!-- End Header -->
+
+  <main>
+    <section id="services" class="services section-bg" style="margin-top: 5%">
+      <div class="container" data-aos="fade-up">
+        <header class="section-header">
+          <h3>{%if viewer=='admin'%}Mentorship Program Proposal{%else%} Mentorship Program Details {%endif%}</h3>
+
+        </header>
+
+        <div class="container mt-3 mb-3" style="background-color: #d0f5ff">
+          <div class="col-md-12">
+            <div class="p-3 py-5">
+              <div class="d-flex justify-content-center align-items-center mb-3 text">
+                <h2 style="text-align: center;">Course Details</h2>
+              </div>
+              <form action="{{url_for('process_viewer_request')}}?course_id={{course['course_id']}}&mentee_id={{mentee_id}}" method="post">
+                <div class="row mt-2">
+                  <div class="col-md-12"><label class="labels"><b>Course Name</b></label><input type="text"
+                      class="form-control" placeholder="Full Name" value="{{course['course_name']}}" readonly></div>
+                  <div class="col-md-12">
+                    <label class="labels"><b>Mentor Name</b></label>
+                    <input type="text" class="form-control" placeholder="Full Name" value="{{ mentor.mentor_name }}"
+                      readonly>
+                    <a href="{{ url_for('view_mentor_profile')}}?viewer={{viewer}}&username={{mentor['username']}}&mentee_id={{mentee_id}}"
+                      class="btn btn-primary">View Profile</a>
+                  </div>
+
+                </div>
+                <div class="row mt-2">
+                  <div class="col-md-6"><label class="labels" style="margin-top: 4%;"><b>Program Start
+                        Date</b></label><input type="date" class="form-control" placeholder=""
+                      value="{{course['course_start']}}" readonly></div>
+                  <div class="col-md-6"><label class="labels" style="margin-top: 4%;"><b>Program End
+                        Date</b></label><input type="date" class="form-control" placeholder=""
+                      value="{{course['course_end']}}" readonly></div>
+                  <div class="col-md-6"><label class="labels" style="margin-top: 4%;"><b>Program Price</b></label><input
+                      type="text" class="form-control" placeholder="" name="price" value="{{course['course_price']}}"
+                      readonly></div>
+                  <div class="col-md-6"><label class="labels" style="margin-top: 4%;"><b>Max mentees </b></label><input
+                      type="number" class="form-control" placeholder="" name="max_mentee"
+                      value="{{course['max_limit']}}" readonly></div>
+                </div>
+
+                <div class="col-md-12"><label class="labels" style="margin-top: 4%;"><i>Program
+                      Description</i></label><textarea type="text" class="form-control"
+                    placeholder="Kindly tell us about what guidance and how this program offers" value=""
+                    readonly>{{course['course_desc']}}</textarea></div> <br>
+
+                <p>Tags relevant for the course</p>
+
+
+                <div class="col-md-12">
+                  {%for tag in tags%}
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" checked readonly>
+                    <label class="form-check-label" for="defaultCheck1">
+                      {{tag['tag_name']}}
+                    </label>
+                  </div>
+                  {%endfor%}
+
+                </div>
+
+                {%if viewer=='admin' and is_approval=='yes'%}
+                <div class="col-md-12"><label class="labels" style="margin-top: 4%;"><i>Admin
+                      comments</i></label><textarea type="text" class="form-control"
+                    placeholder="Any comments or suggestions on the course" value="" name="admin_comment"></textarea>
+                </div> <br>
+
+                <div class="mt-5 text-center"><button class="btn profile-button" type="submit"
+                    style="color: #ffffff; background:rgb(10, 95, 10); " name="accept">Approve course</button>
+                  <button class="btn profile-button" type="submit" style="background: rgb(168, 37, 37); color: #ffffff;"
+                    name="reject">Reject course</button>
+                </div>
+                {%elif viewer=='admin' and is_approval=='no'%}
+                <div class="col-md-6"><label class="labels" style="margin-top: 4%;"><b>Course approval
+                      status</b></label><input type="text" class="form-control" placeholder=""
+                    value="{{course['course_status']}}" readonly></div>
+                <div class="col-md-12"><label class="labels" style="margin-top: 4%;"><i>Admin comments on
+                      course</i></label><textarea type="text" class="form-control" placeholder="Admin comments" value=""
+                    readonly>{{course['admin_comment']}}</textarea></div> <br>
+                    <div class="col-md-12"><label class="labels"><b>No of students Enrolled : </b></label><input type="number"
+                      class="form-control" placeholder="Full Name" value="{{course_mentee|length}}" readonly></div>
+                      {% elif viewer == 'mentee' and course.max_limit > course_mentee|length %}
+                <div class="col-md-12"><label class="labels"><b>No of students Enrolled : </b></label><input type="number"
+                  class="form-control" placeholder="Full Name" value="{{course_mentee|length}}" readonly></div>
+                <div class="mt-5 text-center"><button class="btn profile-button" type="submit" style="color: #ffffff;"
+                    name="register">Register</button></div>
+                    {% elif viewer == 'mentee' and course.max_limit <= course_mentee|length %}
+                    <div class="col-md-12"><label class="labels"><b>No of students Enrolled : </b></label><input type="number"
+                      class="form-control" placeholder="Full Name" value="{{course_mentee|length}}" readonly></div>
+                    <h5>Enrollment in this course is full</h5>
+                    <a href="{{ url_for('dashboard_mentee', username=mentee['username']) }}" class="btn btn-primary">Browse other courses</a>
+                {%elif viewer=='mentor'%}
+                <div class="col-md-6"><label class="labels" style="margin-top: 4%;"><b>Course approval
+                      status</b></label><input type="text" class="form-control" placeholder=""
+                    value="{{course['course_status']}}" readonly></div>
+                <div class="col-md-12"><label class="labels" style="margin-top: 4%;"><i>Admin comments on
+                      course</i></label><textarea type="text" class="form-control" placeholder="Admin comments" value=""
+                    readonly>{{course['admin_comment']}}</textarea></div> <br>
+                    <div class="col-md-12"><label class="labels"><b>No of students Enrolled : </b></label><input type="number"
+                      class="form-control" placeholder="Full Name" value="{{course_mentee|length}}" readonly></div>
+                {%endif%}
+              </form>
+            </div>
+          </div>
+        </div>
+    </section>
+    <!-- End Services Section -->
+  </main>
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer" class="section-bg">
+    <div class="container">
+      <div class="copyright">
+        &copy; Copyright <strong>Mentify 2024</strong>
+      </div>
+    </div>
+  </footer>
+  <!-- End  Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="../static/assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="../static/assets/vendor/aos/aos.js"></script>
+  <script src="../static/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../static/assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="../static/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="../static/assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="../static/assets/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="../static/assets/js/main.js"></script>
+</body>
+
+</html>

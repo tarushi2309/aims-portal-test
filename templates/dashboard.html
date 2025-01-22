@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Mentify - Dashboard</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="../static/assets/img/favicon.png" rel="icon">
+  <link href="../static/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Montserrat:300,400,500,600,700" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="../static/assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="../static/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../static/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="../static/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="../static/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="../static/assets/css/style.css" rel="stylesheet">
+
+</head>
+<style>
+    li::marker{font-size:0;}
+
+    section{
+        padding: 60px 0;
+    }
+
+    .carousel-item{
+        height:32rem;
+        background: rgb(141, 176, 198);
+        color: white;
+        position: relative;
+        background-position: center;
+        background-size: cover;
+    }
+    .overlay-image{
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        top: 0;
+        background-position: right center;
+        background-repeat: no-repeat;
+        background-size: contain;
+        margin-right: 50px;
+    }
+
+    a{
+        text-decoration: inherit;
+        color: inherit;
+        Text-Decoration: None
+    }
+    a:hover{   
+    text-decoration: none;
+    color: inherit;
+    }
+
+</style>
+
+<body>
+    <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top d-flex align-items-center header-transparent">
+        <div class="container d-flex align-items-center">
+        <h1 class="logo me-auto"><a href="/">Mentify</a></h1>
+            <nav id="navbar" class="navbar order-last order-lg-0">
+                <ul>
+                <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+                <li><a class="nav-link scrollto" href="#services">Services</a></li>
+                <li><a href="profile">Profile</a></li>
+                </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav>
+        </div>
+    </header>
+    <!-- End Header -->
+
+      
+    <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+
+        <ol class="carousel-indicators">
+            <li data-bs-target="#myCarousel" data-bs-slide-to="0" class="active"></li>
+            <li data-bs-target="#myCarousel" data-bs-slide-to="1"></li>
+            <li data-bs-target="#myCarousel" data-bs-slide-to="2"></li>
+        </ol>
+
+        <div class="carousel-inner">
+
+            <div class="carousel-item active">
+                <a href=""><div class="overlay-image" style="background-image: url();"></div>
+                    <div class="container" style="position: absolute; bottom: 0; left: 0; right: 0;
+                    padding-bottom: 50px;">
+                        <h1 style="margin-left: 100px;">Data Science</h1>
+                        <p style="margin-left: 100px; margin-bottom: 150px;">Learn from the best!</p>
+                    </div>
+                </a>
+            </div>
+
+            <div class="carousel-item ">
+                <a href="/explore/?q=HealthCare#ex"><div class="overlay-image" style="background-image: url(/static/img/health.svg);"></div>
+                    <div class="container" style="position: absolute; bottom: 0; left: 0; right: 0;
+                    padding-bottom: 50px;">
+                        <h1 style="margin-left: 100px;">ML Ops</h1>
+                        <p style="margin-left: 100px; margin-bottom: 150px;">Learn from the best!</p>
+                    </div>
+                </a>
+            </div>
+
+            <div class="carousel-item">
+                <a href="/explore/?q=FinTech#ex"><div class="overlay-image" style="background-image: url(/static/img/money.svg);"></div>
+                    <div class="container" style="position: absolute; bottom: 0; left: 0; right: 0;
+                    padding-bottom: 50px;">
+                        
+                        <h1 style="margin-left: 100px;">Economics</h1>
+                        <p style="margin-left: 100px; margin-bottom: 150px;">Learn from the best!</p>
+                    </div>
+                </a>
+            </div>
+            
+        </div>
+
+        <a href="#myCarousel" class="carousel-control-prev" role="button" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        </a>
+        <a href="#myCarousel" class="carousel-control-next" role="button" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        </a>
+    </div>
+
+    <main>
+
+        <!-- ======= Services Section ======= -->
+        <section id="services" class="services section-bg">
+        <div class="container" data-aos="fade-up">
+
+            <header class="section-header">
+            <h3>Mentorship Programs</h3>
+            <p>Laudem latine persequeris id sed, ex fabulas delectus quo. No vel partiendo abhorreant vituperatoribus.</p>
+            </header>
+
+            <div class="row g-5">
+
+            <div class="col-md-6 col-lg-4 wow bounceInUp" data-aos="zoom-in" data-aos-delay="100">
+                <div class="box">
+                <div class="icon" style="background: #fceef3;"><i class="bi bi-briefcase" style="color: #ff689b;"></i></div>
+                <h4 class="title"><a href="">Lorem Ipsum</a></h4>
+                <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-delay="200">
+                <div class="box">
+                <div class="icon" style="background: #fff0da;"><i class="bi bi-card-checklist" style="color: #e98e06;"></i></div>
+                <h4 class="title"><a href="">Dolor Sitema</a></h4>
+                <p class="description">Minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat tarad limino ata</p>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-delay="300">
+                <div class="box">
+                <div class="icon" style="background: #e6fdfc;"><i class="bi bi-bar-chart" style="color: #3fcdc7;"></i></div>
+                <h4 class="title"><a href="">Sed ut perspiciatis</a></h4>
+                <p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 wow" data-aos="zoom-in" data-aos-delay="100">
+                <div class="box">
+                <div class="icon" style="background: #eafde7;"><i class="bi bi-binoculars" style="color:#41cf2e;"></i></div>
+                <h4 class="title"><a href="">Magni Dolores</a></h4>
+                <p class="description">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-delay="200"">
+            <div class=" box">
+                <div class="icon" style="background: #e1eeff;"><i class="bi bi-brightness-high" style="color: #2282ff;"></i></div>
+                <h4 class="title"><a href="">Nemo Enim</a></h4>
+                <p class="description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque</p>
+            </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-delay="300">
+            <div class="box">
+                <div class="icon" style="background: #ecebff;"><i class="bi bi-calendar4-week" style="color: #8660fe;"></i></div>
+                <h4 class="title"><a href="">Eiusmod Tempor</a></h4>
+                <p class="description">Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi</p>
+            </div>
+            </div>
+
+        </div>
+
+        </div>
+        </section><!-- End Services Section -->
+
+    </main>
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer" class="section-bg">
+
+    <div class="container">
+      <div class="copyright">
+        &copy; Copyright <strong>Mentify 2024</strong>
+      </div>
+    </div>
+  </footer><!-- End  Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="../static/assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="../static/assets/vendor/aos/aos.js"></script>
+  <script src="../static/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../static/assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="../static/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="../static/assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="../static/assets/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="../static/assets/js/main.js"></script>
+
+</body>
+
+</html>

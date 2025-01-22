@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    <title>Mentify - Dashboard</title>
+    <meta content="" name="description" />
+    <meta content="" name="keywords" />
+
+    <!-- Favicons -->
+    <link href="../static/assets/img/favicon.png" rel="icon" />
+    <link href="../static/assets/img/apple-touch-icon.png" rel="apple-touch-icon" />
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Montserrat:300,400,500,600,700"
+      rel="stylesheet"
+    />
+
+    <!-- Vendor CSS Files -->
+    <link href="../static/assets/vendor/aos/aos.css" rel="stylesheet" />
+    <link
+      href="../static/assets/vendor/bootstrap/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="../static/assets/vendor/bootstrap-icons/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link
+      href="../static/assets/vendor/glightbox/css/glightbox.min.css"
+      rel="stylesheet"
+    />
+    <link href="../static/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet" />
+
+    <!-- Template Main CSS File -->
+    <link href="../static/assets/css/style.css" rel="stylesheet" />
+  </head>
+
+  <style>
+
+  </style>
+
+  <body>
+    <!-- ======= Header ======= -->
+    <header
+      id="header"
+      class="fixed-top d-flex align-items-center header-transparent"
+    >
+      <div class="container d-flex align-items-center">
+        <h1 class="logo me-auto"><a href="/">Mentify</a></h1>
+        <nav id="navbar" class="navbar order-last order-lg-0">
+          <ul>
+            <li><a class="nav-link scrollto active" href="{{url_for('dashboard_mentee', username=mentee['username'])}}">Home</a></li>
+            <li><a class="nav-link scrollto active" href="{{ url_for('profile_mentee', username=mentee['username'],msg='') }}">Profile</a></li>
+            <li><a href="{{ url_for('my_courses', username=mentee['username'],msg='') }}">My Courses</a></li>
+            <li><a href="/logout">Logout</a></li>
+          </ul>
+          <i class="bi bi-list mobile-nav-toggle"></i>
+        </nav>
+      </div>
+    </header>
+    <!-- End Header -->
+
+    <main>
+      <div class="container rounded bg-white mt-5 mb-5">
+        <div class="row">
+          <div class="col-md-3 border-right">
+            <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="https://img.freepik.com/premium-vector/user-profile-icon-flat-style-member-avatar-vector-illustration-isolated-background-human-permission-sign-business-concept_157943-15752.jpg?size=338&ext=jpg&ga=GA1.1.1395880969.1710028800&semt=ais"><span class="font-weight-bold">{{mentee.mentee_name}}</span><span class="text-black-50">{{mentee.username}}</span><span> </span></div>
+          </div>
+          <div class="col-md-8 border-right">
+            <div class="p-3 py-5">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <u><h3 class="text-right">Profile Settings</h3></u>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <u><h5 class="text-right">{{msg}}</h5></u>
+              </div>
+                <form action="" method="post">
+                <div class="row mt-2">
+                    <div class="col-md-6"><label class="labels"><b>Name</label><input type="text" class="form-control" placeholder="Full Name" value="{{mentee['mentee_name']}}" name="name"></div>
+            
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-6"><label class="labels" style="margin-top: 4%;"><b>Phone Number</b></label><input type="text" class="form-control" placeholder="Phone number" value="{{mentee['contact_no']}}" name="contact_no"></div>
+                    <div class="col-md-6"><label class="labels" style="margin-top: 4%;"><b>Email ID</b></label><input type="text" class="form-control" placeholder="Email id" value="{{mentee['email_id']}}" name="email_id"></div>
+                    <div class="col-md-6"><label class="labels" style="margin-top: 4%;"><b>Education/Experience</b></label><input type="text" class="form-control" placeholder="Institute/company" value="{{mentee['education']}}" name="education"></div>
+                </div>
+                <div class="col-md-12"><label class="labels" style="margin-top: 4%;"><i>What mentorship I'm looking for/Your interests</i></label><textarea type="text" name="interests" class="form-control" placeholder="Kindly tell us about what guidance you would like to find through our platform" >{{mentee.interests}}</textarea></div> <br>
+                <p>Kindly select relevant tags for the course</p>
+                                
+                
+                <div class="col-md-12">
+                  {%for tag in tags%}
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" {% if is_checked[tag['tag_name']] %}checked{% endif %} id="defaultCheck1" name="{{tag['tag_name']}}">
+                        <label class="form-check-label" for="defaultCheck1">
+                            {{tag['tag_name']}}
+                        </label>
+                    </div>
+                    {%endfor%}
+
+                <div class="mt-5 text-center"><button class="btn profile-button" type="submit" style="color: #ffffff;">Save Profile</button></div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    </main>
+    <!-- ======= Footer ======= -->
+    <footer id="footer" class="section-bg">
+      <div class="container">
+        <div class="copyright">
+          &copy; Copyright <strong>Mentify 2024</strong>
+        </div>
+      </div>
+    </footer>
+    <!-- End  Footer -->
+
+    <a
+      href="#"
+      class="back-to-top d-flex align-items-center justify-content-center"
+      ><i class="bi bi-arrow-up-short"></i
+    ></a>
+
+    <!-- Vendor JS Files -->
+    <script src="../static/assets/vendor/purecounter/purecounter_vanilla.js"></script>
+    <script src="../static/assets/vendor/aos/aos.js"></script>
+    <script src="../static/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../static/assets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="../static/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="../static/assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="../static/assets/vendor/php-email-form/validate.js"></script>
+
+    <!-- Template Main JS File -->
+    <script src="../static/assets/js/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+  <title>Mentify - Dashboard</title>
+  <meta content="" name="description" />
+  <meta content="" name="keywords" />
+
+  <!-- Favicons -->
+  <link href="../static/assets/img/favicon.png" rel="icon" />
+  <link href="../static/assets/img/apple-touch-icon.png" rel="apple-touch-icon" />
+
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Montserrat:300,400,500,600,700"
+    rel="stylesheet" />
+
+  <!-- Vendor CSS Files -->
+  <link href="../static/assets/vendor/aos/aos.css" rel="stylesheet" />
+  <link href="../static/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="../static/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
+  <link href="../static/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet" />
+  <link href="../static/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet" />
+
+  <!-- Template Main CSS File -->
+  <link href="../static/assets/css/style.css" rel="stylesheet" />
+</head>
+
+<body>
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top d-flex align-items-center header-transparent">
+    <div class="container d-flex align-items-center">
+      <h1 class="logo me-auto"><a href="/">Mentify</a></h1>
+      <nav id="navbar" class="navbar order-last order-lg-0">
+        <ul>
+          <li>
+            {%if viewer=='mentee'%}
+            <a class="nav-link scrollto" href="{{ url_for('dashboard_mentee', username=mentee['username'])}}">Home</a>
+            {%elif viewer=='mentor'%}
+            <a class="nav-link scrollto" href="{{ url_for('dashboard_mentor', username=mentor['username']) }}">Home</a>
+            {%endif%}
+          </li>
+          <li>
+            {%if viewer=='mentee'%}
+            <a href="{{ url_for('profile_mentee', username=mentee['username']) }}">Profile</a>
+            {%elif viewer=='mentor'%}
+            <a href="{{ url_for('profile_mentor', username=mentor['username']) }}">Profile</a>
+            {%endif%}
+
+          </li>
+          <li>
+            {%if viewer=='mentee'%}
+            <a href="{{ url_for('my_courses', username=mentee['username'],msg='') }}">My Courses</a>
+          </li>
+          {%elif viewer=='mentor'%}
+          <a href="{{ url_for('create_program', username=mentor['username']) }}">Create Program</a></li>
+          {%endif%}
+          <li><a href="{{ url_for('logout')}}">Logout</a></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav>
+    </div>
+  </header>
+  <!-- End Header -->
+
+  <main>
+    <section style="margin-top: 10%">
+      <div class="container" data-aos="fade-up">
+        <header style="text-align: center; background-color: rgb(190, 238, 255)">
+          <h2>{{course.course_name}}</h2>
+        </header>
+
+        <div class="container" style="text-align: center">Start Date:{{course.course_start}}</div>
+        <div class="container" style="text-align: center">End Date:{{course.course_end}}</div>
+
+        <br />
+
+        <div class="container" style="text-align: center">
+          {{course.course_desc}}
+        </div>
+
+        <br />
+
+        <div style="text-align: center; font-style: italic">
+          Status: {{course.course_status}}
+        </div>
+
+        <br />
+
+        <div style="text-align: center; color: rgb(2, 62, 95); font-size: small">
+          <b>Kindly provide us
+            <u>
+              {%if viewer=='mentee'%}
+              <a href="{{url_for('submit_feedback')}}?course_id={{ course.course_id }}&username={{mentee['username']}}" style="color: #59a7d7">feedback
+                here</a>
+              {%endif%}</u>, so we can improve our services and let the mentor know how you
+            found the program.</b>
+        </div>
+      </div>
+    </section>
+
+    <br />
+
+    <section>
+      <div class="container">
+        <h3 style="text-align: center; background-color: #96bbfa; padding: 5px">
+          Messages for {{ course.course_name }}
+        </h3>
+
+        <ul id="messages" style="text-align: center">
+          {% for message in messages %}
+          <li>{{ message.sender }}: {{ message.content }}</li>
+          {% endfor %}
+        </ul>
+        <div class="d-flex justify-content-center align-items-center mb-3 text">
+
+          <form id="messageForm" action="/send_message" method="POST">
+            <div class="col-md-6" style="background-color: rgb(252, 252, 252); text-align: center">
+              <div class="row mt-2">
+
+                {%if viewer=='mentee'%}
+                <input type="hidden" id="sender" name="sender" value="{{mentee['mentee_name']}}" />
+                {%elif viewer=='mentor'%}
+                <input type="hidden" id="sender" name="sender" value="{{mentor['mentor_name']}}" />
+                {%endif%}
+                <input style="margin-top: 2%" type="text" id="content" name="content" placeholder="Add Message"
+                  required />
+                <input type="hidden" name="course_id" value="{{ course.course_id }}">
+
+              </div>
+              <br>
+              <button class="btn btn-primary btn btn-block" type="submit"
+                style="background: #96bbfa; color: black; margin-top: 2%">Send</button>
+            </div>
+          </form>
+
+
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.3.2/socket.io.js"></script>
+          <!-- Your JavaScript code -->
+          <script>
+            document.addEventListener('DOMContentLoaded', function () {
+              var socket = io(); // Connect to the default namespace
+
+              socket.on('connect', function () {
+                console.log('Connected to server');
+              });
+
+              socket.on('new_message', function (data) {
+                var messageList = document.getElementById('messages'); // Corrected ID
+                var listItem = document.createElement('li');
+                listItem.textContent = `${data.sender}: ${data.content}`;
+                messageList.appendChild(listItem);
+              });
+
+              document.getElementById('messageForm').addEventListener('submit', function (event) {
+                event.preventDefault();
+                var sender = document.getElementById('sender').value;
+                var content = document.getElementById('content').value;
+                var course_id = document.querySelector('input[name="course_id"]').value; // Use querySelector to get the value of hidden input
+
+                socket.emit('new_message', { sender: sender, content: content, course_id: course_id });
+
+                // Clear input fields after sending message
+                document.getElementById('content').value = '';
+              });
+            });
+          </script>
+        </div>
+      </div>
+      </div>
+    </section>
+
+    <footer id="footer" class="section-bg" style="margin-top: 5%">
+      <div class="container" style="text-align: center">
+        <div>
+          Have an issue? Raise it
+          <u>
+            {%if viewer=='mentee'%}
+            <a href="{{url_for('complaint_against_mentor')}}?course_id={{course['course_id']}}&mentee_id={{mentee['mentee_id']}}"
+              style="color: #59a7d7">Here</a>
+            {%elif viewer=='mentor'%}
+            <a href="{{url_for('complaint_against_mentee')}}?course_id={{course['course_id']}}&mentee_id={{mentee['mentee_id']}}"
+              style="color: #59a7d7">Here</a>
+            {%endif%}</u>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="../static/assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="../static/assets/vendor/aos/aos.js"></script>
+  <script src="../static/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../static/assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="../static/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="../static/assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="../static/assets/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="../static/assets/js/main.js"></script>
+</body>
+
+</html>

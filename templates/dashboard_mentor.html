@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    <title>Mentify - Dashboard</title>
+    <meta content="" name="description" />
+    <meta content="" name="keywords" />
+
+    <!-- Favicons -->
+    <link href="../static/assets/img/favicon.png" rel="icon" />
+    <link href="../static/assets/img/apple-touch-icon.png" rel="apple-touch-icon" />
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Montserrat:300,400,500,600,700"
+      rel="stylesheet"
+    />
+
+    <!-- Vendor CSS Files -->
+    <link href="../static/assets/vendor/aos/aos.css" rel="stylesheet" />
+    <link
+      href="../static/assets/vendor/bootstrap/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="../static/assets/vendor/bootstrap-icons/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link
+      href="../static/assets/vendor/glightbox/css/glightbox.min.css"
+      rel="stylesheet"
+    />
+    <link href="../static/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet" />
+
+    <!-- Template Main CSS File -->
+    <link href="../static/assets/css/style.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <!-- ======= Header ======= -->
+    <header
+      id="header"
+      class="fixed-top d-flex align-items-center header-transparent"
+    >
+      <div class="container d-flex align-items-center">
+        <h1 class="logo me-auto"><a href="/">Mentify</a></h1>
+        <nav id="navbar" class="navbar order-last order-lg-0">
+          <ul>
+            <li>
+              <a class="nav-link scrollto active" href=""
+                >Home</a
+              >
+            </li>
+            <li><a href="{{ url_for('profile_mentor', username=mentor['username']) }}">Profile</a></li>
+            <li><a href="{{ url_for('create_program', username=mentor['username']) }}">Create Program</a></li>
+            <li><a href="{{ url_for('logout')}}">Logout</a></li>
+          </ul>
+          <i class="bi bi-list mobile-nav-toggle"></i>
+        </nav>
+      </div>
+    </header>
+    <!-- End Header -->
+    <br />
+    <main>
+      <section style="background-color: #c9ebff; margin-top: 6%">
+        <div
+          class="container mt-2"
+          style="
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+          "
+        >
+          <h3>Mentor Status:{%if mentor['mentor_status'] == 'unverified'%} Pending {%elif mentor['mentor_status']=='verified'%} Verified {%elif mentor['mentor_status']=='rejected'%} Rejected {%endif%}</h3>
+        </div>
+      </section>
+      <section id="services" class="services section-bg" style="margin-top: 2%">
+        <div class="container" data-aos="fade-up">
+          <header class="section-header">
+            <h3>My Programs</h3>
+            <p>View all the programs you mentor.</p>
+          </header>
+
+          <div class="justify-content-center align-items-center">
+            <form method="" action="">
+              <!-- <label for="filter" class="border-transparent"></label>
+
+              <select name="filter" id="filter">
+                <option value="valuation">Filter - None</option>
+                <option value="valuation">Tag A</option>
+                <option value="equity">Tag B</option>
+                <option value="investment">Tag C</option>
+                <option value="revenue">Tag D</option>
+                <option value="profit">Tag E</option>
+              </select>
+
+              <label for="sort" class="border-transparent"></label>
+
+              <select name="sort" id="sort">
+                <option value="valuation">Sort - None</option>
+                <option value="valuation">Most popular</option>
+                <option value="equity">Low to high price</option>
+                <option value="investment">High to low price</option>
+              </select> -->
+
+
+          <br />
+
+          <div class="row g-5">
+            {% for course in courses %}
+            <div class="col-md-6 col-lg-4 wow bounceInUp" data-aos="zoom-in" data-aos-delay="100">
+              <div class="box">
+                <div class="icon" style="background: rgb(209, 237, 255)">
+                  <i class="bi bi-journal-text" style="color: #1985f0"></i>
+                </div>
+                <h3 class="title"><a href="{{ url_for('view_course') }}?viewer=mentor&course_id={{course['course_id']}}&mentee_id=0&isapproval=no">{{course.course_name}}</a></h3>
+                <h5 style="font-size: small; text-align: center;">Course Status: {{course.course_status}}</h5>
+                <p class="description" style="text-align:center;">{{course.course_desc}}</p>
+                <h4 class="title"><a href="{{ url_for('view_mentees') }}?course_id={{course['course_id']}}">View enrolled Mentees</a></h4>
+                <!-- <button class="btn btn-primary btn-md btn-block" type="submit" style="background: #00304e">
+                    View Profile
+                </button> -->
+              </div>
+            </div>
+            {% endfor %}
+  
+           
+            <!-- <div
+              class="col-md-6 col-lg-4 wow bounceInUp"
+              data-aos="zoom-in"
+              data-aos-delay="100"
+            >
+              <div class="box">
+                <div class="icon" style="background: rgb(209, 237, 255)">
+                  <i class="bi bi-briefcase" style="color: #1985f0"></i>
+                </div>
+                <h3 class="title"><a href="">Course Name</a></h3>
+                <h5 style="font-size: small">Course Duration:</h5>
+                <h5 style="font-size: small">Price: 1000 INR</h5>
+                <p class="description">description of course</p>
+              </div>
+            </div>
+            <div
+              class="col-md-6 col-lg-4 wow bounceInUp"
+              data-aos="zoom-in"
+              data-aos-delay="100"
+            >
+              <div class="box">
+                <div class="icon" style="background: rgb(209, 237, 255)">
+                  <i class="bi bi-bar-chart" style="color: #1985f0"></i>
+                </div>
+                <h3 class="title"><a href="">Course Name</a></h3>
+                <h5 style="font-size: small">Course Duration:</h5>
+                <h5 style="font-size: small">Price: 1000 INR</h5>
+                <p class="description">description of course</p>
+              </div>
+            </div>
+            <div
+              class="col-md-6 col-lg-4 wow bounceInUp"
+              data-aos="zoom-in"
+              data-aos-delay="100"
+            >
+              <div class="box">
+                <div class="icon" style="background: rgb(209, 237, 255)">
+                  <i class="bi bi-book" style="color: #1985f0"></i>
+                </div>
+                <h3 class="title"><a href="">Course Name</a></h3>
+                <h5 style="font-size: small">Course Duration:</h5>
+                <h5 style="font-size: small">Price: 1000 INR</h5>
+                <p class="description">description of course</p>
+              </div>
+            </div>
+          </div>-->
+        </div>
+      </section>
+      <!-- End Services Section -->
+    </main>
+
+    <!-- ======= Footer ======= -->
+    <footer id="footer" class="section-bg">
+      <div class="container">
+        <div class="copyright">
+          &copy; Copyright <strong>Mentify 2024</strong>
+        </div>
+      </div>
+    </footer>
+    <!-- End  Footer -->
+
+    <a
+      href="#"
+      class="back-to-top d-flex align-items-center justify-content-center"
+      ><i class="bi bi-arrow-up-short"></i
+    ></a>
+
+    <!-- Vendor JS Files -->
+    <script src="../static/assets/vendor/purecounter/purecounter_vanilla.js"></script>
+    <script src="../static/assets/vendor/aos/aos.js"></script>
+    <script src="../static/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../static/assets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="../static/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="../static/assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="../static/assets/vendor/php-email-form/validate.js"></script>
+
+    <!-- Template Main JS File -->
+    <script src="../static/assets/js/main.js"></script>
+  </body>
+</html>

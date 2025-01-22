@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    <title>Mentify - Signup</title>
+    <meta content="" name="description" />
+    <meta content="" name="keywords" />
+
+    <!-- Favicons -->
+    <link href="../static/assets/img/favicon.png" rel="icon" />
+    <link href="../static/assets/img/apple-touch-icon.png" rel="apple-touch-icon" />
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Montserrat:300,400,500,600,700"
+      rel="stylesheet"
+    />
+
+    <!-- Vendor CSS Files -->
+    <link href="../static/assets/vendor/aos/aos.css" rel="stylesheet" />
+    <link
+      href="../static/assets/vendor/bootstrap/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="../static/assets/vendor/bootstrap-icons/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link
+      href="../static/assets/vendor/glightbox/css/glightbox.min.css"
+      rel="stylesheet"
+    />
+    <link href="../static/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.0.8/css/all.css"
+    />
+
+    <!-- Template Main CSS File -->
+    <link href="../static/assets/css/style.css" rel="stylesheet" />
+  </head>
+</html>
+
+<body>
+  <header
+    id="header"
+    class="fixed-top d-flex align-items-center header-transparent"
+  >
+    <div class="container d-flex align-items-center">
+      <h1 class="logo me-auto"><a href="/">Mentify</a></h1>
+    </div>
+  </header>
+  <!-- End Header -->
+
+  <section class="vh-100" style="background-color: #ffffff">
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+          <div class="card" style="background-color: #bcf1ff">
+            <div class="card-body p-5 text-center">
+              <h3 class="mb-5" style="font-family: Open Sans; color: #000408">
+                {{user_type}}
+              </h3>
+
+              <form action="/signup" method="post">
+                <div class="form-group input-group" style="margin: 2% 2%">
+                  <div
+                    class="input-group-prepend"
+                    style="margin-top: 0.5%; background-color: #bcf1ff"
+                  >
+                    <span
+                      class="input-group-text"
+                      style="background-color: #ffffff"
+                    >
+                      <i class="fa fa-user" style="font-size: 1.25em"></i>
+                    </span>
+                  
+                  </div>
+                  <input
+                    name="name"
+                    class="form-control"
+                    placeholder="Full name"
+                    type="text"
+                  />
+                </div>
+
+                <div class="form-group input-group" style="margin: 2% 2%">
+                  <div
+                    class="input-group-prepend"
+                    style="margin-top: 0.5%; background-color: #bcf1ff"
+                  >
+                    <span
+                      class="input-group-text"
+                      style="background-color: #ffffff"
+                    >
+                      <i class="fa fa-envelope" style="font-size: 1.25em"></i>
+                    </span>
+                  
+                  </div>
+                  <input
+                    name="username"
+                    class="form-control"
+                    placeholder="Create username"
+                    type="text"
+                  />
+                </div>
+                
+                
+                <div class="form-group input-group" style="margin: 2% 2%">
+                  <div
+                    class="input-group-prepend"
+                    style="margin-top: 0.5%; background-color: #bcf1ff"
+                  >
+                    <span
+                      class="input-group-text"
+                      style="background-color: #ffffff"
+                    >
+                      <i class="fa fa-envelope" style="font-size: 1.25em"></i>
+                    </span>
+                  </div>
+                  <input
+                    name="email"
+                    class="form-control"
+                    placeholder="Email address"
+                    type="email"
+                  />
+                </div>
+                <div class="form-group input-group" style="margin: 2% 2%">
+                  <div
+                    class="input-group-prepend"
+                    style="margin-top: 0.5%; background-color: #bcf1ff"
+                  >
+                    <span
+                      class="input-group-text"
+                      style="background-color: #ffffff"
+                    >
+                      <i class="fa fa-phone" style="font-size: 1.25em"></i>
+                    </span>
+                  </div>
+                  <input
+                    name="contact_no"
+                    class="form-control"
+                    placeholder="Phone number"
+                    type="text"
+                  />
+                </div>
+                <div class="form-group input-group" style="margin: 2% 2%">
+                  <div
+                    class="input-group-prepend"
+                    style="margin-top: 0.5%; background-color: #bcf1ff"
+                  >
+                    <span
+                      class="input-group-text"
+                      style="background-color: #ffffff"
+                    >
+                      <i class="fa fa-building" style="font-size: 1.25em"></i>
+                    </span>
+                  </div>
+                  <select class="form-control">
+                    <option selected="">Select job type</option>
+                    <option>Designer</option>
+                    <option>Manager</option>
+                    <option>Accaunting</option>
+                  </select>
+                </div>
+                <div class="form-group input-group" style="margin: 2% 2%">
+                  <div
+                    class="input-group-prepend"
+                    style="margin-top: 0.5%; background-color: #bcf1ff"
+                  >
+                    <span
+                      class="input-group-text"
+                      style="background-color: #ffffff"
+                    >
+                      <i class="fa fa-unlock" style="font-size: 1.25em"></i>
+                    </span>
+                  </div>
+                  <input
+                    class="form-control"
+                    placeholder="Create password"
+                    type="password"
+                    name="password"
+                  />
+                </div>
+                <div class="form-group input-group" style="margin: 2% 2%">
+                  <div
+                    class="input-group-prepend"
+                    style="margin-top: 0.5%; background-color: #bcf1ff"
+                  >
+                    <span
+                      class="input-group-text"
+                      style="background-color: #ffffff"
+                    >
+                      <i class="fa fa-lock" style="font-size: 1.25em"></i>
+                    </span>
+                  </div>
+                  <input
+                    class="form-control"
+                    placeholder="Confirm password"
+                    type="password"
+                  />
+                </div>
+                <div class="form-group" style="margin: 5% 5%">
+                  <button
+                    type="submit"
+                    class="btn btn-block"
+                    style="background: #00304e; color: #ffffff"
+                  >
+                    Create Account
+                  </button>
+                </div>
+
+                <p class="text-center" style="margin: 5% 5%; color: #00304e">
+                  Have an account?
+                  <u><a href="login" style="color: #00304e">Log In</a></u>
+                </p>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
