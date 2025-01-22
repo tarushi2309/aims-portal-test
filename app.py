@@ -22,7 +22,8 @@ conn = mysql.connector.connect(
     host="127.0.0.1",
     user="root",
     password="password",
-    database="aims"
+    database="aims",
+    auth_plugin='mysql_native_password'
 )
 cursor = conn.cursor() 
 user_type=''
@@ -153,7 +154,7 @@ def signup_process():
             'INSERT INTO student(student_name,entry_no,email_id,degree,department,year_of_entry) VALUES(%s,%s, %s,%s, %s,%s)', (name,entry_no,email_id,degree,department,year_of_entry,) )
             conn.commit()
             return render_template("login.html",msg="Signup Successful. You may login Now")
-        else if user_trype =="faculty":
+        elif user_trype =="faculty":
             name = request.form['name']
             email_id = request.form['email']
             cursor.execute(

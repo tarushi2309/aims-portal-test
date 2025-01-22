@@ -47,6 +47,6 @@ CREATE TABLE faculty_advisor(
     year_of_entry int,
     degree ENUM('BTECH','MTECH','PHD','MSC'),
     dep ENUM('COMPUTER SCIENCE AND ENGINEERING','ELECTRICAL ENGINEERING','MECHANICAL ENGINEERING','MATHS AND COMPUTING','CHEMICAL ENGINEERING','METALLURGY ENGINEERING')
-)
+);
 
-Insert into student(student_name,email_id,degree,dep) values('TARUSHI','2022csb1135@iitrpr.ac.in','BTECH','COMPUTER SCIENCE AND ENGINEERING');
+Insert into student(student_name,email_id,degree,dep,entry_no,year_of_entry) values('TARUSHI','2022csb1135@iitrpr.ac.in','BTECH','COMPUTER SCIENCE AND ENGINEERING','2022csb1135',2022);
