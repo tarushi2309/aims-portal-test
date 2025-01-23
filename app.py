@@ -44,7 +44,7 @@ def generate_otp(length=6):
 def send_email(sender,receiver):
     otp = generate_otp()
     cursor.execute(
-            'delete from otp_table where user_id = % s and TIMESTAMPDIFF(MINUTE, created_at, NOW()) > 3', (receiver,) )
+            'delete from otp_table where user_id = %s and TIMESTAMPDIFF(MINUTE, created_at, NOW()) > 3', (receiver,) )
     conn.commit()
     cursor.execute('insert into otp_table (user_id,otp,created_at) values (%s,%s,%s)',(receiver,otp,datetime.now(),))
     conn.commit()
