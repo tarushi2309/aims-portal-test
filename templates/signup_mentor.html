@@ -39,18 +39,19 @@
   </head>
 </html>
 
-<body>
-  <header
-    id="header"
-    class="fixed-top d-flex align-items-center header-transparent"
-  >
-    <div class="container d-flex align-items-center">
-      <h1 class="logo me-auto"><a href="/">Mentify</a></h1>
-    </div>
-  </header>
+<body class = "bg-light">
+  <!-- ======= Header ======= -->
+  <div>
+    <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand AIMS">
+          AIMS :: Academic Information Management System
+        </a>
+      </div>
+    </nav>
   <!-- End Header -->
 
-  <section style="background-color: #ffffff">
+  <!-- <section style="background-color: #ffffff">
     <div class="container py-5">
       <div class="row d-flex justify-content-center align-items-center">
         <div class="col-12 col-md-8 col-lg-6 col-lg-5" style="margin-top: 5%">
@@ -224,6 +225,84 @@
                   Have an account?
                   <u><a href="login" style="color: #00304e">Log In</a></u>
                 </p>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section> -->
+  <section class="bg-light py-3 py-md-5" style="margin: 5%;">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5 col-xxl-4">
+          <div class="card border border-light-subtle rounded-3 shadow-sm">
+            <div class="card-body p-3 p-md-4 p-xl-5 bg-dark" style="border-radius: 2%;">
+              <h5 class=" text-center text-light mb-4" style="font-family: 'Montserrat', sans-serif; font-weight: 400">
+                Enter your details to register
+              </h5>
+              <form action="/signup" method="post">
+                <div class="row gy-2 overflow-hidden">
+                  <div class="col-12">
+                    <div class="mb-2">
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="name"
+                        id="fullName"
+                        placeholder="Full Name"
+                        required
+                      />
+                      <!-- <label for="firstName" class="form-label"
+                        >Full Name</label
+                      > -->
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="mb-2">
+                      <input
+                        type="email"
+                        class="form-control"
+                        name="email"
+                        id="email"
+                        placeholder="Email"
+                        required
+                      />
+                      <!-- <label for="email" class="form-label">Email</label> -->
+                    </div>
+                  </div>
+                  
+                  <!-- <div class="col-12">
+                    <div class="form-floating mb-3">
+                      <input
+                        type="password"
+                        class="form-control"
+                        name="password"
+                        id="password"
+                        value=""
+                        placeholder="Password"
+                        required
+                      />
+                      <label for="password" class="form-label">Password</label>
+                    </div>
+                  </div> -->
+                  </div>
+                  <div class="col-12">
+                    <div class="d-grid my-3">
+                      <button class="btn btn-secondary btn-lg" type="submit">
+                        Sign up
+                      </button>
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <p class="m-0 text-secondary text-center">
+                      Already have an account?
+                      <a href="login" class="link-primary text-decoration-none"
+                        >Log in</a
+                      >
+                    </p>
+                  </div>
+                </div>
               </form>
             </div>
           </div>
