@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    <title>Aims - Login Page</title>
+    <meta content="" name="description" />
+    <meta content="" name="keywords" />
+
+    <!-- Favicons -->
+    <link href="../static/assets/img/favicon.png" rel="icon" />
+    <link
+      href="../static/assets/img/apple-touch-icon.png"
+      rel="apple-touch-icon"
+    />
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Montserrat:300,400,500,600,700"
+      rel="stylesheet"
+    />
+
+    <!-- Vendor CSS Files -->
+    <link href="../static/assets/vendor/aos/aos.css" rel="stylesheet" />
+    <link
+      href="../static/assets/vendor/bootstrap/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="../static/assets/vendor/bootstrap-icons/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link
+      href="../static/assets/vendor/glightbox/css/glightbox.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="../static/assets/vendor/swiper/swiper-bundle.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Template Main CSS File -->
+    <link href="../static/assets/css/style.css" rel="stylesheet" />
+  </head>
+
+
+
+<body class="bg-light"> 
+    <!-- ======= Header ======= -->
+    <div>
+        <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand AIMS">
+            AIMS :: Academic Information Management System
+            </a>
+        </div>
+        </nav>
+    </div>
+    <!-- End Header -->
+
+    <div class="course-details-container" style="color: black;">
+        <!-- Course Details Section -->
+        <h1 id="course-name">Course Name</h1>
+        <p id="course-code">Course Code: <span></span></p>
+        <p id="instructor-name">Instructor: <span></span></p>
+        <p id="ltpc">LTPC: <span></span></p>
+    
+        <!-- Number of Students Enrolled -->
+        <p id="students-enrolled">Number of Students Enrolled: <span></span></p>
+    
+        <!-- Students Table -->
+        <h4>Enrolled Students</h4>
+        <table border="1" style="width: 100%; text-align: left; border-collapse: collapse;">
+            <thead>
+              <tr>
+                <th style="padding: 10px; border: 1px solid black;">Serial Number</th>
+                <th style="padding: 10px; border: 1px solid black;">Student Name</th>
+                <th style="padding: 10px; border: 1px solid black;">Entry Number</th>
+                <th style="padding: 10px; border: 1px solid black;">Status</th>
+              </tr>
+            </thead>
+            <tbody id="students-list">
+              <!-- Dynamic rows will be populated here -->
+            </tbody>
+          </table>
+      </div>
+    
+      <script>
+        // Example script to dynamically populate data from backend
+        document.addEventListener('DOMContentLoaded', async () => {
+          const courseName = new URLSearchParams(window.location.search).get('courseName');
+    
+          if (!courseName) {
+            alert('Course name not provided in URL.');
+            return;
+          }
+    
+          try {
+            // Fetch course details from backend
+            const response = await fetch(`/api/courses?name=${courseName}`);
+            const course = await response.json();
+    
+            // Populate course details
+            document.getElementById('course-name').textContent = course.name;
+            document.getElementById('course-code').querySelector('span').textContent = course.code;
+            document.getElementById('instructor-name').querySelector('span').textContent = course.instructor;
+            document.getElementById('ltpc').querySelector('span').textContent = course.ltpc;
+            document.getElementById('students-enrolled').querySelector('span').textContent = course.enrolled_students.length;
+    
+            // Populate students table
+            const studentsList = document.getElementById('students-list');
+            course.enrolled_students.forEach((student, index) => {
+              const row = document.createElement('tr');
+    
+              row.innerHTML = `
+                <td>${index + 1}</td>
+                <td>${student.name}</td>
+                <td>${student.entry_number}</td>
+                <td>${student.status}</td>
+              `;
+    
+              studentsList.appendChild(row);
+            });
+          } catch (error) {
+            console.error('Error fetching course details:', error);
+            alert('Failed to load course details. Please try again later.');
+          }
+        });
+      </script>
+  
+      <a
+        href="#"
+        class="back-to-top d-flex align-items-center justify-content-center"
+        ><i class="bi bi-arrow-up-short"></i
+      ></a>
+  
+      <!-- Vendor JS Files -->
+      <script src="../static/assets/vendor/purecounter/purecounter_vanilla.js"></script>
+      <script src="../static/assets/vendor/aos/aos.js"></script>
+      <script src="../static/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+      <script src="../static/assets/vendor/glightbox/js/glightbox.min.js"></script>
+      <script src="../static/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+      <script src="../static/assets/vendor/swiper/swiper-bundle.min.js"></script>
+      <script src="../static/assets/vendor/php-email-form/validate.js"></script>
+  
+      <!-- Template Main JS File -->
+      <script src="../static/assets/js/main.js"></script>
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
