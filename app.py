@@ -21,7 +21,7 @@ aims_email='tarushi.tanejag1112@gmail.com'
 conn = mysql.connector.connect(
     host="127.0.0.1",
     user="root",
-    password="password",
+    password="1234",
     database="aims",
     auth_plugin='mysql_native_password'
 )
@@ -77,7 +77,7 @@ def process_otp(email_id):
         cursor.execute('select otp from otp_table where user_id = %s and TIMESTAMPDIFF(MINUTE, created_at, NOW()) <= 3',(email_id,))
         otp_given=cursor.fetchone()
         if otp_given:
-            if otp_given['otp']==otp:
+            if otp_given[0]==otp:
                 cursor.execute('select * from student where email_id = %s',(email_id,))
                 user=cursor.fetchone()
                 if user:
@@ -93,10 +93,13 @@ def process_otp(email_id):
                     else:
                         msg="incorrect username or password"
                         return render_template("login.html",msg=msg)
+                    
 
 @app.route('/signup_main',methods=['GET','POST'])
 def signup_main():
     return render_template("signup_main.html")
+
+
 
 """@app.route('/dashboard_mentee/<username>')
 def dashboard_mentee(username):
