@@ -25,7 +25,7 @@ conn = mysql.connector.connect(
     database="aims",
     auth_plugin='mysql_native_password'
 )
-cursor = conn.cursor() 
+cursor = conn.cursor(dictionary=True) 
 user_type=''
 
 def init_db():
@@ -175,9 +175,9 @@ def user_category():
     global user_type
     user_type=request.form['button']
     if(user_type=='student'):   
-        return render_template("signup_mentee.html")
+        return render_template("signup_student.html")
     elif(user_type=='faculty'):
-        return render_template("signup_mentor.html")
+        return render_template("signup_faculty.html")
 
 """@app.route('/profile_mentee/<username>',methods=['GET','POST'])
 def profile_mentee(username):
