@@ -41,14 +41,15 @@
 
 <body>
   <!-- ======= Header ======= -->
-  <header
-    id="header"
-    class="fixed-top d-flex align-items-center header-transparent"
-  >
-    <div class="container d-flex align-items-center">
-      <h1 class="logo me-auto"><a href="/">AIMS</a></h1>
-    </div>
-  </header>
+  <div>
+    <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand AIMS">
+          AIMS :: Academic Information Management System
+        </a>
+      </div>
+    </nav>
+  </div>
   <!-- End Header -->
 
   <section class="vh-100" style="background-color: #ffffff">
@@ -62,7 +63,7 @@
               </h3>
 
               <form action="/process_login" method="post">
-                <div class="msg">{{ msg }}</div>
+              
               <div class="form-outline">
                 <input
                   type="text"

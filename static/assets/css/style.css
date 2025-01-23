@@ -1161,3 +1161,11 @@ section {
 .labels {
   font-size: 16px;
 }
+
+.navbar-brand.AIMS {
+  font-size: 20px;
+  font-weight: 500;
+  font-family:Arial, Helvetica, sans-serif;
+  color: white;
+  text-transform: none;
+}
