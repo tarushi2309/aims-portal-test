@@ -1296,11 +1296,11 @@ body {
 }
 
 .student-details h2 {
-    font-size: 20px;
-    margin: 10px;
-    color: #000000;
-    text-align: center;
-    font-weight: 500;
+  font-size: 20px;
+  margin: 10px;
+  color: #000000;
+  text-align: center;
+  font-weight: 500;
 }
 
 .grid-container {
@@ -1331,6 +1331,10 @@ body {
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
     background-color: #ededed; /* Slightly lighter grey when focused */
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 0509d8d (Updated faculty_dahsboard.html and style.css)
 .faculty-details h2{
   font-size: 20px;
   margin: 10px;
