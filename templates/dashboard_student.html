@@ -60,7 +60,6 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f9f9f9;
         }
 
         header {
@@ -86,138 +85,75 @@
             color: #fff;
             text-decoration: none;
         }
-
-        .logout-btn {
-            background-color: #e74c3c;
-            color: #fff;
-            border: none;
-            padding: 5px 10px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .logout-btn:hover {
-            background-color: #c0392b;
-        }
-
         .container {
             padding: 20px;
             max-width: 2000px;
             margin: 0 auto;
         }
 
-        .student-details {
-            margin-bottom: 20px;
-            background-color: #fff;
-            border-radius: 8px;
-            padding: 10px;
-            box-shadow: 0 2px 8px rgba(20, 18, 18, 0.1);
-            border-bottom: 2px solid #8d8a8a; /* Added border-bottom line */
+        .readonly-input {
+            background-color: #f8f9fa; /* Light gray background */
+            border: 1px solid #ced4da; /* Border similar to editable inputs */
+            color: #495057; /* Text color */
+            pointer-events: none; /* Prevent interaction */
+            cursor: default; /* Standard cursor */
+            width: 100%; /* Full width */
+            padding: 8px; /* Padding for better appearance */
+            border-radius: 4px; /* Rounded corners */
         }
 
-        .student-details h2 {
-            font-size: 20px;
-            margin-bottom: 20px;
-            color: #444;
-            text-align: center;
-        }
-
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-        }
-
-        .grid-container label {
-            font-weight: bold;
-            margin-bottom: 5px;
-            display: block;
-            color: #525050;
-        }
-
-        .grid-container input, .grid-container select {
-            border: none;
-            border-radius: 5px;
-            padding: 8px;
-            width: 100%;
-            background-color: #a8a3a3; /* Dark grey */
-            color: #fff;
-        }
-
-        .grid-container input:focus, .grid-container select:focus {
-            outline: none;
-            border: 2px solid #007bff;
-            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-            background-color: #444; /* Slightly lighter grey when focused */
-        }
-
-        .my-courses {
-    margin-top: 30px;
-    background-color: #fff;
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    margin-left: 20px; /* Added left margin */
-    margin-right: 20px; /* Added right margin */
-    border-top: 2px solid #b9b4b4; /* Added border-top line */
-}
-
-.my-courses h2 {
-    font-size: 22px;
-    margin-bottom: 20px;
-    color: #0a0909;
-    text-align: center;
-}
-
-.results-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-}
-
-.course-item {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 15px;
-    background-color: #f9f9f9;
-}
-
-.course-item p {
-    font-size: 14px;
-    line-height: 1.6;
-    color: #555;
-}
-
-.course-item a {
-    color: #007bff;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-.course-item a:hover {
-    text-decoration: underline;
-}
-
-.course-item input[type="checkbox"] {
-    margin-right: 10px;
-    vertical-align: middle;
-}
-
-.course-item strong {
-    font-weight: bold;
-}
 
     </style>
 </head>
-<body>
-    <header>
-        <h1>Student DashBoard</h1>
-        <nav>
-            <a href="{{ url_for('courses') }}">Courses</a>
-            <button class="logout-btn" onclick="logout()">Logout</button>
-        </nav>
-    </header>
-
+<body class="bg-light">
+    <div>
+        <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+            <div class="container-fluid my-container-fluid">
+              <a class="navbar-brand AIMS">
+                AIMS :: Academic Information Management System
+              </a>
+              <ul class="nav nav-underline justify-content-end">
+                <li class="nav-item">
+                  <a
+                    class="nav-link active"
+                    style="
+                      color: white;
+                      font-family: Arial, Helvetica, sans-serif;
+                      font-weight: 300;
+                    "
+                    href="dashboard_student.html"
+                    >Home</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a
+                    class="nav-link"
+                    style="
+                      color: white;
+                      font-family: Arial, Helvetica, sans-serif;
+                      font-weight: 300;
+                    "
+                    aria-current="page"
+                    href="courses_available.html"
+                    >Courses</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a
+                    class="nav-link"
+                    style="
+                      color: white;
+                      font-family: Arial, Helvetica, sans-serif;
+                      font-weight: 300;
+                    "
+                    href="login.html"
+                    >Logout</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </nav>
+      </div>
     <div class="container">
         <div class="student-details">
             <h2>Student Details</h2>
@@ -226,51 +162,28 @@
             </body>
             <div class="grid-container">
                 <div>
-                    <label for="first-name">First Name</label>
-                    <input type="text" id="first-name" value="{{ student['first_name'] }}" placeholder="Enter your first name">
+                    <label for="full-name">Full Name</label>
+                    <input type="text" id="first-name" value="{{ student['first_name'] }}" readonly class="readonly-input">
                 </div>
                 <div>
-                    <label for="last-name">Last Name</label>
-                    <input type="text" id="last-name" value="{{ student['last_name'] }}" placeholder="Enter your last name">
-                </div>
-                <div>
-                    <label for="roll-no">Roll No.</label>
-                    <input type="text" id="roll-no" value="{{ student['roll_no'] }}" placeholder="Enter your roll number">
+                    <label for="roll-no">Roll Number</label>
+                    <input type="text" id="roll-no" value="{{ student['roll_no'] }}" readonly class="readonly-input">
                 </div>
                 <div>
                     <label for="email">Email</label>
-                    <input type="email" id="email" value="{{ student['email'] }}" placeholder="Enter your email">
+                    <input type="email" id="email" value="{{ student['email'] }}" readonly class="readonly-input">
                 </div>
                 <div>
                     <label for="department">Department</label>
-                    <select id="department">
-                        <option value="CSE" {% if student['department'] == 'CSE' %}selected{% endif %}>Computer Science and Engineering</option>
-                        <option value="ECE" {% if student['department'] == 'ECE' %}selected{% endif %}>Electronics and Communication Engineering</option>
-                        <option value="ME" {% if student['department'] == 'ME' %}selected{% endif %}>Mechanical Engineering</option>
-                    </select>
+                    <input type="text" id="department" value="{{ student['department'] }}" readonly class="readonly-input">
                 </div>
                 <div>
                     <label for="year">Year of Entry</label>
-                    <input type="text" id="year" placeholder="Enter your year of entry">
-                </div>
-                <div>
-                    <label for="minor">Minor/Concentration Specialization</label>
-                    <input type="text" id="minor" value="{{ student['minor'] }}" placeholder="Enter your minor/specialization">
+                    <input type="text" id="year" value="{{ student['year'] }}" readonly class="readonly-input">
                 </div>
                 <div>
                     <label for="degree">Degree Type</label>
-                    <select id="degree">
-                        <option value="B.Tech" {% if student['degree'] == 'B.Tech' %}selected{% endif %}>B.Tech</option>
-                        <option value="M.Tech" {% if student['degree'] == 'M.Tech' %}selected{% endif %}>M.Tech</option>
-                        <option value="PhD" {% if student['degree'] == 'PhD' %}selected{% endif %}>PhD</option>
-                    </select>
-                </div>
-                <div>
-                    <label for="status">Current Status</label>
-                    <select id="status">
-                        <option value="Registered" {% if student['status'] == 'Registered' %}selected{% endif %}>Registered</option>
-                        <option value="Not Registered" {% if student['status'] == 'Not Registered' %}selected{% endif %}>Not Registered</option>
-                    </select>
+                    <input type="text" id="degree" value="{{ student['degree'] }}" readonly class="readonly-input">
                 </div>
             </div>
         </div>
@@ -278,82 +191,65 @@
 
 
 <!-- My Courses Section -->
-<div class="my-courses">
+<div class="my-courses" style="color: black;">
     <h2>My Courses</h2>
-    <hr width="100%" color="grey" size="5">
-    <div class="courses-grid">
-        <button id="actionButton" class="action-button disabled">Action</button>
-        <div id="dropdownMenu" class="dropdown">
-            <a href="#">Credit</a>
-            <a href="#">Credit for Minor</a>
-            <a href="#">Credit for Concentration</a>
-            <a href="#">Audit</a>
-        </div>
-        <div class="course-item">
-            <input type="checkbox" class="course-checkbox" id="course1">
-            <label for="course1">
-                <a href="#">CS304 | Computer Networks | 3-1-2-6-4</a>
-            </label>
-            <p>
-                <strong>Credits:</strong> 4<br>
-                <strong>Status:</strong> Running<br>
-                <strong>Session:</strong> 2024-II<br>
-                <strong>Enrollment:</strong> 102 in Sec.-A<br>
-                <strong>Instructor(s):</strong> Sudeep Mishra, Basant Subba.
-            </p>
-        </div>
-        <div class="course-item">
-            <input type="checkbox" class="course-checkbox" id="course2">
-            <label for="course2">
-                <a href="#">CS304 | Computer Networks | 3-1-2-6-4</a>
-            </label>
-            <p>
-                <strong>Credits:</strong> 4<br>
-                <strong>Status:</strong> Completed<br>
-                <strong>Session:</strong> 2023-II<br>
-                <strong>Enrollment:</strong> 99 in Sec.-A<br>
-                <strong>Instructor(s):</strong> Sudeep Mishra, Basant Subba.
-            </p>
-        </div>
+    <hr width="100%" color="grey" size="5" />
+
+    <div class="courses-grid" style="display: flex; flex-wrap: wrap; justify-content: space-evenly;">
+      <!--dummy data 1-->
+      <div class="course-item">
+          <label for="course1">
+              <a href="#">CS304 | Computer Networks | 3-1-2-6-4</a>
+          </label>
+          <p>
+              <strong>Credits:</strong> 4<br>
+              <strong>Status:</strong> Running<br>
+              <strong>Session:</strong> 2024-II<br>
+              <strong>Enrollment:</strong> 102 in Sec.-A<br>
+              <strong>Instructor(s):</strong> Sudeep Mishra, Basant Subba.
+          </p>
+      </div>
+      <div class="course-item">
+          <label for="course1">
+              <a href="#">CS304 | Computer Networks | 3-1-2-6-4</a>
+          </label>
+          <p>
+              <strong>Credits:</strong> 4<br>
+              <strong>Status:</strong> Running<br>
+              <strong>Session:</strong> 2024-II<br>
+              <strong>Enrollment:</strong> 102 in Sec.-A<br>
+              <strong>Instructor(s):</strong> Sudeep Mishra, Basant Subba.
+          </p>
+      </div>
+      <div class="course-item">
+          <label for="course1">
+              <a href="#">CS304 | Computer Networks | 3-1-2-6-4</a>
+          </label>
+          <p>
+              <strong>Credits:</strong> 4<br>
+              <strong>Status:</strong> Running<br>
+              <strong>Session:</strong> 2024-II<br>
+              <strong>Enrollment:</strong> 102 in Sec.-A<br>
+              <strong>Instructor(s):</strong> Sudeep Mishra, Basant Subba.
+          </p>
+      </div>
+      <!--dummy data end-->
+
+      {% for course in courses %}
+      <div class="course-item">
+        <label>
+          <a href="course_details.html">{{ course.code }} | {{ course.name }} | {{ course.structure }}</a>
+        </label>
+        <p>
+          <strong>Credits:</strong> {{ course.credits }}<br>
+          <strong>Status:</strong> {{ course.status }}<br>
+          <strong>Session:</strong> {{ course.session }}<br>
+          <strong>Enrollment:</strong> {{ course.enrollment }} in Sec.-A<br>
+          <strong>Instructor(s):</strong> {{ course.instructors }}
+        </p>
+      {% endfor %}
     </div>
-    
-
-
-<hr width="100%" color="grey" size="5">
-
-
-
-<!-- Just comment out the above my courses section and there is 
- code below fro my section which have to be linked with flask-->
-
-<!-- My Courses Section -->
-<div class="my-courses">
-    <h2>My Courses</h2>
-    <hr width="100%" color="grey" size="5">
-    <div class="courses-grid">
-        {% for course in courses %}
-        <div class="course-card">
-            <h3>{{ course.name }} ({{ course.code }})</h3>
-            <p><strong>Credits:</strong> {{ course.credits }}</p>
-            <p><strong>Status:</strong> {{ course.status }}</p>
-            <p><strong>Session:</strong> {{ course.session }}</p>
-            <p><strong>Enrollment:</strong> {{ course.enrollment }}</p>
-            <p><strong>Instructors:</strong> {{ course.instructors }}</p>
-        </div>
-        {% endfor %}
-    </div>
-</div>
-
-
-
-
-    <script>
-        // Logout function
-        function logout() {
-            alert("You have been logged out.");
-            window.location.href = "{{ url_for('login') }}";
-        }
-    </script>
+  </div>
 
 <script>
     // Get references to elements
