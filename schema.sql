@@ -31,6 +31,8 @@ CREATE TABLE course (
     faculty_id int,
     status enum('running','completed'),
     no_of_enrollments int,
+    LTPC int,
+    department VARCHAR(100),
     FOREIGN KEY (faculty_id) REFERENCES faculty(faculty_id)
 );
 
