@@ -60,7 +60,6 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f9f9f9;
         }
 
         header {
@@ -151,73 +150,57 @@
             background-color: #444; /* Slightly lighter grey when focused */
         }
 
-        .my-courses {
-    margin-top: 30px;
-    background-color: #fff;
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    margin-left: 20px; /* Added left margin */
-    margin-right: 20px; /* Added right margin */
-    border-top: 2px solid #b9b4b4; /* Added border-top line */
-}
-
-.my-courses h2 {
-    font-size: 22px;
-    margin-bottom: 20px;
-    color: #0a0909;
-    text-align: center;
-}
-
-.results-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-}
-
-.course-item {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 15px;
-    background-color: #f9f9f9;
-}
-
-.course-item p {
-    font-size: 14px;
-    line-height: 1.6;
-    color: #555;
-}
-
-.course-item a {
-    color: #007bff;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-.course-item a:hover {
-    text-decoration: underline;
-}
-
-.course-item input[type="checkbox"] {
-    margin-right: 10px;
-    vertical-align: middle;
-}
-
-.course-item strong {
-    font-weight: bold;
-}
-
     </style>
 </head>
-<body>
-    <header>
-        <h1>Student DashBoard</h1>
-        <nav>
-            <a href="{{ url_for('courses') }}">Courses</a>
-            <button class="logout-btn" onclick="logout()">Logout</button>
-        </nav>
-    </header>
-
+<body class="bg-light">
+    <div>
+        <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+            <div class="container-fluid my-container-fluid">
+              <a class="navbar-brand AIMS">
+                AIMS :: Academic Information Management System
+              </a>
+              <ul class="nav nav-underline justify-content-end">
+                <li class="nav-item">
+                  <a
+                    class="nav-link active"
+                    style="
+                      color: white;
+                      font-family: Arial, Helvetica, sans-serif;
+                      font-weight: 300;
+                    "
+                    href="dashboard_student.html"
+                    >Home</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a
+                    class="nav-link"
+                    style="
+                      color: white;
+                      font-family: Arial, Helvetica, sans-serif;
+                      font-weight: 300;
+                    "
+                    aria-current="page"
+                    href="courses_available.html"
+                    >Courses</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a
+                    class="nav-link"
+                    style="
+                      color: white;
+                      font-family: Arial, Helvetica, sans-serif;
+                      font-weight: 300;
+                    "
+                    href="login.html"
+                    >Logout</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </nav>
+      </div>
     <div class="container">
         <div class="student-details">
             <h2>Student Details</h2>
@@ -277,6 +260,81 @@
     </div>
 
 
+    <!--<div class="my-courses">
+    <h2>My Courses</h2>
+    <div class="results-container">
+        <div class="course-item">
+            <div>
+                <input type="checkbox" id="course1">
+                <label for="course1">
+                    <a href="#">CS304 | Computer Networks | 3-1-2-6-4</a>
+                </label>
+            </div>
+            <p>
+                <strong>Credits:</strong> 4<br>
+                <strong>Status:</strong> Running<br>
+                <strong>Session:</strong> 2024-II<br>
+                <strong>Enrolment:</strong> 102 in Sec.-A.<br>
+                <strong>Offered by:</strong> Dept. of Computer Science and Engineering.<br>
+                <strong>Slot:</strong> Program elec or open elec for 3-4 year B.Tech.<br>
+                <strong>Instructor(s):</strong> Sudeep Mishra, Basant Subba.
+            </p>
+        </div>
+        <div class="course-item">
+            <div>
+                <input type="checkbox" id="course2">
+                <label for="course2">
+                    <a href="#">CS304 | Computer Networks | 3-1-2-6-4</a>
+                </label>
+            </div>
+            <p>
+                <strong>Credits:</strong> 4<br>
+                <strong>Status:</strong> Completed<br>
+                <strong>Session:</strong> 2023-II<br>
+                <strong>Enrolment:</strong> 99 in Sec.-A.<br>
+                <strong>Offered by:</strong> Dept. of Computer Science and Engineering.<br>
+                <strong>Slot:</strong> Program elec or open elec for 3-4 year B.Tech.<br>
+                <strong>Instructor(s):</strong> Sudeep Mishra, Basant Subba.
+            </p>
+        </div>
+        <div class="course-item">
+            <div>
+                <input type="checkbox" id="course3">
+                <label for="course3">
+                    <a href="#">CS304 | Computer Networks | 3-1-2-6-4</a>
+                </label>
+            </div>
+            <p>
+                <strong>Credits:</strong> 4<br>
+                <strong>Status:</strong> Completed<br>
+                <strong>Session:</strong> 2022-II<br>
+                <strong>Enrolment:</strong> 102 in Sec.-A.<br>
+                <strong>Offered by:</strong> Dept. of Computer Science and Engineering.<br>
+                <strong>Slot:</strong> Program elec or open elec for 3-4 year B.Tech.<br>
+                <strong>Instructor(s):</strong> Sujata Pal, Sudeep Mishra.
+            </p>
+        </div>
+        <div class="course-item">
+            <div>
+                <input type="checkbox" id="course4">
+                <label for="course4">
+                    <a href="#">CS304 | Computer Networks | 3-1-2-6-4</a>
+                </label>
+            </div>
+            <p>
+                <strong>Credits:</strong> 4<br>
+                <strong>Status:</strong> Completed<br>
+                <strong>Session:</strong> 2021-II<br>
+                <strong>Enrolment:</strong> 120 in Sec.-A.<br>
+                <strong>Offered by:</strong> Dept. of Computer Science and Engineering.<br>
+                <strong>Slot:</strong> Program elec or open elec for 3-4 year B.Tech.<br>
+                <strong>Instructor(s):</strong> Sujata Pal, Sudeep Mishra.
+            </p>
+        </div>
+    </div>
+</div>
+-->
+
 <!-- My Courses Section -->
 <div class="my-courses">
     <h2>My Courses</h2>
@@ -323,8 +381,7 @@
 
 
 
-<!-- Just comment out the above my courses section and there is 
- code below fro my section which have to be linked with flask-->
+
 
 <!-- My Courses Section -->
 <div class="my-courses">

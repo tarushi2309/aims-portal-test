@@ -1230,3 +1230,56 @@ body {
     .dropdown:hover .dropdown-content {
     display: block;
     }
+
+    .my-courses {
+      margin-top: 30px;
+      background-color: #fff;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      margin-left: 20px; /* Added left margin */
+      margin-right: 20px; /* Added right margin */
+      border-top: 2px solid #b9b4b4; /* Added border-top line */
+  }
+  .my-courses h2 {
+      font-size: 22px;
+      margin-bottom: 20px;
+      color: #090707;
+      text-align: center;
+  }
+  .results-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+  }
+  .course-item {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 15px;
+      background-color: #f9f9f9;
+      margin: 10px
+  }
+  .course-item p {
+      font-size: 14px;
+      line-height: 1.6;
+      color: #555;
+  }
+  .course-item a {
+      color: #060a0e;
+      text-decoration: none;
+      font-weight: bold;
+  }
+  .course-item a:hover {
+      text-decoration: underline;
+  }
+  .course-item input[type="checkbox"] {
+      margin-right: 10px;
+      vertical-align: middle;
+  }
+  .course-item strong {
+      font-weight: bold;
+  }
+
+  .my-container-fluid{
+    margin-right: 20px;
+  }
