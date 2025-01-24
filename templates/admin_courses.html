@@ -43,45 +43,270 @@
     <!-- Template Main CSS File -->
     <link href="../static/assets/css/style.css" rel="stylesheet" />
   </head>
-</html>
 
-<body>
-  <!-- ======= Header ======= -->
-  <div>
-    <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
-      <div class="container-fluid my-container-fluid">
-        <a class="navbar-brand AIMS">
-          AIMS :: Academic Information Management System
-        </a>
-        <ul class="nav nav-underline justify-content-end">
-          <li class="nav-item">
-            <a
-              class="nav-link active"
-              style="
-                color: white;
-                font-family: Arial, Helvetica, sans-serif;
-                font-weight: 300;
-              "
-              href="dashboard_admin.html"
-              >Home</a
+  <body>
+    <!-- ======= Header ======= -->
+    <div>
+      <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+        <div class="container-fluid my-container-fluid">
+          <a class="navbar-brand AIMS">
+            AIMS :: Academic Information Management System
+          </a>
+          <ul class="nav nav-underline justify-content-end">
+            <li class="nav-item">
+              <a
+                class="nav-link active"
+                style="
+                  color: white;
+                  font-family: Arial, Helvetica, sans-serif;
+                  font-weight: 300;
+                "
+                href="dashboard_admin.html"
+                >Home</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                style="
+                  color: white;
+                  font-family: Arial, Helvetica, sans-serif;
+                  font-weight: 300;
+                "
+                href="login.html"
+                >Logout</a
+              >
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+    <!-- End Header -->
+
+    <!-- ======= Courses for approval ======= -->
+    <div class="my-courses" style="color: black; margin-top: 20px">
+      <h2>Pending Requests for Course Approval</h2>
+      <hr width="100%" color="grey" size="5" />
+
+      <div
+        class="courses-grid"
+        style="display: flex; flex-wrap: wrap; justify-content: space-evenly"
+      >
+        <!--dummy data 1-->
+        <div class="course-item">
+          <label for="course1">
+            <a href="#">CS304 | Computer Networks</a>
+          </label>
+          <p>
+            <strong>Instructor(s): </strong> Sudeep Mishra, Basant Subba.<br />
+            <strong>L-T-P-C: </strong>3-2-1-4<br />
+            <strong>Department: </strong>Computer Science Engineering<br />
+            <strong>Semester: </strong>II<br />
+            <strong>Year: </strong>2025<br />
+          </p>
+          <div class="dropdown">
+            <button
+              class="btn btn-secondary dropdown-toggle"
+              type="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
             >
-          </li>
-          <li class="nav-item">
-            <a
-              class="nav-link"
-              style="
-                color: white;
-                font-family: Arial, Helvetica, sans-serif;
-                font-weight: 300;
-              "
-              href="login.html"
-              >Logout</a
+              Action
+            </button>
+            <ul class="dropdown-menu">
+              <li>
+                <a
+                  class="dropdown-item action-btn"
+                  href="#"
+                  data-course-id="1"
+                  data-action="approve"
+                  style="color: black; font-weight: 400"
+                  >Approve</a
+                >
+              </li>
+              <li>
+                <a
+                  class="dropdown-item action-btn"
+                  href="#"
+                  data-course-id="1"
+                  data-action="reject"
+                  style="color: black; font-weight: 400"
+                  >Reject</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="course-item">
+          <label for="course1">
+            <a href="#">CS304 | Computer Networks</a>
+          </label>
+          <p>
+            <strong>Instructor(s): </strong> Sudeep Mishra, Basant Subba.<br />
+            <strong>L-T-P-C: </strong>3-2-1-4<br />
+            <strong>Department: </strong>Computer Science Engineering<br />
+            <strong>Semester: </strong>II<br />
+            <strong>Year: </strong>2025<br />
+          </p>
+          <div class="dropdown">
+            <button
+              class="btn btn-secondary dropdown-toggle"
+              type="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
             >
-          </li>
-        </ul>
+              Action
+            </button>
+            <ul class="dropdown-menu">
+              <li>
+                <a
+                  class="dropdown-item action-btn"
+                  href="#"
+                  data-course-id="1"
+                  data-action="approve"
+                  style="color: black; font-weight: 400"
+                  >Approve</a
+                >
+              </li>
+              <li>
+                <a
+                  class="dropdown-item action-btn"
+                  href="#"
+                  data-course-id="1"
+                  data-action="reject"
+                  style="color: black; font-weight: 400"
+                  >Reject</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="course-item">
+          <label for="course1">
+            <a href="#">CS304 | Computer Networks</a>
+          </label>
+          <p>
+            <strong>Instructor(s): </strong> Sudeep Mishra, Basant Subba.<br />
+            <strong>L-T-P-C: </strong>3-2-1-4<br />
+            <strong>Department: </strong>Computer Science Engineering<br />
+            <strong>Semester: </strong>II<br />
+            <strong>Year: </strong>2025<br />
+          </p>
+          <div class="dropdown">
+            <button
+              class="btn btn-secondary dropdown-toggle"
+              type="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Action
+            </button>
+            <ul class="dropdown-menu">
+              <li>
+                <a
+                  class="dropdown-item action-btn"
+                  href="#"
+                  data-course-id="1"
+                  data-action="approve"
+                  style="color: black; font-weight: 400"
+                  >Approve</a
+                >
+              </li>
+              <li>
+                <a
+                  class="dropdown-item action-btn"
+                  href="#"
+                  data-course-id="1"
+                  data-action="reject"
+                  style="color: black; font-weight: 400"
+                  >Reject</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        {% for course in courses %}
+        <div class="course-item">
+          <label>
+            <a href="course_details.html"
+              >{{ course.code }} | {{ course.name }}</a
+            >
+          </label>
+          <p>
+            <strong>Instructor(s): </strong> {{ course.instructors }}<br />
+            <strong>L-T-P-C: </strong> {{ course.LTPC }}<br />
+            <strong>Department: </strong> {{ course.department }}<br />
+            <strong>Semester: </strong> {{ course.semester }}<br />
+            <strong>Year: </strong> {{ course.year }} <br />
+          </p>
+          <div class="dropdown">
+            <button
+              class="btn btn-secondary dropdown-toggle"
+              type="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Action
+            </button>
+            <ul class="dropdown-menu">
+              <li>
+                <a
+                  class="dropdown-item action-btn"
+                  href="#"
+                  data-course-id="{{ course.id }}"
+                  data-action="approve"
+                  style="color: black; font-weight: 400"
+                  >Approve</a
+                >
+              </li>
+              <li>
+                <a
+                  class="dropdown-item action-btn"
+                  href="#"
+                  data-course-id="{{ course.id }}"
+                  data-action="reject"
+                  style="color: black; font-weight: 400"
+                  >Reject</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+        {% endfor %}
       </div>
-    </nav>
-  </div>
-  <!-- End Header -->
+    </div>
 
-</body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        document.body.addEventListener("click", function (event) {
+          if (event.target.classList.contains("action-btn")) {
+            event.preventDefault();
+
+            console.log("Button clicked!"); // Debugging message
+            const courseItem = event.target.closest(".course-item");
+
+            if (courseItem) {
+              console.log("Course item found, applying effects...");
+
+              // Add animation effects before removing the element
+              courseItem.style.transition =
+                "opacity 0.5s ease-out, transform 0.5s ease-out";
+              courseItem.style.opacity = "0";
+              courseItem.style.transform = "scale(0.9)";
+
+              // Remove the element after the animation completes
+              setTimeout(() => {
+                courseItem.remove();
+                console.log("Course item removed successfully.");
+              }, 500);
+            } else {
+              console.log("No course-item found.");
+            }
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
