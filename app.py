@@ -21,7 +21,7 @@ aims_email='tarushi.tanejag1112@gmail.com'
 conn = mysql.connector.connect(
     host="127.0.0.1",
     user="root",
-    password="1234",
+    password="1147",
     database="aims",
     auth_plugin='mysql_native_password'
 )
