@@ -1232,20 +1232,21 @@ body {
     }
 
     .my-courses {
-      margin-top: 30px;
+      margin: 10px;
       background-color: #fff;
       border-radius: 10px;
       padding: 20px;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-      margin-left: 20px; /* Added left margin */
-      margin-right: 20px; /* Added right margin */
-      border-top: 2px solid #b9b4b4; /* Added border-top line */
+      margin-left: 30px; /* Added left margin */
+      margin-right: 30px; /* Added right margin */
+      border-top: 1px solid #b9b4b4; /* Added border-top line */
   }
   .my-courses h2 {
       font-size: 22px;
       margin-bottom: 20px;
       color: #090707;
       text-align: center;
+      font-weight: 500;
   }
   .results-container {
       display: grid;
@@ -1283,3 +1284,50 @@ body {
   .my-container-fluid{
     margin-right: 20px;
   }
+
+  .student-details {
+    margin: 20px 10px;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0 2px 8px rgba(20, 18, 18, 0.1);
+    border-bottom: 1px solid #8d8a8a; /* Added border-bottom line */
+    color:#000000
+}
+
+.student-details h2 {
+    font-size: 20px;
+    margin: 10px;
+    color: #000000;
+    text-align: center;
+    font-weight: 500;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.grid-container label {
+    font-weight: 400;
+    margin-bottom: 5px;
+    display: block;
+    color: #0f0505;
+}
+
+.grid-container input, .grid-container select {
+    border: none;
+    border-radius: 5px;
+    padding: 8px;
+    width: 100%;
+    background-color: #ededed; /* Dark grey */
+    color: #060202;
+}
+
+.grid-container input:focus, .grid-container select:focus {
+    outline: none;
+    border: 2px solid #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    background-color: #ededed; /* Slightly lighter grey when focused */
+}
