@@ -15,7 +15,7 @@
       href="../static/assets/img/apple-touch-icon.png"
       rel="apple-touch-icon"
     />
-   
+
     <!-- Google Fonts -->
     <link
       href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Montserrat:300,400,500,600,700"
@@ -45,181 +45,187 @@
     <link href="../static/assets/css/style.css" rel="stylesheet" />
   </head>
 
-<body class="bg-light"> 
-  <style>
-        body {
-                font-family: Arial, sans-serif;
-                margin: 0;
-                padding: 0;
-                background-color: #f9f9f9;
-            }
-        header {
-            background-color: #222;
-            color: #fff;
-            padding: 10px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+  <body class="bg-light">
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f9f9f9;
+      }
+      header {
+        background-color: #222;
+        color: #fff;
+        padding: 10px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
 
-        header h1 {
-            margin: 0;
-            font-size: 18px;
-        }
+      header h1 {
+        margin: 0;
+        font-size: 18px;
+      }
 
-        .container {
-            padding: 20px;
-            max-width: 2000px;
-            margin: 0 auto;
-        }
+      .container {
+        padding: 20px;
+        max-width: 2000px;
+        margin: 0 auto;
+      }
 
-        nav {
-            display: flex;
-            gap: 15px;
-        }
+      nav {
+        display: flex;
+        gap: 15px;
+      }
 
-        nav a {
-            color: #fff;
-            text-decoration: none;
-        }
+      nav a {
+        color: #fff;
+        text-decoration: none;
+      }
 
-        .logout-btn {
-            background-color: #e74c3c;
-            color: #fff;
-            border: none;
-            padding: 5px 10px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
+      .logout-btn {
+        background-color: #e74c3c;
+        color: #fff;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
 
-        .logout-btn:hover {
-            background-color: #c0392b;
-        }
+      .logout-btn:hover {
+        background-color: #c0392b;
+      }
 
-        .student-details {
-            margin-bottom: 20px;
-            background-color: #fff;
-            border-radius: 8px;
-            padding: 10px;
-            box-shadow: 0 2px 8px rgba(20, 18, 18, 0.1);
-            border-bottom: 2px solid #8d8a8a; /* Added border-bottom line */
-        }
+      .student-details {
+        margin-bottom: 10px;
+        background-color: #fff;
+        border-radius: 8px;
+        padding: 10px;
+        box-shadow: 0 2px 8px rgba(20, 18, 18, 0.1);
+        border-bottom: 1px solid #8d8a8a; /* Added border-bottom line */
+      }
 
-        .student-details h2 {
-            font-size: 20px;
-            margin-bottom: 20px;
-            color: #444;
-            text-align: center;
-        }
+      .student-details h2 {
+        font-size: 20px;
+        margin-bottom: 20px;
+        color: #444;
+        text-align: center;
+      }
 
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-        }
+      .grid-container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
+      }
 
-        .grid-container label {
-            font-weight: bold;
-            margin-bottom: 5px;
-            display: block;
-            color: #525050;
-        }
+      .grid-container label {
+        font-weight: bold;
+        margin-bottom: 5px;
+        display: block;
+        color: #525050;
+      }
 
-        .grid-container input, .grid-container select {
-            border: none;
-            border-radius: 5px;
-            padding: 8px;
-            width: 100%;
-            background-color: #a8a3a3; /* Dark grey */
-            color: #fff;
-        }
+      .grid-container input,
+      .grid-container select {
+        border: none;
+        border-radius: 5px;
+        padding: 8px;
+        width: 100%;
+        background-color: #a8a3a3; /* Dark grey */
+        color: #fff;
+      }
 
-        .grid-container input:focus, .grid-container select:focus {
-            outline: none;
-            border: 2px solid #007bff;
-            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-            background-color: #444; /* Slightly lighter grey when focused */
-        }
+      .grid-container input:focus,
+      .grid-container select:focus {
+        outline: none;
+        border: 2px solid #007bff;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        background-color: #444; /* Slightly lighter grey when focused */
+      }
 
-        .highlight {
-            background-color: #A9A9A9; /* Light grey background */
-            color: #fff; /* Dark text for visibility */
-            padding: 5px 10px; /* Add padding around the text */
-            border-radius: 5px; /* Rounded corners */
-            display: inline-block; /* Ensures spacing works well */
-            width: 100%; /* Make the box stretch to full width of the parent container */
-            max-width: 500px; /* Limit the maximum width */
-            text-align: center;
-        }
+      .highlight {
+        background-color: #a9a9a9; /* Light grey background */
+        color: #fff; /* Dark text for visibility */
+        padding: 5px 10px; /* Add padding around the text */
+        border-radius: 5px; /* Rounded corners */
+        display: inline-block; /* Ensures spacing works well */
+        width: 100%; /* Make the box stretch to full width of the parent container */
+        max-width: 500px; /* Limit the maximum width */
+        text-align: center;
+      }
 
-        .grid-container div {
-            margin-bottom: 10px; /* Add spacing between rows */
-            text-align: center; 
-        }
+      .grid-container div {
+        margin-bottom: 10px; /* Add spacing between rows */
+        text-align: center;
+      }
 
-        .centered-label {
-            display: block; /* Makes the label a block element for proper centering */
-            font-weight: bold; /* Optional: make headings bold */
-            margin-bottom: 5px; /* Space between label and text */
-        }
+      .centered-label {
+        display: block; /* Makes the label a block element for proper centering */
+        font-weight: bold; /* Optional: make headings bold */
+        margin-bottom: 5px; /* Space between label and text */
+      }
 
-        .enrollments {
-          margin-top: 30px;
-          background-color: #fff;
-          border-radius: 10px;
-          padding: 20px;
-          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-          margin-left: 20px; /* Added left margin */
-          margin-right: 20px; /* Added right margin */
-          border-top: 2px solid #b9b4b4; /* Added border-top line */
-        }
+      .enrollments {
+        margin-top: 10px;
+        background-color: #fff;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        margin-left: 20px; /* Added left margin */
+        margin-right: 20px; /* Added right margin */
+        border-top: 1px solid #b9b4b4; /* Added border-top line */
+      }
 
-        .enrollments h2 {
+      .enrollments h2 {
         font-size: 22px;
         margin-bottom: 20px;
         color: #0a0909;
         text-align: center;
-    }
+        font-weight:500;
+      }
 
-    .results-container {
+      .results-container {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: 20px;
-    }
+      }
 
-    .course-item {
+      .course-item {
         border: 1px solid #ddd;
         border-radius: 8px;
         padding: 15px;
         background-color: #f9f9f9;
-    }
+      }
 
-    .course-item p {
+      .course-item p {
         font-size: 14px;
         line-height: 1.6;
         color: #555;
-    }
+      }
 
-    .course-item a {
+      .course-item a {
         color: #007bff;
         text-decoration: none;
         font-weight: bold;
-    }
+      }
 
-    .course-item a:hover {
+      .course-item a:hover {
         text-decoration: underline;
-    }
+      }
 
-    .course-item input[type="checkbox"] {
+      .course-item input[type="checkbox"] {
         margin-right: 10px;
         vertical-align: middle;
-    }
+      }
 
-    .course-item strong {
+      .course-item strong {
         font-weight: bold;
-    }
+      }
 
-
+      .highlight {
+        background-color: #ededed;
+        border: 1px solid #bdbcbc;
+      }
     </style>
 
     <div>
@@ -241,19 +247,6 @@
                 >Home</a
               >
             </li>
-            <li class="nav-item">
-              <a
-                class="nav-link"
-                style="
-                  color: white;
-                  font-family: Arial, Helvetica, sans-serif;
-                  font-weight: 300;
-                "
-                aria-current="page"
-                href="coursefloat.html"
-                > Create Course </a
-              >
-            </li>
 
             <li class="nav-item">
               <a
@@ -263,156 +256,175 @@
                   font-family: Arial, Helvetica, sans-serif;
                   font-weight: 300;
                 "
-                aria-current="page"
-                href="faculty_approval.html"
-                > Pending Approvals </a
+                href="login.html"
+                >Logout</a
               >
             </li>
-
-            <li class="nav-item">
-                
-                <a
-                  class="nav-link"
-                  style="
-                    color: white;
-                    font-family: Arial, Helvetica, sans-serif;
-                    font-weight: 300;
-                  "
-                  href="login.html"
-                  >Logout</a
-                >
-              </li>
-            </ul>
-          </div>
-        </nav>
-      </div>
-
-      <!-- Course Details -->
-
-      <div class="container">
-        <div class="student-details">
-            <h2>Course Details</h2>
-            <body>
-                <hr width="100%;" color="grey" size="5">
-            </body>
-            <div class="grid-container" >
-                <div>
-                    <label for="course-name" class="centered-label">Course Name</label>
-                    <span id="course-name" class = "highlight">{{ course['course_name'] }}</span>
-                </div>
-                <div>
-                  <label for="course-code" class="centered-label">Course Code</label>
-                  <span id="course-code" class = "highlight">{{ course['course_code'] }}</span>
-                </div>
-                <div>
-                  <label for="Instructor" class="centered-label">Instructor</label>
-                  <span id="Instructor" class = "highlight">{{ course['faculty_id'] }}</span>
-                </div>
-                <div>
-                  <label for="Status" class="centered-label">Status</label>
-                  <span id="Status" class = "highlight">{{ course['status'] }}</span>
-                </div>
-                <div>
-                  <label for="LTPC" class="centered-label">L-T-P-C</label>
-                  <span id="LTPC" class = "highlight">{{ course['LTPC'] }}</span>
-                </div>
-                <div>
-                  <label for="department" class="centered-label">Off. by the Department</label>
-                  <span id="department" class = "highlight">{{ course['department'] }}</span>
-                </div>
-                <div>
-                  <label for="semester" class="centered-label">Semester</label>
-                  <span id="semester" class = "highlight">{{ course['semester'] }}</span>
-                </div>
-                <div>
-                  <label for="year" class="centered-label">Year</label>
-                  <span id="year" class = "highlight">{{ course['year_course'] }}</span>
-                </div>
-              </div>
+          </ul>
         </div>
+      </nav>
+    </div>
+
+    <!-- Course Details -->
+
+    <div class="container">
+      <div class="student-details" style="padding: 15px 20px 30px 20px">
+        <h2 style="color: #0a0909">Course Details</h2>
+        <body>
+          <hr width="100%;" color="grey" size="5" />
+        </body>
+        <div class="grid-container">
+          <div>
+            <label
+              for="course-name"
+              class="centered-label"
+              style="color: #0a0909"
+              >Course Name</label
+            >
+            <span id="course-name" class="highlight" style="color: #0a0909"
+              >{{ course['course_name'] }}</span
+            >
+          </div>
+          <div>
+            <label
+              for="course-code"
+              class="centered-label"
+              style="color: #0a0909"
+              >Course Code</label
+            >
+            <span id="course-code" class="highlight" style="color: #0a0909"
+              >{{ course['course_code'] }}</span
+            >
+          </div>
+          <div>
+            <label
+              for="Instructor"
+              class="centered-label"
+              style="color: #0a0909"
+              >Instructor</label
+            >
+            <span id="Instructor" class="highlight" style="color: #0a0909"
+              >{{ course['faculty_id'] }}</span
+            >
+          </div>
+          <div>
+            <label for="Status" class="centered-label" style="color: #0a0909"
+              >Status</label
+            >
+            <span id="Status" class="highlight" style="color: #0a0909"
+              >{{ course['status'] }}</span
+            >
+          </div>
+          <div>
+            <label for="LTPC" class="centered-label" style="color: #0a0909"
+              >L-T-P-C</label
+            >
+            <span id="LTPC" class="highlight" style="color: #0a0909"
+              >{{ course['LTPC'] }}</span
+            >
+          </div>
+          <div>
+            <label
+              for="department"
+              class="centered-label"
+              style="color: #0a0909"
+              >Off. by the Department</label
+            >
+            <span id="department" class="highlight" style="color: #0a0909"
+              >{{ course['department'] }}</span
+            >
+          </div>
+          <div>
+            <label for="semester" class="centered-label" style="color: #0a0909"
+              >Semester</label
+            >
+            <span id="semester" class="highlight" style="color: #0a0909"
+              >{{ course['semester'] }}</span
+            >
+          </div>
+          <div>
+            <label for="year" class="centered-label" style="color: #0a0909"
+              >Year</label
+            >
+            <span id="year" class="highlight" style="color: #0a0909"
+              >{{ course['year_course'] }}</span
+            >
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- Enrollments -->
 
     <div class="enrollments">
       <h2>Enrollments</h2>
-      <h5 class = "highlight centered-text" >Number of Enrollments - {{course['no_of_enrollments']}}</h5>
-
-    </div>
-
-    <div class = "container">
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Name</th>
-          <th scope="col">Entry Number</th>
-          <th scope="col">Status</th>
-        </tr>
-      </thead>
-      <tbody>
-        
-        <!-- hard coded part for testing -->
-        <tr>
-          <th scope="row">1</th>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>Jacob</td>
-          <td>Thornton</td>
-          <td>@fat</td>
-        </tr>
-        <!-- Dynamic part -->
-        {% for student in students %}
-        <tr>
-          <th scope = "row">{{loop.index}}</th>
-          <td>{{ student['student_name'] }}</td>
-          <td>{{ student['entry_no']}}</td>
-          <td>
-            {% if student['status'] == 'pending_instructor_approval' %}
+      <h5 style="color: #0a0909; font-family: Arial, Helvetica, sans-serif; font-weight: 400; padding-left: 20px; font-size: 17px;">
+        Total Number of Enrollments - {{course['no_of_enrollments']}}
+      </h5>
+      <body>
+        <hr width="100%;" color="grey" size="5" />
+      </body>
+      <div class="container" style="margin-top: 0px; padding-top: 0px;">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Name</th>
+              <th scope="col">Entry Number</th>
+              <th scope="col">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- hard coded part for testing -->
+            <tr>
+              <th scope="row">1</th>
+              <td>Mark</td>
+              <td>Otto</td>
+              <td><span class="badge bg-success">Enrolled</span></td>
+            </tr>
+            <tr>
+              <th scope="row">2</th>
+              <td>Jacob</td>
+              <td>Thornton</td>
+              <td><span class="badge bg-success">Enrolled</span></td>
+            </tr>
+            <!-- Dynamic part -->
+            {% for student in students %}
+            <tr>
+              <th scope="row">{{loop.index}}</th>
+              <td>{{ student['student_name'] }}</td>
+              <td>{{ student['entry_no']}}</td>
+              <td>
+                {% if student['status'] == 'pending_instructor_approval' %}
                 <span class="badge bg-warning">Pending Instructor Approval</span>
-            {% elif student['status'] == 'pending_advisor_approval' %}
+                {% elif student['status'] == 'pending_advisor_approval' %}
                 <span class="badge bg-primary">Pending Advisor Approval</span>
-            {% elif student['status'] == 'enrolled' %}
+                {% elif student['status'] == 'enrolled' %}
                 <span class="badge bg-success">Enrolled</span>
-            {% endif %}
-          </td>
-        </tr>
-        {%end for%}
-      </tbody>
-    </table>
+                {% endif %}
+              </td>
+            </tr>
+            {%end for%}
+          </tbody>
+        </table>
+      </div>
     </div>
+    <a
+      href="#"
+      class="back-to-top d-flex align-items-center justify-content-center"
+      ><i class="bi bi-arrow-up-short"></i
+    ></a>
 
-      <a
-        href="#"
-        class="back-to-top d-flex align-items-center justify-content-center"
-        ><i class="bi bi-arrow-up-short"></i
-      ></a>
-  
-      <!-- Vendor JS Files -->
-      <script src="../static/assets/vendor/purecounter/purecounter_vanilla.js"></script>
-      <script src="../static/assets/vendor/aos/aos.js"></script>
-      <script src="../static/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-      <script src="../static/assets/vendor/glightbox/js/glightbox.min.js"></script>
-      <script src="../static/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-      <script src="../static/assets/vendor/swiper/swiper-bundle.min.js"></script>
-      <script src="../static/assets/vendor/php-email-form/validate.js"></script>
-  
-      <!-- Template Main JS File -->
-      <script src="../static/assets/js/main.js"></script>
-  
-</body>
+    <!-- Vendor JS Files -->
+    <script src="../static/assets/vendor/purecounter/purecounter_vanilla.js"></script>
+    <script src="../static/assets/vendor/aos/aos.js"></script>
+    <script src="../static/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../static/assets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="../static/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="../static/assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="../static/assets/vendor/php-email-form/validate.js"></script>
 
+    <!-- Template Main JS File -->
+    <script src="../static/assets/js/main.js"></script>
+  </body>
 </html>
-
-
-
-
-
-
-
-
-
