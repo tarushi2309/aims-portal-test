@@ -33,6 +33,9 @@ CREATE TABLE course (
     no_of_enrollments int,
     LTPC int,
     department VARCHAR(100),
+    semester int,
+    year_course int,
+    course_code varchar(100),
     FOREIGN KEY (faculty_id) REFERENCES faculty(faculty_id)
 );
 
@@ -49,6 +52,15 @@ CREATE TABLE faculty_advisor(
     year_of_entry int,
     degree ENUM('BTECH','MTECH','PHD','MSC'),
     dep ENUM('COMPUTER SCIENCE AND ENGINEERING','ELECTRICAL ENGINEERING','MECHANICAL ENGINEERING','MATHS AND COMPUTING','CHEMICAL ENGINEERING','METALLURGY ENGINEERING')
+);
+
+CREATE TABLE student_course_enrollment (
+    enrollment_id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    student_id INT,
+    course_id INT,
+    status ENUM('pending_instructor_approval', 'pending_advisor_approval', 'enrolled'),
+    FOREIGN KEY (student_id) REFERENCES student(student_id),
+    FOREIGN KEY (course_id) REFERENCES course(course_id)
 );
 
 Insert into student(student_name,email_id,degree,dep,entry_no,year_of_entry) values('TARUSHI','2022csb1135@iitrpr.ac.in','BTECH','COMPUTER SCIENCE AND ENGINEERING','2022csb1135',2022);
