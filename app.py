@@ -162,7 +162,15 @@ def create_course(faculty_id):
     else:
         return "You are not authorised to view this page!!"
 
-#@app.route('/pending_approvals/<')
+@app.route('/pending_approvals/<faculty_id>')
+def pending_approvals(faculty_id):
+    if session['role']==2:
+        cursor.execute(
+            'SELECT u.username , s.entry_no, c.course_name FROM course c JOIN student_course sc ON sc.course_id = c.course_id JOIN student s ON sc.student_id = s.student_id JOIN user u ON s.user_id = u.user_id WHERE c.faculty_id = %s AND sc.status = %s', (faculty_id, 'pending_instructor_approval'))
+        students = cursor.fetchall()
+        return render_template('faculty_approval.html',students=students)
+    else:
+       return "You are not authorised to view this page!!" 
 
 @app.route('/signup',methods=['GET','POST'])
 def signup_process():
