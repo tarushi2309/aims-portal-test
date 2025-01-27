@@ -136,14 +136,14 @@
             </tr>
         </thead>
         <tbody>
-            <!-- hard coded part for testing -->
+            <!-- hard coded part for testing 
             <tr class="course-item">
                 <th scope="row">1</th>
                 <td>Mark</td>
                 <td>Otto@gmail.com</td>
                 <td>1234</td>
                 <td>
-                    <!-- Dropdown button -->
+                    Dropdown button
                     <div class="dropdown">
                         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                             Action
@@ -155,11 +155,11 @@
                     </div>
                 </td>
             </tr>
-            <!-- Dynamic part -->
+            Dynamic part -->
             {% for student in students %}
             <tr class="course-item">
                 <th scope="row">{{ loop.index }}</th>
-                <td>{{ student['student_name'] }}</td>
+                <td>{{ student['username'] }}</td>
                 <td>{{ student['entry_no'] }}</td>
                 <td>{{ student['course_name'] }}</td>
                 <td>
