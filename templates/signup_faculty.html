@@ -241,95 +241,99 @@
               <h5 class=" text-center text-light mb-4" style="font-family: 'Montserrat', sans-serif; font-weight: 400">
                 Enter your details to register
               </h5>
-              <form action="/signup" method="post">
+              <form id="facultySignupForm" action="/signup" method="post">
                 <div class="row gy-2 overflow-hidden">
-                  <div class="col-12">
-                    <div class="mb-2">
-                      <input
-                        type="text"
-                        class="form-control"
-                        name="name"
-                        id="fullName"
-                        placeholder="Enter Full Name"
-                        required
-                      />
-                      <!-- <label for="firstName" class="form-label"
-                        >Full Name</label
-                      > -->
+                    <div class="col-12">
+                        <div class="mb-2">
+                            <input
+                                type="text"
+                                class="form-control"
+                                name="name"
+                                id="fullName"
+                                placeholder="Enter Full Name"
+                                required
+                            />
+                        </div>
                     </div>
-                  </div>
-                  <div class="col-12">
-                    <div class="mb-2">
-                      <input
-                        type="email"
-                        class="form-control"
-                        name="email"
-                        id="email"
-                        placeholder="Enter Email"
-                        required
-                      />
-                      <!-- <label for="email" class="form-label">Email</label> -->
+                    <div class="col-12">
+                        <div class="mb-2">
+                            <input
+                                type="email"
+                                class="form-control"
+                                name="email"
+                                id="email"
+                                placeholder="Enter Email"
+                                required
+                            />
+                        </div>
                     </div>
-                  </div>
-                  <div class="col-12">
-                    <div class="mb-2">
-                      <input
-                        type="text"
-                        class="form-control"
-                        name="faculty"
-                        id="facultyid"
-                        placeholder="Enter Faculty ID"
-                        required
-                      />
-                      <!-- <label for="email" class="form-label">Email</label> -->
+                    <div class="col-12">
+                        <div class="mb-2">
+                            <input
+                                type="text"
+                                class="form-control"
+                                name="faculty"
+                                id="facultyid"
+                                placeholder="Enter Faculty ID"
+                                required
+                            />
+                        </div>
                     </div>
-                  </div>
-                  <div class="col-12">
-                    <div class="mb-2">
-                      <input
-                        type="text"
-                        class="form-control"
-                        name="department"
-                        id="department"
-                        placeholder="Enter Department"
-                        required
-                      />
-                      <!-- <label for="email" class="form-label">Email</label> -->
+                    <div class="col-12">
+                      <div class="mb-2">
+                          <select class="form-control" name="department" id="department" required>
+                              <option value="" disabled selected>Select Department</option>
+                              <option value="COMPUTER SCIENCE AND ENGINEERING">Computer Science and Engineering</option>
+                              <option value="ELECTRICAL ENGINEERING">Electrical Engineering</option>
+                              <option value="MECHANICAL ENGINEERING">Mechanical Engineering</option>
+                              <option value="MATHS AND COMPUTING">Maths and Computing</option>
+                              <option value="CHEMICAL ENGINEERING">Chemical Engineering</option>
+                              <option value="METALLURGY ENGINEERING">Metallurgy Engineering</option>
+                              <option value="CIVIL ENGINEERING">Civil Engineering</option>
+                              <option value="HUMANITIES AND SOCIAL SCIENCES">Humanities and Social Sciences</option>
+                              <!-- Add more options as needed -->
+                          </select>
+                      </div>
                     </div>
-                  </div>
-                  
-                  <!-- <div class="col-12">
-                    <div class="form-floating mb-3">
-                      <input
-                        type="password"
-                        class="form-control"
-                        name="password"
-                        id="password"
-                        value=""
-                        placeholder="Password"
-                        required
-                      />
-                      <label for="password" class="form-label">Password</label>
+                    <div class="col-12">
+                        <div class="d-grid my-3">
+                            <button class="btn btn-secondary btn-lg" type="submit">
+                                Sign up
+                            </button>
+                        </div>
                     </div>
-                  </div> -->
-                  </div>
-                  <div class="col-12">
-                    <div class="d-grid my-3">
-                      <button class="btn btn-secondary btn-lg" type="submit">
-                        Sign up
-                      </button>
+                    <div class="col-12">
+                        <p class="m-0 text-secondary text-center">
+                            Already have an account?
+                            <a href="login" class="link-primary text-decoration-none">Log in</a>
+                        </p>
                     </div>
-                  </div>
-                  <div class="col-12">
-                    <p class="m-0 text-secondary text-center">
-                      Already have an account?
-                      <a href="login" class="link-primary text-decoration-none"
-                        >Log in</a
-                      >
-                    </p>
-                  </div>
                 </div>
-              </form>
+            </form>
+            <script>
+              document.getElementById("facultySignupForm").onsubmit = function (event) {
+                  // Prevent form submission if validation fails
+                  const fields = [
+                      { id: "fullName", name: "Full Name" },
+                      { id: "email", name: "Email" },
+                      { id: "facultyid", name: "Faculty ID" },
+                      { id: "department", name: "Department" },
+                  ];
+          
+                  for (let field of fields) {
+                      const value = document.getElementById(field.id).value.trim();
+                      if (!value) {
+                          event.preventDefault(); // Prevent submission
+                          alert(`Please fill out the ${field.name} field.`);
+                          document.getElementById(field.id).focus();
+                          return false;
+                      }
+                  }
+          
+                  // Show success message upon validation
+                  alert("Registration successful!");
+              };
+              </script>            
             </div>
           </div>
         </div>

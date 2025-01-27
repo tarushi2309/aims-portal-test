@@ -286,10 +286,14 @@
                     <div class="mb-2">
                       <select class="form-control" name="department" id="department" required>
                         <option value="" disabled selected>Select Department</option>
-                        <option value="CSE">Computer Science and Engineering</option>
-                        <option value="ECE">Electronics and Communication Engineering</option>
-                        <option value="ME">Mechanical Engineering</option>
-                        <option value="CE">Civil Engineering</option>
+                            <option value="COMPUTER SCIENCE AND ENGINEERING">COMPUTER SCIENCE AND ENGINEERING</option>
+                            <option value="ELECTRICAL ENGINEERING">ELECTRICAL ENGINEERING</option>
+                            <option value="MECHANICAL ENGINEERING">MECHANICAL ENGINEERING</option>
+                            <option value="MATHS AND COMPUTING">MATHS AND COMPUTING</option>
+                            <option value="CHEMICAL ENGINEERING">CHEMICAL ENGINEERING</option>
+                            <option value="METALLURGY ENGINEERING">METALLURGY ENGINEERING</option>
+                            <option value="CIVIL ENGINEERING">CIVIL ENGINEERING</option>
+                            <option value="HUMANITIES AND SOCIAL SCIENCES">HUMANITIES AND SOCIAL SCIENCES</option>
                         <!-- Add more options as needed -->
                       </select>
                     </div>
@@ -307,20 +311,6 @@
                       <!-- <label for="email" class="form-label">Email</label> -->
                     </div>
                   </div>
-                  <!-- <div class="col-12">
-                    <div class="form-floating mb-3">
-                      <input
-                        type="password"
-                        class="form-control"
-                        name="password"
-                        id="password"
-                        value=""
-                        placeholder="Password"
-                        required
-                      />
-                      <label for="password" class="form-label">Password</label>
-                    </div>
-                  </div> -->
                   </div>
                   <div class="col-12">
                     <div class="d-grid my-3">
@@ -339,6 +329,34 @@
                   </div>
                 </div>
               </form>
+
+              <script>
+                document.getElementById("signupForm").onsubmit = function (event) {
+                // Prevent form submission if validation fails
+                  const fields = [
+                      { id: "fullName", name: "Full Name" },
+                      { id: "email", name: "Email" },
+                      { id: "EntryNo", name: "Entry Number" },
+                      { id: "degree", name: "Degree Type" },
+                      { id: "department", name: "Department" },
+                      { id: "year", name: "Year of Entry" },
+                  ];
+
+                  for (let field of fields) {
+                      const value = document.getElementById(field.id).value.trim();
+                      if (!value) {
+                          event.preventDefault(); // Prevent submission
+                          alert(`Please fill out the ${field.name} field.`);
+                          document.getElementById(field.id).focus();
+                          return false;
+                      }
+                  }
+
+                // Show success message after successful submission
+                  alert("Registration successful! You can login once admin approvals the registration.");
+                  this.submit()
+                };
+              </script>
             </div>
           </div>
         </div>
