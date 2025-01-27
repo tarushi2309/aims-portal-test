@@ -225,7 +225,7 @@
                         <h5 class="text-center text-light mb-4" style="font-family: 'Montserrat', sans-serif; font-weight: 400">
                             Enter Course Details
                         </h5>
-                        <form action="/create_course/{{faculty_id}}" method="post">
+                        <form action="/create_course/{{faculty_id}}" method="post" onsubmit="return validateForm()">
                             <div class="row gy-3">
                                 <!-- Left Column -->
                                 <div class="col-md-5">
@@ -238,8 +238,12 @@
                                         <input type="text" class="form-control" name="LTPC" id="LTPC" placeholder="Enter L-T-P-C" required />
                                     </div>
                                     <div class="mb-3">
-                                        <label for="semester" class="form-label text-light">Semester</label>
-                                        <input type="text" class="form-control" name="semester" id="semester" placeholder="Enter Semester" required />
+                                      <label for="semester" class="form-label text-light">Semester</label>
+                                      <select class="form-control" name="semester" id="semester" required>
+                                          <option value="">Select Semester</option>
+                                          <option value="2024-II">2024-II(running)</option>
+                                          <option value="2024-S">2025-S</option>
+                                      </select>
                                     </div>
                                 </div>
 
@@ -259,9 +263,20 @@
                                         <input type="text" class="form-control" name="year" id="year" placeholder="Enter Year" required />
                                     </div>
                                     <div class="mb-3">
-                                        <label for="department" class="form-label text-light">Department</label>
-                                        <input type="text" class="form-control" name="department" id="department" placeholder="Enter Department Name" required />
-                                    </div>
+                                      <label for="department" class="form-label text-light">Department</label>
+                                      <select class="form-control" name="department" id="department" required>
+                                          <option value="">Select Department</option>
+                                          <option value="COMPUTER SCIENCE AND ENGINEERING">COMPUTER SCIENCE AND ENGINEERING</option>
+                                          <option value="ELECTRICAL ENGINEERING">ELECTRICAL ENGINEERING</option>
+                                          <option value="MECHANICAL ENGINEERING">MECHANICAL ENGINEERING</option>
+                                          <option value="MATHS AND COMPUTING">MATHS AND COMPUTING</option>
+                                          <option value="CHEMICAL ENGINEERING">CHEMICAL ENGINEERING</option>
+                                          <option value="METALLURGY ENGINEERING">METALLURGY ENGINEERING</option>
+                                          <option value="CIVIL ENGINEERING">CIVIL ENGINEERING</option>
+                                          <option value="HUMANITIES AND SOCIAL SCIENCES">HUMANITIES AND SOCIAL SCIENCES</option>
+                                          <!-- Add more departments as needed -->
+                                      </select>
+                                  </div>
                                 </div>
                             </div>
 
@@ -271,6 +286,33 @@
                               
                             </div>
                           </form>
+                          <script>
+                            function validateForm() {
+                              const fields = [
+                                { id: "courseName", name: "Course Name" },
+                                { id: "LTPC", name: "L-T-P-C" },
+                                { id: "semester", name: "Semester" },
+                                { id: "courseCode", name: "Course Code" },
+                                { id: "year", name: "Year" },
+                                { id: "department", name: "Department" }
+                              ];
+
+                              for (let field of fields) {
+                                const value = document.getElementById(field.id).value.trim();
+                                if (!value) {
+                                    alert(`Please fill out the ${field.name} field.`);
+                                    document.getElementById(field.id).focus(); // Focus on the empty field
+                                    return false; // Prevent form submission
+                                }
+                              }
+
+                              const courseCodeField = document.getElementById("courseCode");
+                              courseCodeField.value = courseCodeField.value.trim().toUpperCase();
+
+                              alert("Course created successfully! Students can enroll after admin approval");
+                              this.submit();
+                            };
+                          </script>
                     </div>
                 </div>
             </div>
