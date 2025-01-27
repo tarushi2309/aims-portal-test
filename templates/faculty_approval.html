@@ -169,8 +169,28 @@
                             Action
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <li><a class="dropdown-item action-btn" href="#">Approve</a></li>
-                            <li><a class="dropdown-item action-btn" href="#">Reject</a></li>
+                          <li>
+                            <a 
+                              class="dropdown-item action-btn" 
+                              href="#" 
+                              data-student-id="{{ student['student_id'] }}" 
+                              data-course-id="{{ student['course_id'] }}" 
+                              data-action="approve"
+                            >
+                              Approve
+                            </a>
+                          </li>
+                          <li>
+                            <a 
+                              class="dropdown-item action-btn" 
+                              href="#" 
+                              data-student-id="{{ student['student_id'] }}" 
+                              data-course-id="{{ student['course_id'] }}" 
+                              data-action="reject"
+                            >
+                              Reject
+                            </a>
+                          </li>
                         </ul>
                     </div>
                 </td>
@@ -182,26 +202,51 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
   document.addEventListener("DOMContentLoaded", function () {
-    // Use event delegation to handle click events
     document.body.addEventListener("click", function (event) {
-      // If the clicked element is an action button (Approve/Reject)
+      // Check if an action button was clicked
       if (event.target.classList.contains("action-btn")) {
         event.preventDefault();
 
-        // Get the closest <tr> element, which is the row
-        const courseItem = event.target.closest("tr.course-item");
+        // Get student ID, course ID, and action from data attributes
+        const studentId = event.target.getAttribute("data-student-id");
+        const courseId = event.target.getAttribute("data-course-id");
+        const action = event.target.getAttribute("data-action");
 
-        if (courseItem) {
-          // Add animation effects before removing the element
-          courseItem.style.transition = "opacity 0.5s ease-out, transform 0.5s ease-out";
-          courseItem.style.opacity = "0";
-          courseItem.style.transform = "scale(0.9)";
+        // Send the data to the backend using fetch
+        fetch("/update_status", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            student_id: studentId,
+            course_id: courseId,
+            action: action,
+          }),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.success) {
+              alert(data.message);
 
-          // Remove the row after the animation completes
-          setTimeout(() => {
-            courseItem.remove();
-          }, 500);  // Timeout duration matches animation time (500ms)
-        }
+              // Optionally remove the row from the table
+              const courseItem = event.target.closest("tr.course-item");
+              if (courseItem) {
+                courseItem.style.transition = "opacity 0.5s ease-out, transform 0.5s ease-out";
+                courseItem.style.opacity = "0";
+                courseItem.style.transform = "scale(0.9)";
+                setTimeout(() => {
+                  courseItem.remove();
+                }, 500);
+              }
+            } else {
+              alert(`Error: ${data.error}`);
+            }
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+            alert("An error occurred while updating the status.");
+          });
       }
     });
   });
