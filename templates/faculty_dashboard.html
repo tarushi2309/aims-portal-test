@@ -239,7 +239,7 @@
                   font-family: Arial, Helvetica, sans-serif;
                   font-weight: 300;
                 "
-                href="faculty_dashboard.html"
+                href=""
                 >Home</a
               >
             </li>
@@ -252,7 +252,7 @@
                   font-weight: 300;
                 "
                 aria-current="page"
-                href="coursefloat.html"
+                href="{{ url_for('create_course',faculty_id=faculty['faculty_id'])}}"
               >
                 Create Course
               </a>
@@ -267,7 +267,7 @@
                   font-weight: 300;
                 "
                 aria-current="page"
-                href="faculty_approval.html"
+                href=""
               >
                 Pending Approvals
               </a>
@@ -281,7 +281,7 @@
                   font-family: Arial, Helvetica, sans-serif;
                   font-weight: 300;
                 "
-                href="login.html"
+                href=""
                 >Logout</a
               >
             </li>
@@ -298,7 +298,7 @@
           <div class="row text-center">
             <div class="col-md-6">
               <label for="name" class="centered-label" style="color:#0a0909; font-family: Arial, Helvetica, sans-serif; font-weight: 400;">Name</label>
-              <span id="name" class="highlight" style="color:#0a0909">{{ faculty['name'] }}</span>
+              <span id="name" class="highlight" style="color:#0a0909">{{ user['username'] }}</span>
             </div>
             <div class="col-md-6">
               <label for="faculty-id" class="centered-label" style="color:#0a0909; font-family: Arial, Helvetica, sans-serif; font-weight: 400;">Faculty ID</label>
@@ -308,19 +308,17 @@
           <div class="row text-center mt-3">
             <div class="col-md-6">
               <label for="email" class="centered-label" style="color:#0a0909; font-family: Arial, Helvetica, sans-serif; font-weight: 400;">Email</label>
-              <span id="email" class="highlight" style="color:#0a0909">{{ faculty['email'] }}</span>
+              <span id="email" class="highlight" style="color:#0a0909">{{ user['email_id'] }}</span>
             </div>
             <div class="col-md-6">
               <label for="department" class="centered-label" style="color:#0a0909; font-family: Arial, Helvetica, sans-serif; font-weight: 400;">Department</label>
-              <span id="department" class="highlight" style="color:#0a0909">{{ faculty['department'] }}</span>
+              <span id="department" class="highlight" style="color:#0a0909">{{ faculty['dep'] }}</span>
             </div>
           </div>
         </div>
       </div>
       
 
-<<<<<<< HEAD
-=======
       <!-- ======= Courses Available Section ======= -->
       <div class="my-courses">
         <h2>My Courses</h2>
@@ -330,7 +328,7 @@
           class="courses-grid"
           style="display: flex; flex-wrap: wrap; justify-content: space-evenly"
         >
-          <!--dummy data 1-->
+          <!--dummy data 1
           <div class="course-item">
             <label for="course1">
               <a style="color: #0a0909" href="#"
@@ -457,22 +455,21 @@
               </ul>
             </div>
           </div>
-          <!--dummy data end-->
+          dummy data end-->
 
           {% for course in courses %}
           <div class="course-item">
             <label>
               <a style="color: #0a0909" href="course_details.html"
-                >{{ course.code }} | {{ course.name }} | {{ course.structure
+                >{{ course.course_code }} | {{ course.course_name }} | {{ course.LTPC
                 }}</a
               >
             </label>
             <p>
               <strong>Credits:</strong> {{ course.credits }}<br />
-              <strong>Status:</strong> {{ course.status }}<br />
-              <strong>Session:</strong> {{ course.session }}<br />
-              <strong>Enrollment:</strong> {{ course.enrollment }} in Sec.-A<br />
-              <strong>Instructor(s):</strong> {{ course.instructors }}
+              <strong>Status:</strong> {{ course.course_status }}<br />
+              <strong>Session:</strong> {{ course.sem }}<br />
+              <strong>Enrollment:</strong> {{ course.no_of_enrollments }} in Sec.-A<br />
             </p>
             <div class="dropdown">
               <ul class="dropdown-menu">
@@ -532,5 +529,4 @@
     <!-- Template Main JS File -->
     <script src="../static/assets/js/main.js"></script>
   </body>
->>>>>>> 0509d8d (Updated faculty_dahsboard.html and style.css)
 </html>

@@ -21,12 +21,13 @@ aims_email='tarushi.tanejag1112@gmail.com'
 conn = mysql.connector.connect(
     host="127.0.0.1",
     user="root",
-    password="1147",
+    password="password",
     database="aims",
     auth_plugin='mysql_native_password'
 )
 cursor = conn.cursor(dictionary=True) 
 user_type=''
+user={}
 
 def init_db():
     with app.app_context():
@@ -44,11 +45,11 @@ def generate_otp(length=6):
 def send_email(sender,receiver):
     otp = generate_otp()
     cursor.execute(
-            'delete from otp_table where user_id = %s and TIMESTAMPDIFF(MINUTE, created_at, NOW()) > 3', (receiver,) )
+            'delete from otp_table where user_id = %s and TIMESTAMPDIFF(MINUTE, created_at, NOW()) > 5', (receiver,) )
     conn.commit()
     cursor.execute('insert into otp_table (user_id,otp,created_at) values (%s,%s,%s)',(receiver,otp,datetime.now(),))
     conn.commit()
-    text=f"Subject : OTP for AIMS Login\n\n Your login otp is {otp} \n\n This is valid for 3 minutes"
+    text=f"Subject : OTP for AIMS Login\n\n Your login otp is {otp} \n\n This is valid for 5 minutes"
     server = smtplib.SMTP("smtp.gmail.com",587)
     server.starttls()
 
@@ -74,25 +75,35 @@ def login_otp(email_id):
 def process_otp(email_id):
     if request.method=='POST' and 'otp' in request.form:
         otp = request.form['otp']
-        cursor.execute('select otp from otp_table where user_id = %s and TIMESTAMPDIFF(MINUTE, created_at, NOW()) <= 3',(email_id,))
+        cursor.execute('select otp from otp_table where user_id = %s and TIMESTAMPDIFF(MINUTE, created_at, NOW()) <= 5',(email_id,))
         otp_given=cursor.fetchone()
         if otp_given:
-            if otp_given[0]==otp:
-                cursor.execute('select * from student where email_id = %s',(email_id,))
+            if otp_given['otp']==otp:
+                cursor.execute('select * from user where email_id = %s',(email_id,))
+                global user
                 user=cursor.fetchone()
-                if user:
+                if user['role']=='student':
+                    session['role']=1
                     session['loggedin']=True
-                    return redirect(url_for("dashboard_student",user=user))
+                    return redirect(url_for("dashboard_student",username=user['username']))
+                elif user['role']=='faculty':
+                    session['role']=2
+                    session['loggedin']=True
+                    return redirect(url_for("dashboard_faculty",username=user['username']))
+                elif user['role']=='admin':
+                    session['role']=3
+                    session['loggedin']=True
+                    return redirect(url_for("dashboard_admin",username=user['username']))
                 else:
-                    cursor.execute(
-                    'SELECT * FROM faculty where email_id = %s', (email_id,))
-                    user=cursor.fetchone()
-                    if user:
-                        session['loggedin']=True
-                        return redirect(url_for("dashboard_faculty",user=user))
-                    else:
-                        msg="incorrect username or password"
-                        return render_template("login.html",msg=msg)
+                    msg="Incorrect Email Id !! Please re enter correct email id"
+                    return render_template("login.html",msg=msg)
+            else:
+                msg="Incorrect OTP !! Please try again"
+                return render_template("login_otp.html",email_id=email_id,msg=msg)
+        else:
+            msg="Please enter a valid OTP"
+            return render_template("login_otp.html",email_id=email_id,msg=msg)
+
                     
 
 @app.route('/signup_main',methods=['GET','POST'])
@@ -101,40 +112,57 @@ def signup_main():
 
 
 
-"""@app.route('/dashboard_mentee/<username>')
-def dashboard_mentee(username):
- 
-    '''This renders the dashboard for a mentee user. It retrieves information about the mentee
-    from the database and fetches tags from the database to populate the search for
-    courses section.'''
- 
-    cursor=mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-    cursor.execute(
-            'SELECT * FROM mentee WHERE username = % s ', (username,) )
-    mentee=cursor.fetchone()
-    
-    cursor.execute('SELECT * FROM tag')  
-    tags = cursor.fetchall()
-    return render_template("dashboard_mentee.html",mentee=mentee,tags=tags,selected_filter = 'none')
+@app.route('/dashboard_student/<username>')
+def dashboard_student(username):
+    if session['role']==1:
+        cursor.execute('SELECT * FROM student where user_id = %s',(user['user_id'],))  
+        student = cursor.fetchone()
+        cursor.execute('SELECT * FROM student_course sc JOIN course c on sc.course_id = c.course_id where sc.student_id = %s',(student['student_id'],))  
+        courses = cursor.fetchall()
+        return render_template("dashboard_student.html",user=user,student=student,courses=courses)
+    else:
+        return "You are not authorised to view this page!!"
 
-@app.route('/dashboard_mentor/<username>')
-def dashboard_mentor(username):
- 
-    '''This renders the dashboard for a mentor user. It retrieves information about the mentor
-    from the database. Additionally, it fetches all courses associated with the mentor from
-    the database.'''
+@app.route('/dashboard_faculty/<username>')
+def dashboard_faculty(username):
+    if session['role']==2:
+        cursor.execute('SELECT * FROM faculty where user_id = %s',(user['user_id'],))  
+        faculty = cursor.fetchone()
+        cursor.execute('SELECT * FROM course where faculty_id = %s',(faculty['faculty_id'],))  
+        courses = cursor.fetchall()
+        return render_template("faculty_dashboard.html",user=user,faculty=faculty,courses=courses)
+    else:
+        return "You are not authorised to view this page!!"
 
-    cursor=mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-    cursor.execute(
-            'SELECT * FROM mentor WHERE username = % s ', (username,) )
-    mentor=cursor.fetchone()
-    cursor.execute(
-            'SELECT * FROM course WHERE mentor_id = % s ', (mentor['mentor_id'],) )
-    courses=cursor.fetchall()
+@app.route('/dashboard_admin/<username>')
+def dashboard_admin(username):
+    if session['role']==3:
+        cursor.execute('SELECT * FROM admin where user_id = %s',(user['user_id'],))  
+        admin = cursor.fetchone()
+        return render_template("dashboard_admin.html",user=user)
+    else:
+        return "You are not authorised to view this page!!"
 
-    return render_template("dashboard_mentor.html",mentor=mentor,courses=courses)"""
+@app.route('/create_course/<faculty_id>',methods=['GET','POST'])
+def create_course(faculty_id):
 
+    if session['role']==2:
+        if request.method=='POST':
+            course_name=request.form['coursename']
+            ltpc=request.form['LTPC']
+            sem=request.form['semester']
+            code=request.form['coursecode']
+            year=request.form['year']
+            dep=request.form['department']
+            print(f"fACULTY ID : {faculty_id}")
+            cursor.execute('INSERT INTO course(course_name,faculty_id,course_code,LTPC,sem,course_status,credits) VALUES (%s, %s, %s, %s, %s,%s,%s)', (course_name, faculty_id, code, ltpc, sem,'pending_admin_approval',ltpc[-1],))
+            conn.commit()
+            return render_template('coursefloat.html',faculty_id=faculty_id,msg='Course created successfully. Students shall be able to enroll after admin approval!!')
+        return render_template('coursefloat.html',faculty_id=faculty_id,msg='')
+    else:
+        return "You are not authorised to view this page!!"
 
+#@app.route('/pending_approvals/<')
 
 @app.route('/signup',methods=['GET','POST'])
 def signup_process():
@@ -157,7 +185,7 @@ def signup_process():
             'INSERT INTO student(student_name,entry_no,email_id,degree,department,year_of_entry) VALUES(%s,%s, %s,%s, %s,%s)', (name,entry_no,email_id,degree,department,year_of_entry,) )
             conn.commit()
             return render_template("login.html",msg="Signup Successful. You may login Now")
-        elif user_trype =="faculty":
+        elif user_type =="faculty":
             name = request.form['name']
             email_id = request.form['email']
             cursor.execute(

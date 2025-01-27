@@ -74,7 +74,7 @@
                 font-family: Arial, Helvetica, sans-serif;
                 font-weight: 300;
               "
-              href="coursefloat.html"
+              href=""
               >Create Course</a
             >
           </li>
@@ -225,7 +225,7 @@
                         <h5 class="text-center text-light mb-4" style="font-family: 'Montserrat', sans-serif; font-weight: 400">
                             Enter Course Details
                         </h5>
-                        <form action="/signup" method="post">
+                        <form action="/create_course/{{faculty_id}}" method="post">
                             <div class="row gy-3">
                                 <!-- Left Column -->
                                 <div class="col-md-5">
@@ -268,8 +268,9 @@
                             <!-- Submit Button Centered -->
                             <div class="d-flex justify-content-center mt-4">
                                 <button class="btn btn-secondary btn-lg" type="submit">Submit</button>
+                              
                             </div>
-                        </form>
+                          </form>
                     </div>
                 </div>
             </div>

@@ -163,23 +163,23 @@
             <div class="grid-container">
                 <div>
                     <label for="full-name">Full Name</label>
-                    <input style="border: 1px solid #bdbcbc;" type="text" id="first-name" value="{{ student['first_name'] }}" readonly class="readonly-input">
+                    <input style="border: 1px solid #bdbcbc;" type="text" id="first-name" value="{{ user['username'] }}" readonly class="readonly-input">
                 </div>
                 <div>
                     <label for="roll-no">Roll Number</label>
-                    <input style="border: 1px solid #bdbcbc;" type="text" id="roll-no" value="{{ student['roll_no'] }}" readonly class="readonly-input">
+                    <input style="border: 1px solid #bdbcbc;" type="text" id="roll-no" value="{{ student['entry_no'] }}" readonly class="readonly-input">
                 </div>
                 <div>
                     <label for="email">Email</label>
-                    <input style="border: 1px solid #bdbcbc;" type="email" id="email" value="{{ student['email'] }}" readonly class="readonly-input">
+                    <input style="border: 1px solid #bdbcbc;" type="email" id="email" value="{{ user['email_id'] }}" readonly class="readonly-input">
                 </div>
                 <div>
                     <label for="department">Department</label>
-                    <input style="border: 1px solid #bdbcbc;"type="text" id="department" value="{{ student['department'] }}" readonly class="readonly-input">
+                    <input style="border: 1px solid #bdbcbc;"type="text" id="department" value="{{ student['dep'] }}" readonly class="readonly-input">
                 </div>
                 <div>
                     <label for="year">Year of Entry</label>
-                    <input style="border: 1px solid #bdbcbc;"type="text" id="year" value="{{ student['year'] }}" readonly class="readonly-input">
+                    <input style="border: 1px solid #bdbcbc;"type="text" id="year" value="{{ student['year_of_entry'] }}" readonly class="readonly-input">
                 </div>
                 <div>
                     <label for="degree">Degree Type</label>
@@ -196,7 +196,7 @@
     <hr width="100%" color="grey" size="5" />
 
     <div class="courses-grid" style="display: flex; flex-wrap: wrap; justify-content: space-evenly;">
-      <!--dummy data 1-->
+      <!--dummy data 
       <div class="course-item">
           <label for="course1">
               <a href="#">CS304 | Computer Networks | 3-1-2-6-4</a>
@@ -233,19 +233,18 @@
               <strong>Instructor(s):</strong> Sudeep Mishra, Basant Subba.
           </p>
       </div>
-      <!--dummy data end-->
+      dummy data end-->
 
       {% for course in courses %}
       <div class="course-item">
         <label>
-          <a href="course_details.html">{{ course.code }} | {{ course.name }} | {{ course.structure }}</a>
+          <a href="course_details.html">{{ course.course_code }} | {{ course.course_name }} | {{ course.LTPC }} | ({{course.course_status}})</a>
         </label>
         <p>
           <strong>Credits:</strong> {{ course.credits }}<br>
           <strong>Status:</strong> {{ course.status }}<br>
-          <strong>Session:</strong> {{ course.session }}<br>
-          <strong>Enrollment:</strong> {{ course.enrollment }} in Sec.-A<br>
-          <strong>Instructor(s):</strong> {{ course.instructors }}
+          <strong>Session:</strong> {{ course.sem}}<br>
+          <strong>Grade:</strong> {{ course.grade }}<br>
         </p>
       {% endfor %}
     </div>
