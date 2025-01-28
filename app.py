@@ -119,9 +119,11 @@ def dashboard_student(username):
     if session['role']==1:
         cursor.execute('SELECT * FROM student where user_id = %s',(user['user_id'],))  
         student = cursor.fetchone()
+        cursor.execute('SELECT * FROM faculty where dep=%s',(student['dep'],))
+        fa=cursor.fetchone()
         cursor.execute('SELECT * FROM student_course sc JOIN course c on sc.course_id = c.course_id where sc.student_id = %s',(student['student_id'],))  
         courses = cursor.fetchall()
-        return render_template("dashboard_student.html",user=user,student=student,courses=courses)
+        return render_template("dashboard_student.html",user=user,student=student,courses=courses,fa=fa)
     else:
         return "You are not authorised to view this page!!"
 
