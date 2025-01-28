@@ -229,7 +229,7 @@
         {% for course in courses %}
         <div class="course-item">
           <label>
-            <a href="course_details.html"
+            <a href="{{ url_for('course',course_id=course['course_id'],username=user['username']) }}"
               >{{ course.course_code }} | {{ course.course_name }}</a
             >
           </label>
@@ -286,7 +286,7 @@ const courseId = event.target.getAttribute("data-course-id");
 const action = event.target.getAttribute("data-action");
 
 // Send the data to the backend using fetch
-fetch("/admin/approve_user", {
+fetch("/admin/approve_course", {
 method: "POST",
 headers: {
 "Content-Type": "application/json",
@@ -298,17 +298,18 @@ action: action,
 })
 .then((response) => response.json())
 .then((data) => {
-  // Optionally remove the row from the table
-  const courseItem = event.target.closest("tr.course-item");
-  if (courseItem) {
-    courseItem.style.transition = "opacity 0.5s ease-out, transform 0.5s ease-out";
-    courseItem.style.opacity = "0";
-    courseItem.style.transform = "scale(0.9)";
-    setTimeout(() => {
-      courseItem.remove();
-    }, 500);
-}
-})
+          // Optionally remove the row from the table
+          const courseItem = event.target.closest("tr.course-item");
+          if (courseItem) {
+            courseItem.style.transition = "opacity 0.5s ease-out, transform 0.5s ease-out";
+            courseItem.style.opacity = "0";
+            courseItem.style.transform = "scale(0.9)";
+            setTimeout(() => {
+              courseItem.remove();
+            }, 500);
+        }
+      })
+
 .catch((error) => {
 console.error("Error:", error);
 alert("An error occurred while updating the status.");

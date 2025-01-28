@@ -82,6 +82,7 @@ def process_otp(email_id):
                 cursor.execute('select * from user where email_id = %s and not exists(select request_status from user_requests ur where ur.user_id=user.user_id)',(email_id,))
                 global user
                 user=cursor.fetchone()
+                print(f"user:{user}")
                 if user:
                     if user['role']=='student':
                         session['role']=1
@@ -254,7 +255,7 @@ def signup_process():
             cursor.execute('insert into user(username,email_id,role) values(%s,%s,%s)',(name,email_id,'student'))
             cursor.execute('select user_id from user where email_id = %s',(email_id,))
             user_id=cursor.fetchone()
-            cursor.execute('insert into user_requests(user_id) values %s',(user_id['user_id'],))
+            cursor.execute('insert into user_requests(user_id) values(%s)',(user_id['user_id'],))
             cursor.execute(
             'INSERT INTO student(user_id,entry_no,degree,dep,year_of_entry) VALUES(%s,%s,%s, %s,%s)', (user_id['user_id'],entry_no,degree,department,year_of_entry,) )
             conn.commit()
@@ -306,7 +307,7 @@ def approve_user():
         conn.commit()
         cursor.execute('select * from user_requests ur JOIN user u on ur.user_id=u.user_id')
         pending_users=cursor.fetchall()
-        return jsonify({success:True,"user":pending_users})
+        return jsonify({"success":True,"user":pending_users})
     cursor.execute('select * from user_requests ur JOIN user u on ur.user_id=u.user_id')
     pending_users=cursor.fetchall()
     return render_template('admin_enrollments.html',user=pending_users)
@@ -318,19 +319,19 @@ def approve_course():
     if request.method == 'POST':
         course_id = request.json.get('course_id')
         action = request.json.get('action')  # 'approve' or 'reject'
-
+        print(f"{course_id} {action}")
         if action == 'approve':
-            cursor.execute('UPDATE course SET admin_approval_status = %s WHERE course_id = %s', ('approved', course_id))
+            cursor.execute('UPDATE course SET admin_approval_status = %s,course_status=%s WHERE course_id = %s', ('approved','running', course_id,))
         elif action == 'reject':
-            cursor.execute('delete from course WHERE course_id = %s', (course_id))
+            cursor.execute('delete from course WHERE course_id = %s', (course_id,))
         conn.commit()
-        cursor.execute('select * from course where admin_approval_status=%s',('pending'))
+        cursor.execute('select * from course where admin_approval_status=%s',('pending',))
         pending_course=cursor.fetchall()
         return jsonify({"success": True,"courses":pending_course})
     else:
-        cursor.execute('select c.*,u.username from course c join faculty f on f.faculty_id = c.faculty_id join user u on u.user_id=f.user_id where admin_approval_status=%s',('pending'))
+        cursor.execute('select c.*,u.username from course c join faculty f on f.faculty_id = c.faculty_id join user u on u.user_id=f.user_id where admin_approval_status=%s',('pending',))
         pending_course=cursor.fetchall()
-        return render_template('admin_courses.html',courses=pending_course)
+        return render_template('admin_courses.html',courses=pending_course,user=user)
 
 @app.route("/course/<course_id>/<username>")
 def course(course_id,username):
