@@ -5,7 +5,6 @@ import re
 import smtplib
 import os
 from werkzeug.utils import secure_filename
-from flask_socketio import SocketIO, emit
 import random
 from datetime import datetime
 import mysql.connector
@@ -21,7 +20,7 @@ aims_email='tarushi.tanejag1112@gmail.com'
 conn = mysql.connector.connect(
     host="127.0.0.1",
     user="root",
-    password="1147",
+    password="password",
     database="aims",
     auth_plugin='mysql_native_password'
 )
@@ -42,14 +41,9 @@ def generate_otp(length=6):
     otp = ''.join([str(random.randint(0, 9)) for _ in range(length)])
     return otp
 
-def send_email(sender,receiver):
-    otp = generate_otp()
-    cursor.execute(
-            'delete from otp_table where user_id = %s', (receiver,) )
-    conn.commit()
-    cursor.execute('insert into otp_table (user_id,otp,created_at) values (%s,%s,%s)',(receiver,otp,datetime.now(),))
-    conn.commit()
-    text=f"Subject : OTP for AIMS Login\n\n Your login otp is {otp} \n\n This is valid for 5 minutes"
+def send_email(sender,receiver,subject,msg):
+    
+    text=f"Subject : {subject}\n\n {msg}"
     server = smtplib.SMTP("smtp.gmail.com",587)
     server.starttls()
 
@@ -64,12 +58,7 @@ def login():
 def process_login():
     if request.method=='POST' and 'username' in request.form:
         email_id=request.form['username']
-        send_email(aims_email,email_id)
-        return redirect(url_for("login_otp",email_id=email_id))
-
-@app.route('/login_otp/<email_id>',methods=['GET','POST'])
-def login_otp(email_id):
-    return render_template('login_otp.html',email_id=email_id)
+        return redirect(url_for("process_otp",email_id=email_id))
 
 @app.route('/process_otp/<email_id>',methods=['GET','POST'])
 def process_otp(email_id):
@@ -105,6 +94,13 @@ def process_otp(email_id):
         else:
             msg="Please enter a valid OTP"
             return render_template("login_otp.html",email_id=email_id,msg=msg)
+    else:
+        otp = generate_otp()
+        cursor.execute('delete from otp_table where user_id = %s', (email_id,) )
+        cursor.execute('insert into otp_table (user_id,otp,created_at) values (%s,%s,%s)',(email_id,otp,datetime.now(),))
+        conn.commit()
+        send_email(aims_email,email_id,'OTP for AIMS Login',f'Your login otp is {otp} \n\n This is valid for 5 minutes')
+        return render_template('login_otp.html',email_id=email_id)
 
                     
 
@@ -117,13 +113,13 @@ def signup_main():
 @app.route('/dashboard_student/<username>')
 def dashboard_student(username):
     if session['role']==1:
-        cursor.execute('SELECT * FROM student where user_id = %s',(user['user_id'],))  
+        cursor.execute('SELECT * FROM student where user_id = %s',(user['user_id'],)) 
         student = cursor.fetchone()
-        #cursor.execute('SELECT * FROM faculty where dep=%s',(student['dep'],))
-        #fa=cursor.fetchone()
+        cursor.execute('SELECT u.username FROM faculty f join user u on f.user_id = u.user_id where f.dep=%s and faculty_advisor=%s',(student['dep'],1,))
+        fa=cursor.fetchone()
         cursor.execute('SELECT * FROM student_course sc JOIN course c on sc.course_id = c.course_id where sc.student_id = %s',(student['student_id'],))  
         courses = cursor.fetchall()
-        return render_template("dashboard_student.html",user=user,student=student,courses=courses)
+        return render_template("dashboard_student.html",user=user,student=student,courses=courses,fa=fa['username'])
     else:
         return "You are not authorised to view this page!!"
 
@@ -142,8 +138,6 @@ def dashboard_faculty(username):
 @app.route('/dashboard_admin')
 def dashboard_admin():
     if session['role']==3:
-        cursor.execute('SELECT * FROM admin where user_id = %s',(user['user_id'],))  
-        admin = cursor.fetchone()
         return render_template("dashboard_admin.html",user=user)
     else:
         return "You are not authorised to view this page!!"
@@ -215,7 +209,7 @@ def courses_available(username):
             cursor.execute('select status from student_course where student_id =%s and course_id =%s',(student['student_id'],course_id,) )
             curr_status=cursor.fetchone()
             if action == 'credit':
-                if curr_status['status'] and curr_status['status']!='dropped':
+                if curr_status and curr_status['status']!='dropped':
                     return jsonify({"success":True,"msg":'Already credited'})
                 cursor.execute('update course set no_of_enrollments = no_of_enrollments+1 where course_id = %s',(course_id,))
                 cursor.execute('insert into student_course(student_id,course_id,status,grade) values(%s,%s,%s,%s)',(student['student_id'],course_id,'pending instructor approval','NA',))
@@ -270,7 +264,7 @@ def signup_process():
             cursor.execute('insert into user(username,email_id,role) values(%s,%s,%s)',(name,email_id,'faculty'))
             cursor.execute('select user_id from user where email_id = %s',(email_id,))
             user_id=cursor.fetchone()
-            cursor.execute('insert into user_requests(user_id) values %s',(user_id['user_id'],))
+            cursor.execute('insert into user_requests(user_id) values (%s)',(user_id['user_id'],))
             cursor.execute(
             'INSERT INTO faculty(user_id,dep) VALUES(%s, %s)', (user_id['user_id'],dep,) )
             conn.commit()
@@ -279,9 +273,6 @@ def signup_process():
 
 @app.route('/user_category',methods=['GET','POST'])
 def user_category():
- 
-    '''This handles the selection of user category (mentee or mentor).After receiving the user's
-    selection, it renders the signup form based on the selected category.'''
     
     global user_type
     user_type=request.form['button']
@@ -340,13 +331,14 @@ def course(course_id,username):
     if session['role']==1:
         cursor.execute('select c.*,u.username,f.dep from course c join faculty f on f.faculty_id = c.faculty_id join user u on u.user_id=f.user_id where course_id = %s',(course_id,))
         course=cursor.fetchone()
-        cursor.execute('select s.*,sc.status from student_course sc join student s on sc.student_id=s.student_id where sc.course_id = %s',(course_id,))
+        cursor.execute('select s.*,sc.status,u.username from student_course sc join student s  on sc.student_id=s.student_id join user u on s.user_id=u.user_id where sc.course_id = %s',(course_id,))
         students=cursor.fetchall()
+        print(f'courses:{course}  students:{students}')
         return render_template('course_details_student.html',course=course,students=students,username=username)
     elif session['role']==2:
         cursor.execute('select c.*,u.username,f.dep,f.faculty_id from course c join faculty f on f.faculty_id = c.faculty_id join user u on u.user_id=f.user_id where course_id = %s',(course_id,))
         course=cursor.fetchone()
-        cursor.execute('select s.*,sc.status from student_course sc join student s on sc.student_id=s.student_id where sc.course_id = %s',(course_id,))
+        cursor.execute('select s.*,sc.status,u.username from student_course sc join student s  on sc.student_id=s.student_id join user u on s.user_id=u.user_id where sc.course_id = %s',(course_id,))
         students=cursor.fetchall()
         return render_template('course_details_faculty.html',course=course,students=students,username=username)
     else:
@@ -365,8 +357,8 @@ def logout():
     return redirect(url_for('login'))
 
 if __name__ == "__main__":
-    with app.app_context():
-        init_db()
+    #with app.app_context():
+        #init_db()
     app.run(debug=True)
             
  
