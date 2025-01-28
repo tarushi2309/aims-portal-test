@@ -176,7 +176,7 @@
                       font-family: Arial, Helvetica, sans-serif;
                       font-weight: 300;
                     "
-                    href="{{ url_for('dashboard_student',username=username) }}"
+                    href="{{ url_for('dashboard_student',username=user['username']) }}"
                     >Home</a
                   >
                 </li>
@@ -284,11 +284,11 @@
             </div>
         </div>
         dummy data end-->
-
+        <div id="message-box" style="margin-top: 20px; font-size: 16px;"></div>
         {% for course in courses %}
         <div class="course-item">
           <label>
-            <a href="course_details.html">{{ course.course_code }} | {{ course.course_name }} | {{ course.LTPC }}</a>
+            <a href="{{ url_for('course',course_id=course['course_id'],username=user['username']) }}">{{ course.course_code }} | {{ course.course_name }} | {{ course.LTPC }}</a>
           </label>
           <p>
             <strong>Credits:</strong> {{ course.credits }}<br>
@@ -321,13 +321,29 @@
             const courseId = this.getAttribute("data-course-id");
             const action = this.getAttribute("data-action");
             const facultyId = this.getAttribute("data-faculty-id");
-            fetch("/courses_available/${user['username']}", {
+            fetch("/courses_available/{{ user['username'] }}", {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
               },
               body: JSON.stringify({ course_id: courseId, action: action,faculty_id: facultyId }),
-            })
+            }).then((response) => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then((data) => {
+          // Display the message to the user
+          const messageBox = document.getElementById("message-box");
+          if (data.success) {
+            messageBox.textContent = data.msg;
+            messageBox.style.color = "green"; // Success message styling
+          } else {
+            messageBox.textContent = data.msg;
+            messageBox.style.color = "red"; // Error message styling
+          }
+        })
           });
         });
       });

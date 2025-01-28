@@ -218,22 +218,26 @@ def courses_available(username):
             course_id = request.json.get('course_id')
             action = request.json.get('action')
             faculty_id = request.json.get('faculty_id')
-            cursor.execute('select status from student_course where stduent_id =%s and course_id =%s',(student['student_id'],course_id,) )
+            print(f"{username}")
+            cursor.execute('select status from student_course where student_id =%s and course_id =%s',(student['student_id'],course_id,) )
             curr_status=cursor.fetchone()
             if action == 'credit':
                 if curr_status['status'] and curr_status['status']!='dropped':
-                    return render_template("courses_available.html",user=user,student=student,courses=courses,msg='Already credited')
+                    return jsonify({"success":True,"msg":'Already credited'})
                 cursor.execute('update course set no_of_enrollments = no_of_enrollments+1 where course_id = %s',(course_id,))
                 cursor.execute('insert into student_course(student_id,course_id,status,grade) values(%s,%s,%s,%s)',(student['student_id'],course_id,'pending instructor approval','NA',))
                 conn.commit()
+                return jsonify({"success":True,"msg":'Successfully credited'})
             elif action == 'audit':
                 cursor.execute('update student_course set status = %s where student_id=%s and course_id = %s',('audit',student['student_id'],course_id,))
                 conn.commit()
+                return jsonify({"success":True,"msg":'Successfully audited'})
             else:
                 if not curr_status['status']:
-                    return render_template("courses_available.html",user=user,student=student,courses=courses,msg='Cannot drop course not enrolled')
+                    return jsonify({"success":True,"msg":'Cannot drop a course that is not enrolled'})
                 cursor.execute('update student_course set status = %s where student_id=%s and course_id = %s',('dropped',student['student_id'],course_id,))
                 conn.commit()
+                return jsonify({"success":True,"msg":'Successfully dropped'})
         cursor.execute('SELECT * from course c join faculty f on f.faculty_id=c.faculty_id join user u on u.user_id=f.user_id where c.admin_approval_status = %s',('approved',))  
         courses = cursor.fetchall()
         return render_template("courses_available.html",user=user,student=student,courses=courses)
