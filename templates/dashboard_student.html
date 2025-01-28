@@ -238,7 +238,7 @@
       {% for course in courses %}
       <div class="course-item">
         <label>
-          <a href="course_details.html">{{ course.course_code }} | {{ course.course_name }} | {{ course.LTPC }} | ({{course.course_status}})</a>
+          <a href="{{ url_for('course',course_id=course['course_id'],username=user['username']) }}">{{ course.course_code }} | {{ course.course_name }} | {{ course.LTPC }} | ({{course.course_status}})</a>
         </label>
         <p>
           <strong>Credits:</strong> {{ course.credits }}<br>

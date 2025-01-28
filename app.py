@@ -177,33 +177,23 @@ def pending_approvals(faculty_id):
             if action == "approve":
                 if curr_status == 'pending instructor approval':
                     new_status = "pending advisor approval"
-                    cursor.execute('select dep from student where student_id = %s',(student_id,))
-                    dep=cursor.fetchone()
-                    cursor.execute('select faculty_id from faculty_advisor where dep = %s',(dep['dep'],))
-                    advisor=cursor.fetchone()
-                    cursor.execute('update approvals set faculty_id =%s where student_id = %s and course_id=%s',(advisor['faculty_id'],student_id,course_id))
-                    conn.commit()
                 else:
                     new_status='enrolled'
-                    cursor.execute('delete from approvals where student_id=%s and course_id=%s',(student_id,course_id))
-                    conn.commit()
             elif action == "reject":
                 new_status = "rejected"
-                cursor.execute('delete from approvals where student_id=%s and course_id=%s',(student_id,course_id))
-                conn.commit()
             cursor.execute(
             'UPDATE student_course SET status = %s WHERE student_id = %s AND course_id = %s',(new_status, student_id, course_id))
             conn.commit()
             cursor.execute('SELECT u.username,s.entry_no,stu_course.* from (select sc.student_id,sc.status,c.course_name,c.course_id FROM course c JOIN student_course sc on sc.course_id=c.course_id where c.faculty_id = %s and sc.status = %s) stu_course JOIN student s on s.student_id=stu_course.student_id JOIN user u ON s.user_id = u.user_id',(faculty_id,'pending instructor approval',))
             students = cursor.fetchall()
             cursor.execute('SELECT s.student_id,u.username,s.entry_no,sc.status,c.course_name,c.course_id from student s JOIN user u on s.user_id = u.user_id JOIN student_course sc on sc.student_id=s.student_id JOIN course c on c.course_id = sc.course_id  where s.dep in (select dep from faculty where faculty_id = %s and faculty_advisor = %s) and sc.status = %s',(faculty_id,1,'pending advisor approval'))
-            students.append(cursor.fetchall())
+            students.extend(cursor.fetchall())
             return jsonify({"success": True, "students": students,"faculty_id":faculty_id,"username":user['username']})
         else:
             cursor.execute('SELECT u.username,s.entry_no,stu_course.* from (select sc.student_id,sc.status,c.course_name,c.course_id FROM course c JOIN student_course sc on sc.course_id=c.course_id where c.faculty_id = %s and sc.status = %s) stu_course JOIN student s on s.student_id=stu_course.student_id JOIN user u ON s.user_id = u.user_id',(faculty_id,'pending instructor approval',))
             students = cursor.fetchall()
             cursor.execute('SELECT s.student_id,u.username,s.entry_no,sc.status,c.course_name,c.course_id from student s JOIN user u on s.user_id = u.user_id JOIN student_course sc on sc.student_id=s.student_id JOIN course c on c.course_id = sc.course_id  where s.dep in (select dep from faculty where faculty_id = %s and faculty_advisor = %s) and sc.status = %s',(faculty_id,1,'pending advisor approval',))
-            students.append(cursor.fetchall())
+            students.extend(cursor.fetchall())
             print(f'sending students{students}')
             return render_template('faculty_approval.html',students=students,faculty_id=faculty_id,username=user['username'])
     else:
@@ -345,15 +335,15 @@ def approve_course():
 @app.route("/course/<course_id>/<username>")
 def course(course_id,username):
     if session['role']==1:
-        cursor.execute('select c.*,u.username,f.dep from course c join faculty f on f.faculty_id = c.faculty_id join user u on u.user_id=f.user_id where course_id = %s',(course_id))
+        cursor.execute('select c.*,u.username,f.dep from course c join faculty f on f.faculty_id = c.faculty_id join user u on u.user_id=f.user_id where course_id = %s',(course_id,))
         course=cursor.fetchone()
-        cusor.execute('select s.*,sc.status from student_course sc join student s on sc.student_is=s.student_id where sc.course_id = %s',(course_id))
+        cursor.execute('select s.*,sc.status from student_course sc join student s on sc.student_id=s.student_id where sc.course_id = %s',(course_id,))
         students=cursor.fetchall()
         return render_template('course_details_student.html',course=course,students=students,username=username)
     elif session['role']==2:
-        cursor.execute('select c.*,u.username,f.dep,f.faculty_id from course c join faculty f on f.faculty_id = c.faculty_id join user u on u.user_id=f.user_id where course_id = %s',(course_id))
+        cursor.execute('select c.*,u.username,f.dep,f.faculty_id from course c join faculty f on f.faculty_id = c.faculty_id join user u on u.user_id=f.user_id where course_id = %s',(course_id,))
         course=cursor.fetchone()
-        cusor.execute('select s.*,sc.status from student_course sc join student s on sc.student_is=s.student_id where sc.course_id = %s',(course_id))
+        cursor.execute('select s.*,sc.status from student_course sc join student s on sc.student_id=s.student_id where sc.course_id = %s',(course_id,))
         students=cursor.fetchall()
         return render_template('course_details_faculty.html',course=course,students=students,username=username)
     else:

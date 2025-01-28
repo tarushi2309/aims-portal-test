@@ -460,7 +460,7 @@
           {% for course in courses %}
           <div class="course-item">
             <label>
-              <a style="color: #0a0909" href="course_details.html"
+              <a style="color: #0a0909" href="{{ url_for('course',course_id=course['course_id'],username=user['username']) }}"
                 >{{ course.course_code }} | {{ course.course_name }} | {{ course.LTPC
                 }}</a
               >
