@@ -241,6 +241,20 @@
   text-align: left;
 }
 
+      .course-item label a {
+        font-weight: bold;
+        font-size: 16px;
+      }
+
+      .dropdown-menu {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .course-item:hover {
+            transform: scale(1.05); /* Slightly enlarge card on hover */
+          }
     </style>
 
     <div>
@@ -334,6 +348,14 @@
               <span id="department" class="highlight" style="color:#0a0909">{{ faculty['dep'] }}</span>
             </div>
           </div>
+          <div class="row text-center mt-3">
+            <div class="col-md-6">
+              {% if faculty['faculty_advisor'] == 1 %}
+                <label for="email" class="centered-label" style="color:#0a0909; font-family: Arial, Helvetica, sans-serif; font-weight: 400;">Faculty Advisor</label>
+                <span id="email" class="highlight" style="color:#0a0909">Yes</span>
+              {% endif %}
+            </div>
+          </div>          
         </div>
       </div>
       

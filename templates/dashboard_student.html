@@ -121,6 +121,39 @@
 }
 
 
+        .courses-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+            gap: 16px; /* Space between cards */
+            margin: 0 auto;
+            max-width: 1200px; /* Optional: Set a max width for the grid */
+          }
+
+          .course-item {
+            flex: 0 1 calc(33.333% - 16px); /* Ensure 3 cards fit per row */
+            box-sizing: border-box;
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 16px;
+            text-align: left;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+          }
+
+          .course-item:hover {
+            transform: scale(1.05); /* Slightly enlarge card on hover */
+          }
+
+          .course-item a {
+            font-weight: bold;
+            color: #0a0909;
+            text-decoration: none;
+          }
+
+          .course-item a:hover {
+            color: #007bff; /* Optional: Change color on hover */
+          }
 
     </style>
 </head>
