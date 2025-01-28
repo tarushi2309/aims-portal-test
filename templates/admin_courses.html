@@ -61,7 +61,7 @@
                   font-family: Arial, Helvetica, sans-serif;
                   font-weight: 300;
                 "
-                href="dashboard_admin.html"
+                href="{{ url_for('dashboard_admin')}}"
                 >Home</a
               >
             </li>
@@ -73,7 +73,7 @@
                   font-family: Arial, Helvetica, sans-serif;
                   font-weight: 300;
                 "
-                href="login.html"
+                href="{{ url_for('logout')}}"
                 >Logout</a
               >
             </li>
@@ -92,7 +92,7 @@
         class="courses-grid"
         style="display: flex; flex-wrap: wrap; justify-content: space-evenly"
       >
-        <!--dummy data 1-->
+        <!--dummy data 1
         <div class="course-item">
           <label for="course1">
             <a href="#">CS304 | Computer Networks</a>
@@ -224,89 +224,100 @@
               </li>
             </ul>
           </div>
-        </div>
+        </div>-->
 
         {% for course in courses %}
         <div class="course-item">
           <label>
             <a href="course_details.html"
-              >{{ course.code }} | {{ course.name }}</a
+              >{{ course.course_code }} | {{ course.course_name }}</a
             >
           </label>
           <p>
-            <strong>Instructor(s): </strong> {{ course.instructors }}<br />
+            <strong>Instructor(s): </strong> {{ course.username }}<br />
             <strong>L-T-P-C: </strong> {{ course.LTPC }}<br />
-            <strong>Department: </strong> {{ course.department }}<br />
-            <strong>Semester: </strong> {{ course.semester }}<br />
+            <strong>Department: </strong> {{ course.dep }}<br />
+            <strong>Semester: </strong> {{ course.sem }}<br />
             <strong>Year: </strong> {{ course.year }} <br />
           </p>
           <div class="dropdown">
-            <button
-              class="btn btn-secondary dropdown-toggle"
-              type="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              Action
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                Action
             </button>
-            <ul class="dropdown-menu">
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
               <li>
-                <a
-                  class="dropdown-item action-btn"
-                  href="#"
-                  data-course-id="{{ course.id }}"
+                <a 
+                  class="dropdown-item action-btn" 
+                  href="#" 
+                  data-course-id="{{course['course_id'] }}" 
                   data-action="approve"
-                  style="color: black; font-weight: 400"
-                  >Approve</a
                 >
+                  Approve
+                </a>
               </li>
               <li>
-                <a
-                  class="dropdown-item action-btn"
-                  href="#"
-                  data-course-id="{{ course.id }}"
+                <a 
+                  class="dropdown-item action-btn" 
+                  href="#" 
+                  data-request-id="{{course['course_id'] }}" 
                   data-action="reject"
-                  style="color: black; font-weight: 400"
-                  >Reject</a
                 >
+                  Reject
+                </a>
               </li>
             </ul>
-          </div>
         </div>
-        {% endfor %}
-      </div>
-    </div>
+    </td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+document.body.addEventListener("click", function (event) {
+// Check if an action button was clicked
+if (event.target.classList.contains("action-btn")) {
+event.preventDefault();
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        document.body.addEventListener("click", function (event) {
-          if (event.target.classList.contains("action-btn")) {
-            event.preventDefault();
+// Getuser ID, course ID, and action from data attributes
+const courseId = event.target.getAttribute("data-course-id");
+const action = event.target.getAttribute("data-action");
 
-            console.log("Button clicked!"); // Debugging message
-            const courseItem = event.target.closest(".course-item");
+// Send the data to the backend using fetch
+fetch("/admin/approve_user", {
+method: "POST",
+headers: {
+"Content-Type": "application/json",
+},
+body: JSON.stringify({
+course_id:courseId,
+action: action,
+}),
+})
+.then((response) => response.json())
+.then((data) => {
+  // Optionally remove the row from the table
+  const courseItem = event.target.closest("tr.course-item");
+  if (courseItem) {
+    courseItem.style.transition = "opacity 0.5s ease-out, transform 0.5s ease-out";
+    courseItem.style.opacity = "0";
+    courseItem.style.transform = "scale(0.9)";
+    setTimeout(() => {
+      courseItem.remove();
+    }, 500);
+}
+})
+.catch((error) => {
+console.error("Error:", error);
+alert("An error occurred while updating the status.");
+});
+}
+});
+});
+</script>
 
-            if (courseItem) {
-              console.log("Course item found, applying effects...");
 
-              // Add animation effects before removing the element
-              courseItem.style.transition =
-                "opacity 0.5s ease-out, transform 0.5s ease-out";
-              courseItem.style.opacity = "0";
-              courseItem.style.transform = "scale(0.9)";
-
-              // Remove the element after the animation completes
-              setTimeout(() => {
-                courseItem.remove();
-                console.log("Course item removed successfully.");
-              }, 500);
-            } else {
-              console.log("No course-item found.");
-            }
-          }
-        });
-      });
-    </script>
-  </body>
+</body>
 </html>

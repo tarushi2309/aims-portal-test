@@ -71,7 +71,7 @@
                 font-family: Arial, Helvetica, sans-serif;
                 font-weight: 300;
               "
-              href="dashboard_admin.html"
+              href="{{ url_for('dashboard_admin')}}"
               >Home</a
             >
           </li>
@@ -83,7 +83,7 @@
                 font-family: Arial, Helvetica, sans-serif;
                 font-weight: 300;
               "
-              href="login.html"
+              href="{{ url_for('logout')}}"
               >Logout</a
             >
           </li>
@@ -109,7 +109,7 @@
             </tr>
         </thead>
         <tbody>
-            <!-- hard coded part for testing -->
+            <!-- hard coded part for testing 
             <tr class="course-item">
                 <th scope="row">1</th>
                 <td>Mark</td>
@@ -119,7 +119,7 @@
                 <td>cse</td>
                 <td>2022</td>
                 <td>
-                    <!-- Dropdown button -->
+                   
                     <div class="dropdown">
                         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                             Action
@@ -131,61 +131,92 @@
                     </div>
                 </td>
             </tr>
-            <!-- Dynamic part -->
-            {% for student in students %}
+             Dynamic part -->
+            {% for user in users %}
             <tr class="course-item">
                 <th scope="row">{{ loop.index }}</th>
-                <td>{{ student['student_name'] }}</td>
-                <td>{{ student['email_id'] }}</td>
-                <td>{{ student['entry_no'] }}</td>
-                <td>{{ student['degree'] }}</td>
-                <td>{{ student['dep'] }}</td>
-                <td>{{ student['year_of_entry'] }}</td>
+                <td>{{ user['username'] }}</td>
+                <td>{{ user['email_id'] }}</td>
+                <td>{{ user['role'] }}</td>
                 <td>
-                    <!-- Dropdown button -->
-                    <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                            Action
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <li><a class="dropdown-item action-btn" href="#">Approve</a></li>
-                            <li><a class="dropdown-item action-btn" href="#">Reject</a></li>
-                        </ul>
-                    </div>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+                  <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                        Action
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <li>
+                        <a 
+                          class="dropdown-item action-btn" 
+                          href="#" 
+                          data-request-id="{{user['request_id'] }}" 
+                          data-action="approve"
+                        >
+                          Approve
+                        </a>
+                      </li>
+                      <li>
+                        <a 
+                          class="dropdown-item action-btn" 
+                          href="#" 
+                          data-request-id="{{user['request_id'] }}" 
+                          data-action="reject"
+                        >
+                          Reject
+                        </a>
+                      </li>
+                    </ul>
+                </div>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    // Use event delegation to handle click events
-    document.body.addEventListener("click", function (event) {
-      // If the clicked element is an action button (Approve/Reject)
-      if (event.target.classList.contains("action-btn")) {
-        event.preventDefault();
+document.addEventListener("DOMContentLoaded", function () {
+document.body.addEventListener("click", function (event) {
+  // Check if an action button was clicked
+  if (event.target.classList.contains("action-btn")) {
+    event.preventDefault();
 
-        // Get the closest <tr> element, which is the row
-        const courseItem = event.target.closest("tr.course-item");
-
-        if (courseItem) {
-          // Add animation effects before removing the element
-          courseItem.style.transition = "opacity 0.5s ease-out, transform 0.5s ease-out";
-          courseItem.style.opacity = "0";
-          courseItem.style.transform = "scale(0.9)";
-
-          // Remove the row after the animation completes
-          setTimeout(() => {
-            courseItem.remove();
-          }, 500);  // Timeout duration matches animation time (500ms)
+    // Getuser ID, course ID, and action from data attributes
+    const requestId = event.target.getAttribute("data-request-id");
+    const action = event.target.getAttribute("data-action");
+    
+    // Send the data to the backend using fetch
+    fetch("/admin/approve_user", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        request_id:requestId,
+        action: action,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+          // Optionally remove the row from the table
+          const courseItem = event.target.closest("tr.course-item");
+          if (courseItem) {
+            courseItem.style.transition = "opacity 0.5s ease-out, transform 0.5s ease-out";
+            courseItem.style.opacity = "0";
+            courseItem.style.transform = "scale(0.9)";
+            setTimeout(() => {
+              courseItem.remove();
+            }, 500);
         }
-      }
-    });
-  });
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        alert("An error occurred while updating the status.");
+      });
+  }
+});
+});
 </script>
 
-  
+
 </body>
 </html>

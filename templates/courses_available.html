@@ -176,7 +176,7 @@
                       font-family: Arial, Helvetica, sans-serif;
                       font-weight: 300;
                     "
-                    href="dashboard_student.html"
+                    href="{{ url_for('dashboard_student',username=username) }}"
                     >Home</a
                   >
                 </li>
@@ -189,7 +189,7 @@
                       font-weight: 300;
                     "
                     aria-current="page"
-                    href="courses_available.html"
+                    href=""
                     >Courses</a
                   >
                 </li>
@@ -201,7 +201,7 @@
                       font-family: Arial, Helvetica, sans-serif;
                       font-weight: 300;
                     "
-                    href="login.html"
+                    href="{{ url_for('logout') }}"
                     >Logout</a
                   >
                 </li>
@@ -216,7 +216,7 @@
       <hr width="100%" color="grey" size="5" />
   
       <div class="courses-grid" style="display: flex; flex-wrap: wrap; justify-content: space-evenly;">
-        <!--dummy data 1-->
+        <!--dummy data 1
         <div class="course-item">
             <label for="course1">
                 <a href="#">CS304 | Computer Networks | 3-1-2-6-4</a>
@@ -283,28 +283,28 @@
                 </ul>
             </div>
         </div>
-        <!--dummy data end-->
+        dummy data end-->
 
         {% for course in courses %}
         <div class="course-item">
           <label>
-            <a href="course_details.html">{{ course.code }} | {{ course.name }} | {{ course.structure }}</a>
+            <a href="course_details.html">{{ course.course_code }} | {{ course.course_name }} | {{ course.LTPC }}</a>
           </label>
           <p>
             <strong>Credits:</strong> {{ course.credits }}<br>
-            <strong>Status:</strong> {{ course.status }}<br>
-            <strong>Session:</strong> {{ course.session }}<br>
-            <strong>Enrollment:</strong> {{ course.enrollment }} in Sec.-A<br>
-            <strong>Instructor(s):</strong> {{ course.instructors }}
+            <strong>Status:</strong> {{ course.course_status }}<br>
+            <strong>Session:</strong> {{ course.sem }}<br>
+            <strong>Enrollment:</strong> {{ course.no_of_enrollments }} in Sec.-A<br>
+            <strong>Instructor(s):</strong> {{ course.username }}
           </p>
           <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
               Action
             </button>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item action-btn" href="#" data-course-id="{{ course.id }}" data-action="credit" style="color:black; font-weight: 400;">Credit</a></li>
-              <li><a class="dropdown-item action-btn" href="#" data-course-id="{{ course.id }}" data-action="audit" style="color:black; font-weight: 400;">Audit</a></li>
-              <li><a class="dropdown-item action-btn" href="#" data-course-id="{{ course.id }}" data-action="drop" style="color:black; font-weight: 400;">Drop</a></li>
+              <li><a class="dropdown-item action-btn" href="#" data-course-id="{{ course.course_id }}"  data-faculty-id="{{ course.faculty_id }}" data-action="credit" style="color:black; font-weight: 400;">Credit</a></li>
+              <li><a class="dropdown-item action-btn" href="#" data-course-id="{{ course.course_id }}" data-faculty-id="{{ course.faculty_id }}" data-action="audit" style="color:black; font-weight: 400;">Audit</a></li>
+              <li><a class="dropdown-item action-btn" href="#" data-course-id="{{ course.course_id }}" data-faculty-id="{{ course.faculty_id }}" data-action="drop" style="color:black; font-weight: 400;">Drop</a></li>
             </ul>
           </div>
         </div>
@@ -313,31 +313,24 @@
     </div>
   
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- <script>
+    <script>
       document.addEventListener("DOMContentLoaded", function() {
         document.querySelectorAll(".action-btn").forEach(function(button) {
           button.addEventListener("click", function(event) {
             event.preventDefault();
             const courseId = this.getAttribute("data-course-id");
             const action = this.getAttribute("data-action");
-  
-            fetch("/course/action", {
+            const facultyId = this.getAttribute("data-faculty-id");
+            fetch("/courses_available/${user['username']}", {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
               },
-              body: JSON.stringify({ course_id: courseId, action: action }),
+              body: JSON.stringify({ course_id: courseId, action: action,faculty_id: facultyId }),
             })
-            .then(response => response.json())
-            .then(data => {
-              alert(data.message);
-            })
-            .catch(error => {
-              console.error("Error:", error);
-            });
           });
         });
       });
-    </script> -->
+    </script>
   </body>
 </html>  

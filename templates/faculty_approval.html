@@ -71,7 +71,7 @@
                 font-family: Arial, Helvetica, sans-serif;
                 font-weight: 300;
               "
-              href="faculty_dashboard.html"
+              href="{{ url_for('dashboard_faculty',username=username) }}"
               >Home</a
             >
           </li>
@@ -84,7 +84,7 @@
                 font-weight: 300;
               "
               aria-current="page"
-              href="coursefloat.html"
+              href="{{ url_for('create_course',faculty_id=faculty_id) }}"
               > Create Course </a
             >
           </li>
@@ -98,7 +98,7 @@
                 font-weight: 300;
               "
               aria-current="page"
-              href="faculty_approval.html"
+              href=""
               > Pending Approvals </a
             >
           </li>
@@ -112,7 +112,7 @@
                   font-family: Arial, Helvetica, sans-serif;
                   font-weight: 300;
                 "
-                href="login.html"
+                href="{{ url_for('logout') }}"
                 >Logout</a
               >
             </li>
@@ -175,6 +175,7 @@
                               href="#" 
                               data-student-id="{{ student['student_id'] }}" 
                               data-course-id="{{ student['course_id'] }}" 
+                              data-status="{{student['status']}}"
                               data-action="approve"
                             >
                               Approve
@@ -186,6 +187,7 @@
                               href="#" 
                               data-student-id="{{ student['student_id'] }}" 
                               data-course-id="{{ student['course_id'] }}" 
+                              data-status="{{student['status']}}"
                               data-action="reject"
                             >
                               Reject
@@ -210,10 +212,11 @@
         // Get student ID, course ID, and action from data attributes
         const studentId = event.target.getAttribute("data-student-id");
         const courseId = event.target.getAttribute("data-course-id");
+        const status = event.target.getAttribute("data-status");
         const action = event.target.getAttribute("data-action");
-
+        
         // Send the data to the backend using fetch
-        fetch("/update_status", {
+        fetch("/pending_approvals/<faculty_id>", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -221,14 +224,12 @@
           body: JSON.stringify({
             student_id: studentId,
             course_id: courseId,
+            status:status,
             action: action,
           }),
         })
           .then((response) => response.json())
           .then((data) => {
-            if (data.success) {
-              alert(data.message);
-
               // Optionally remove the row from the table
               const courseItem = event.target.closest("tr.course-item");
               if (courseItem) {
@@ -238,9 +239,6 @@
                 setTimeout(() => {
                   courseItem.remove();
                 }, 500);
-              }
-            } else {
-              alert(`Error: ${data.error}`);
             }
           })
           .catch((error) => {

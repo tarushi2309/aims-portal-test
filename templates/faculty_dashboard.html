@@ -267,7 +267,7 @@
                   font-weight: 300;
                 "
                 aria-current="page"
-                href=""
+                href="{{ url_for('pending_approvals',faculty_id=faculty['faculty_id']) }}"
               >
                 Pending Approvals
               </a>
@@ -281,7 +281,7 @@
                   font-family: Arial, Helvetica, sans-serif;
                   font-weight: 300;
                 "
-                href=""
+                href="{{ url_for('logout') }}"
                 >Logout</a
               >
             </li>

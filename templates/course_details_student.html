@@ -243,11 +243,10 @@
                   font-family: Arial, Helvetica, sans-serif;
                   font-weight: 300;
                 "
-                href="faculty_dashboard.html"
+                href="{{ url_for('dashboard_student',username=username) }}"
                 >Home</a
               >
             </li>
-
             <li class="nav-item">
               <a
                 class="nav-link"
@@ -256,7 +255,20 @@
                   font-family: Arial, Helvetica, sans-serif;
                   font-weight: 300;
                 "
-                href="login.html"
+                aria-current="page"
+                href="{{ url_for('courses_available',username=username) }}"
+                >Courses</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                style="
+                  color: white;
+                  font-family: Arial, Helvetica, sans-serif;
+                  font-weight: 300;
+                "
+                href="{{ url_for('logout') }}"
                 >Logout</a
               >
             </li>
@@ -304,7 +316,7 @@
               >Instructor</label
             >
             <span id="Instructor" class="highlight" style="color: #0a0909"
-              >{{ course['faculty_id'] }}</span
+              >{{ course['username'] }}</span
             >
           </div>
           <div>
@@ -312,7 +324,7 @@
               >Status</label
             >
             <span id="Status" class="highlight" style="color: #0a0909"
-              >{{ course['status'] }}</span
+              >{{ course['course_status'] }}</span
             >
           </div>
           <div>
@@ -331,7 +343,7 @@
               >Off. by the Department</label
             >
             <span id="department" class="highlight" style="color: #0a0909"
-              >{{ course['department'] }}</span
+              >{{ course['dep'] }}</span
             >
           </div>
           <div>
@@ -339,17 +351,10 @@
               >Semester</label
             >
             <span id="semester" class="highlight" style="color: #0a0909"
-              >{{ course['semester'] }}</span
+              >{{ course['sem'] }}</span
             >
           </div>
           <div>
-            <label for="year" class="centered-label" style="color: #0a0909"
-              >Year</label
-            >
-            <span id="year" class="highlight" style="color: #0a0909"
-              >{{ course['year_course'] }}</span
-            >
-          </div>
         </div>
       </div>
     </div>
@@ -375,7 +380,7 @@
             </tr>
           </thead>
           <tbody>
-            <!-- hard coded part for testing -->
+            <!-- hard coded part for testing 
             <tr>
               <th scope="row">1</th>
               <td>Mark</td>
@@ -388,16 +393,16 @@
               <td>Thornton</td>
               <td><span class="badge bg-success">Enrolled</span></td>
             </tr>
-            <!-- Dynamic part -->
+            Dynamic part -->
             {% for student in students %}
             <tr>
               <th scope="row">{{loop.index}}</th>
               <td>{{ student['student_name'] }}</td>
               <td>{{ student['entry_no']}}</td>
               <td>
-                {% if student['status'] == 'pending_instructor_approval' %}
+                {% if student['status'] == 'pending instructor approval' %}
                 <span class="badge bg-warning">Pending Instructor Approval</span>
-                {% elif student['status'] == 'pending_advisor_approval' %}
+                {% elif student['status'] == 'pending advisor approval' %}
                 <span class="badge bg-primary">Pending Advisor Approval</span>
                 {% elif student['status'] == 'enrolled' %}
                 <span class="badge bg-success">Enrolled</span>

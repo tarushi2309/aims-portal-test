@@ -62,7 +62,7 @@
                 font-family: Arial, Helvetica, sans-serif;
                 font-weight: 300;
               "
-              href="faculty_dashboard.html"
+              href="{{ url_for('dashboard_faculty',username=username) }}"
               >Home</a
             >
           </li>
@@ -86,7 +86,7 @@
                 font-family: Arial, Helvetica, sans-serif;
                 font-weight: 300;
               "
-              href="faculty_approval.html"
+              href="{{ url_for('pending_approvals',faculty_id=faculty_id) }}"
               >Pending Approval</a
             >
           </li>
@@ -98,7 +98,7 @@
                 font-family: Arial, Helvetica, sans-serif;
                 font-weight: 300;
               "
-              href="login.html"
+              href="{{ url_for('logout')}}"
               >Logout</a
             >
           </li>

@@ -62,7 +62,7 @@
                 font-family: Arial, Helvetica, sans-serif;
                 font-weight: 300;
               "
-              href="dashboard_admin.html"
+              href="{{ url_for('dashboard_admin') }}"
               >Home</a
             >
           </li>
@@ -74,7 +74,7 @@
                 font-family: Arial, Helvetica, sans-serif;
                 font-weight: 300;
               "
-              href="login.html"
+              href="{{ url_for('logout') }}"
               >Logout</a
             >
           </li>
@@ -93,12 +93,12 @@
       <div class="container" style=" display: flex; justify-content: space-evenly; margin-top: 7%;">
         <div class="card" style="width: 18rem;">
           <div class="card-body text-light bg-dark" style="border-radius: 5%; padding:50px;">
-            <a href="admin_courses.html" style="color: white; font-family: Arial, Helvetica, sans-serif; font-weight: 400;"><h3 class="card-title">Pending Courses Approvals</h3></a>
+            <a href="{{ url_for('approve_course') }}" style="color: white; font-family: Arial, Helvetica, sans-serif; font-weight: 400;"><h3 class="card-title">Pending Courses Approvals</h3></a>
           </div>
         </div>
         <div class="card" style="width: 18rem;">
           <div class="card-body text-light bg-dark" style="border-radius: 5%; padding:50px;">
-            <a href="admin_enrollments.html" style="color: white; font-family: Arial, Helvetica, sans-serif; font-weight: 400;"><h3 class="card-title">Pending Enrollments Approvals</h3></a>
+            <a href="{{ url_for('approve_user') }}" style="color: white; font-family: Arial, Helvetica, sans-serif; font-weight: 400;"><h3 class="card-title">Pending Enrollments Approvals</h3></a>
           </div>
         </div>
       </div>

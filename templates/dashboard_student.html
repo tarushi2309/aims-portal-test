@@ -121,7 +121,7 @@
                       font-family: Arial, Helvetica, sans-serif;
                       font-weight: 300;
                     "
-                    href="dashboard_student.html"
+                    href=""
                     >Home</a
                   >
                 </li>
@@ -134,7 +134,7 @@
                       font-weight: 300;
                     "
                     aria-current="page"
-                    href="courses_available.html"
+                    href="{{ url_for('courses_available',username=user['username']) }}"
                     >Courses</a
                   >
                 </li>
@@ -146,7 +146,7 @@
                       font-family: Arial, Helvetica, sans-serif;
                       font-weight: 300;
                     "
-                    href="login.html"
+                    href="{{ url_for('logout') }}"
                     >Logout</a
                   >
                 </li>
