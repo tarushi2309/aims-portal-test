@@ -92,144 +92,11 @@
         class="courses-grid"
         style="display: flex; flex-wrap: wrap; justify-content: space-evenly"
       >
-        <!--dummy data 1
-        <div class="course-item">
-          <label for="course1">
-            <a href="#">CS304 | Computer Networks</a>
-          </label>
-          <p>
-            <strong>Instructor(s): </strong> Sudeep Mishra, Basant Subba.<br />
-            <strong>L-T-P-C: </strong>3-2-1-4<br />
-            <strong>Department: </strong>Computer Science Engineering<br />
-            <strong>Semester: </strong>II<br />
-            <strong>Year: </strong>2025<br />
-          </p>
-          <div class="dropdown">
-            <button
-              class="btn btn-secondary dropdown-toggle"
-              type="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              Action
-            </button>
-            <ul class="dropdown-menu">
-              <li>
-                <a
-                  class="dropdown-item action-btn"
-                  href="#"
-                  data-course-id="1"
-                  data-action="approve"
-                  style="color: black; font-weight: 400"
-                  >Approve</a
-                >
-              </li>
-              <li>
-                <a
-                  class="dropdown-item action-btn"
-                  href="#"
-                  data-course-id="1"
-                  data-action="reject"
-                  style="color: black; font-weight: 400"
-                  >Reject</a
-                >
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="course-item">
-          <label for="course1">
-            <a href="#">CS304 | Computer Networks</a>
-          </label>
-          <p>
-            <strong>Instructor(s): </strong> Sudeep Mishra, Basant Subba.<br />
-            <strong>L-T-P-C: </strong>3-2-1-4<br />
-            <strong>Department: </strong>Computer Science Engineering<br />
-            <strong>Semester: </strong>II<br />
-            <strong>Year: </strong>2025<br />
-          </p>
-          <div class="dropdown">
-            <button
-              class="btn btn-secondary dropdown-toggle"
-              type="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              Action
-            </button>
-            <ul class="dropdown-menu">
-              <li>
-                <a
-                  class="dropdown-item action-btn"
-                  href="#"
-                  data-course-id="1"
-                  data-action="approve"
-                  style="color: black; font-weight: 400"
-                  >Approve</a
-                >
-              </li>
-              <li>
-                <a
-                  class="dropdown-item action-btn"
-                  href="#"
-                  data-course-id="1"
-                  data-action="reject"
-                  style="color: black; font-weight: 400"
-                  >Reject</a
-                >
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="course-item">
-          <label for="course1">
-            <a href="#">CS304 | Computer Networks</a>
-          </label>
-          <p>
-            <strong>Instructor(s): </strong> Sudeep Mishra, Basant Subba.<br />
-            <strong>L-T-P-C: </strong>3-2-1-4<br />
-            <strong>Department: </strong>Computer Science Engineering<br />
-            <strong>Semester: </strong>II<br />
-            <strong>Year: </strong>2025<br />
-          </p>
-          <div class="dropdown">
-            <button
-              class="btn btn-secondary dropdown-toggle"
-              type="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              Action
-            </button>
-            <ul class="dropdown-menu">
-              <li>
-                <a
-                  class="dropdown-item action-btn"
-                  href="#"
-                  data-course-id="1"
-                  data-action="approve"
-                  style="color: black; font-weight: 400"
-                  >Approve</a
-                >
-              </li>
-              <li>
-                <a
-                  class="dropdown-item action-btn"
-                  href="#"
-                  data-course-id="1"
-                  data-action="reject"
-                  style="color: black; font-weight: 400"
-                  >Reject</a
-                >
-              </li>
-            </ul>
-          </div>
-        </div>-->
 
         {% for course in courses %}
         <div class="course-item">
           <label>
-            <a href="course_details.html"
+            <a href="{{ url_for('course',course_id=course['course_id'],username=user['username']) }}"
               >{{ course.course_code }} | {{ course.course_name }}</a
             >
           </label>
@@ -286,7 +153,7 @@ const courseId = event.target.getAttribute("data-course-id");
 const action = event.target.getAttribute("data-action");
 
 // Send the data to the backend using fetch
-fetch("/admin/approve_user", {
+fetch("/admin/approve_course", {
 method: "POST",
 headers: {
 "Content-Type": "application/json",
@@ -298,17 +165,18 @@ action: action,
 })
 .then((response) => response.json())
 .then((data) => {
-  // Optionally remove the row from the table
-  const courseItem = event.target.closest("tr.course-item");
-  if (courseItem) {
-    courseItem.style.transition = "opacity 0.5s ease-out, transform 0.5s ease-out";
-    courseItem.style.opacity = "0";
-    courseItem.style.transform = "scale(0.9)";
-    setTimeout(() => {
-      courseItem.remove();
-    }, 500);
-}
-})
+          // Optionally remove the row from the table
+          const courseItem = event.target.closest(".course-item");
+          if (courseItem) {
+            courseItem.style.transition = "opacity 0.5s ease-out, transform 0.5s ease-out";
+            courseItem.style.opacity = "0";
+            courseItem.style.transform = "scale(0.9)";
+            setTimeout(() => {
+              courseItem.remove();
+            }, 500);
+        }
+      })
+
 .catch((error) => {
 console.error("Error:", error);
 alert("An error occurred while updating the status.");

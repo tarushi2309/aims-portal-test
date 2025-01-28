@@ -102,6 +102,58 @@
             border-radius: 4px; /* Rounded corners */
         }
 
+        .course-container {
+  display: grid; /* Enable grid layout */
+  grid-template-columns: repeat(3, 1fr); /* Create 3 equal-width columns */
+  gap: 16px; /* Space between cards */
+  justify-items: center; /* Center align cards in each grid cell */
+}
+
+.course-item {
+  background-color: #f9f9f9; /* Light background for cards */
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 16px;
+  width: 300px; /* Fixed width */
+  height: 250px; /* Fixed height */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  text-align: left;
+}
+
+
+        .courses-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+            gap: 16px; /* Space between cards */
+            margin: 0 auto;
+            max-width: 1200px; /* Optional: Set a max width for the grid */
+          }
+
+          .course-item {
+            flex: 0 1 calc(33.333% - 16px); /* Ensure 3 cards fit per row */
+            box-sizing: border-box;
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 16px;
+            text-align: left;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+          }
+
+          .course-item:hover {
+            transform: scale(1.05); /* Slightly enlarge card on hover */
+          }
+
+          .course-item a {
+            font-weight: bold;
+            color: #0a0909;
+            text-decoration: none;
+          }
+
+          .course-item a:hover {
+            color: #007bff; /* Optional: Change color on hover */
+          }
 
     </style>
 </head>
@@ -185,6 +237,10 @@
                     <label for="degree">Degree Type</label>
                     <input style="border: 1px solid #bdbcbc;"type="text" id="degree" value="{{ student['degree'] }}" readonly class="readonly-input">
                 </div>
+                <div>
+                  <label for="degree">Faculty Advisor</label>
+                  <input style="border: 1px solid #bdbcbc;"type="text" id="degree" value="{{ student['faculty_advisor'] }}" readonly class="readonly-input">
+              </div>
             </div>
         </div>
     </div>
@@ -196,45 +252,7 @@
     <hr width="100%" color="grey" size="5" />
 
     <div class="courses-grid" style="display: flex; flex-wrap: wrap; justify-content: space-evenly;">
-      <!--dummy data 
-      <div class="course-item">
-          <label for="course1">
-              <a href="#">CS304 | Computer Networks | 3-1-2-6-4</a>
-          </label>
-          <p>
-              <strong>Credits:</strong> 4<br>
-              <strong>Status:</strong> Running<br>
-              <strong>Session:</strong> 2024-II<br>
-              <strong>Enrollment:</strong> 102 in Sec.-A<br>
-              <strong>Instructor(s):</strong> Sudeep Mishra, Basant Subba.
-          </p>
-      </div>
-      <div class="course-item">
-          <label for="course1">
-              <a href="#">CS304 | Computer Networks | 3-1-2-6-4</a>
-          </label>
-          <p>
-              <strong>Credits:</strong> 4<br>
-              <strong>Status:</strong> Running<br>
-              <strong>Session:</strong> 2024-II<br>
-              <strong>Enrollment:</strong> 102 in Sec.-A<br>
-              <strong>Instructor(s):</strong> Sudeep Mishra, Basant Subba.
-          </p>
-      </div>
-      <div class="course-item">
-          <label for="course1">
-              <a href="#">CS304 | Computer Networks | 3-1-2-6-4</a>
-          </label>
-          <p>
-              <strong>Credits:</strong> 4<br>
-              <strong>Status:</strong> Running<br>
-              <strong>Session:</strong> 2024-II<br>
-              <strong>Enrollment:</strong> 102 in Sec.-A<br>
-              <strong>Instructor(s):</strong> Sudeep Mishra, Basant Subba.
-          </p>
-      </div>
-      dummy data end-->
-
+     
       {% for course in courses %}
       <div class="course-item">
         <label>

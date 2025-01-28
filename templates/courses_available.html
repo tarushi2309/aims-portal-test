@@ -43,121 +43,26 @@
     <!-- Template Main CSS File -->
     <link href="../static/assets/css/style.css" rel="stylesheet" />
   </head>
+  <style>
+    .course-container {
+  display: grid; /* Enable grid layout */
+  grid-template-columns: repeat(3, 1fr); /* Create 3 equal-width columns */
+  gap: 16px; /* Space between cards */
+  justify-items: center; /* Center align cards in each grid cell */
+}
+
+.course-item {
+  background-color: #f9f9f9; /* Light background for cards */
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 16px;
+  width: 350px; /* Fixed width */
+  height: 300px; /* Fixed height */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  text-align: left;
+}
+  </style>
 </html>
-
-<!-- <body class="bg-light">
-  <!-- ======= Header ======= 
-  <div>
-    <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
-      <div class="container-fluid my-container-fluid">
-        <a class="navbar-brand AIMS">
-          AIMS :: Academic Information Management System
-        </a>
-        <ul class="nav nav-underline justify-content-end">
-          <li class="nav-item">
-            <a
-              class="nav-link"
-              style="
-                color: white;
-                font-family: Arial, Helvetica, sans-serif;
-                font-weight: 300;
-              "
-              href="dashboard_student.html"
-              >Home</a
-            >
-          </li>
-          <li class="nav-item">
-            <a
-              class="nav-link active"
-              style="
-                color: white;
-                font-family: Arial, Helvetica, sans-serif;
-                font-weight: 300;
-              "
-              aria-current="page"
-              href="courses_available.html"
-              >Courses</a
-            >
-          </li>
-          <li class="nav-item">
-            <a
-              class="nav-link"
-              style="
-                color: white;
-                font-family: Arial, Helvetica, sans-serif;
-                font-weight: 300;
-              "
-              href="login.html"
-              >Logout</a
-            >
-          </li>
-        </ul>
-      </div>
-    </nav>
-  </div>
-
-  <!-- End Header -->
-
-  <!-- ======= Courses Available Section ======= 
-
-  <div class="my-courses" style="color: black;">
-    <h2>Courses Available</h2>
-    <hr width="100%" color="grey" size="5" />
-
-    <div class="courses-grid" style="flex-wrap: wrap;">
-        <div class="course-item">
-            <label for="course1">
-                <a href="#">CS304 | Computer Networks | 3-1-2-6-4</a>
-            </label>
-            <p>
-                <strong>Credits:</strong> 4<br>
-                <strong>Status:</strong> Running<br>
-                <strong>Session:</strong> 2024-II<br>
-                <strong>Enrollment:</strong> 102 in Sec.-A<br>
-                <strong>Instructor(s):</strong> Sudeep Mishra, Basant Subba.
-            </p>
-            <div class="dropdown">
-                <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Action
-                </button>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">Credit</a></li>
-                  <li><a class="dropdown-item" href="#">Audit</a></li>
-                  <li><a class="dropdown-item" href="#">Drop</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="course-item">
-            <label for="course2">
-                <a href="#">CS304 | Computer Networks | 3-1-2-6-4</a>
-            </label>
-            <p>
-                <strong>Credits:</strong> 4<br>
-                <strong>Status:</strong> Completed<br>
-                <strong>Session:</strong> 2023-II<br>
-                <strong>Enrollment:</strong> 99 in Sec.-A<br>
-                <strong>Instructor(s):</strong> Sudeep Mishra, Basant Subba.
-            </p>
-            <div class="dropdown">
-                <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Action
-                </button>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">Credit</a></li>
-                  <li><a class="dropdown-item" href="#">Audit</a></li>
-                  <li><a class="dropdown-item" href="#">Drop</a></li>
-                </ul>
-            </div>
-        </div>
-
-
-  </div>
-
-  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-  <script>
-    AOS.init();
-  </script>
-</body> -->
 
 <body class="bg-light">
     <!-- ======= Header ======= -->
@@ -216,75 +121,9 @@
       <hr width="100%" color="grey" size="5" />
   
       <div class="courses-grid" style="display: flex; flex-wrap: wrap; justify-content: space-evenly;">
-        <!--dummy data 1
-        <div class="course-item">
-            <label for="course1">
-                <a href="#">CS304 | Computer Networks | 3-1-2-6-4</a>
-            </label>
-            <p>
-                <strong>Credits:</strong> 4<br>
-                <strong>Status:</strong> Running<br>
-                <strong>Session:</strong> 2024-II<br>
-                <strong>Enrollment:</strong> 102 in Sec.-A<br>
-                <strong>Instructor(s):</strong> Sudeep Mishra, Basant Subba.
-            </p>
-            <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Action
-                </button>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#" style="color:black; font-weight: 400;">Credit</a></li>
-                  <li><a class="dropdown-item" href="#" style="color:black; font-weight: 400;">Audit</a></li>
-                  <li><a class="dropdown-item" href="#" style="color:black; font-weight: 400;">Drop</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="course-item">
-            <label for="course1">
-                <a href="#">CS304 | Computer Networks | 3-1-2-6-4</a>
-            </label>
-            <p>
-                <strong>Credits:</strong> 4<br>
-                <strong>Status:</strong> Running<br>
-                <strong>Session:</strong> 2024-II<br>
-                <strong>Enrollment:</strong> 102 in Sec.-A<br>
-                <strong>Instructor(s):</strong> Sudeep Mishra, Basant Subba.
-            </p>
-            <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Action
-                </button>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#" style="color:black; font-weight: 400;">Credit</a></li>
-                  <li><a class="dropdown-item" href="#" style="color:black; font-weight: 400;">Audit</a></li>
-                  <li><a class="dropdown-item" href="#" style="color:black; font-weight: 400;">Drop</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="course-item">
-            <label for="course1">
-                <a href="#">CS304 | Computer Networks | 3-1-2-6-4</a>
-            </label>
-            <p>
-                <strong>Credits:</strong> 4<br>
-                <strong>Status:</strong> Running<br>
-                <strong>Session:</strong> 2024-II<br>
-                <strong>Enrollment:</strong> 102 in Sec.-A<br>
-                <strong>Instructor(s):</strong> Sudeep Mishra, Basant Subba.
-            </p>
-            <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Action
-                </button>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#" style="color:black; font-weight: 400;">Credit</a></li>
-                  <li><a class="dropdown-item" href="#" style="color:black; font-weight: 400;">Audit</a></li>
-                  <li><a class="dropdown-item" href="#" style="color:black; font-weight: 400;">Drop</a></li>
-                </ul>
-            </div>
-        </div>
-        dummy data end-->
+
         <div id="message-box" style="margin-top: 20px; font-size: 16px;"></div>
+        <div class="course-container">
         {% for course in courses %}
         <div class="course-item">
           <label>
@@ -309,6 +148,7 @@
           </div>
         </div>
         {% endfor %}
+        </div>
       </div>
     </div>
 
