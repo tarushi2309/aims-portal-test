@@ -92,139 +92,6 @@
         class="courses-grid"
         style="display: flex; flex-wrap: wrap; justify-content: space-evenly"
       >
-        <!--dummy data 1
-        <div class="course-item">
-          <label for="course1">
-            <a href="#">CS304 | Computer Networks</a>
-          </label>
-          <p>
-            <strong>Instructor(s): </strong> Sudeep Mishra, Basant Subba.<br />
-            <strong>L-T-P-C: </strong>3-2-1-4<br />
-            <strong>Department: </strong>Computer Science Engineering<br />
-            <strong>Semester: </strong>II<br />
-            <strong>Year: </strong>2025<br />
-          </p>
-          <div class="dropdown">
-            <button
-              class="btn btn-secondary dropdown-toggle"
-              type="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              Action
-            </button>
-            <ul class="dropdown-menu">
-              <li>
-                <a
-                  class="dropdown-item action-btn"
-                  href="#"
-                  data-course-id="1"
-                  data-action="approve"
-                  style="color: black; font-weight: 400"
-                  >Approve</a
-                >
-              </li>
-              <li>
-                <a
-                  class="dropdown-item action-btn"
-                  href="#"
-                  data-course-id="1"
-                  data-action="reject"
-                  style="color: black; font-weight: 400"
-                  >Reject</a
-                >
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="course-item">
-          <label for="course1">
-            <a href="#">CS304 | Computer Networks</a>
-          </label>
-          <p>
-            <strong>Instructor(s): </strong> Sudeep Mishra, Basant Subba.<br />
-            <strong>L-T-P-C: </strong>3-2-1-4<br />
-            <strong>Department: </strong>Computer Science Engineering<br />
-            <strong>Semester: </strong>II<br />
-            <strong>Year: </strong>2025<br />
-          </p>
-          <div class="dropdown">
-            <button
-              class="btn btn-secondary dropdown-toggle"
-              type="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              Action
-            </button>
-            <ul class="dropdown-menu">
-              <li>
-                <a
-                  class="dropdown-item action-btn"
-                  href="#"
-                  data-course-id="1"
-                  data-action="approve"
-                  style="color: black; font-weight: 400"
-                  >Approve</a
-                >
-              </li>
-              <li>
-                <a
-                  class="dropdown-item action-btn"
-                  href="#"
-                  data-course-id="1"
-                  data-action="reject"
-                  style="color: black; font-weight: 400"
-                  >Reject</a
-                >
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="course-item">
-          <label for="course1">
-            <a href="#">CS304 | Computer Networks</a>
-          </label>
-          <p>
-            <strong>Instructor(s): </strong> Sudeep Mishra, Basant Subba.<br />
-            <strong>L-T-P-C: </strong>3-2-1-4<br />
-            <strong>Department: </strong>Computer Science Engineering<br />
-            <strong>Semester: </strong>II<br />
-            <strong>Year: </strong>2025<br />
-          </p>
-          <div class="dropdown">
-            <button
-              class="btn btn-secondary dropdown-toggle"
-              type="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              Action
-            </button>
-            <ul class="dropdown-menu">
-              <li>
-                <a
-                  class="dropdown-item action-btn"
-                  href="#"
-                  data-course-id="1"
-                  data-action="approve"
-                  style="color: black; font-weight: 400"
-                  >Approve</a
-                >
-              </li>
-              <li>
-                <a
-                  class="dropdown-item action-btn"
-                  href="#"
-                  data-course-id="1"
-                  data-action="reject"
-                  style="color: black; font-weight: 400"
-                  >Reject</a
-                >
-              </li>
-            </ul>
-          </div>
-        </div>-->
 
         {% for course in courses %}
         <div class="course-item">
@@ -299,7 +166,7 @@ action: action,
 .then((response) => response.json())
 .then((data) => {
           // Optionally remove the row from the table
-          const courseItem = event.target.closest("tr.course-item");
+          const courseItem = event.target.closest(".course-item");
           if (courseItem) {
             courseItem.style.transition = "opacity 0.5s ease-out, transform 0.5s ease-out";
             courseItem.style.opacity = "0";

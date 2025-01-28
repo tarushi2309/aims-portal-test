@@ -222,6 +222,25 @@
         background-color: #ededed;
         border: 1px solid #bdbcbc;
       }
+
+      .course-container {
+  display: grid; /* Enable grid layout */
+  grid-template-columns: repeat(3, 1fr); /* Create 3 equal-width columns */
+  gap: 16px; /* Space between cards */
+  justify-items: center; /* Center align cards in each grid cell */
+}
+
+.course-item {
+  background-color: #f9f9f9; /* Light background for cards */
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 16px;
+  width: 300px; /* Fixed width */
+  height: 250px; /* Fixed height */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  text-align: left;
+}
+
     </style>
 
     <div>
@@ -328,142 +347,14 @@
           class="courses-grid"
           style="display: flex; flex-wrap: wrap; justify-content: space-evenly"
         >
-          <!--dummy data 1
-          <div class="course-item">
-            <label for="course1">
-              <a style="color: #0a0909" href="#"
-                >CS304 | Computer Networks | 3-1-2-6-4</a
-              >
-            </label>
-            <p>
-              <strong>Credits:</strong> 4<br />
-              <strong>Status:</strong> Running<br />
-              <strong>Session:</strong> 2024-II<br />
-              <strong>Enrollment:</strong> 102 in Sec.-A<br />
-              <strong>Instructor(s):</strong> Sudeep Mishra, Basant Subba.
-            </p>
-            <div class="dropdown">
-              <ul class="dropdown-menu">
-                <li>
-                  <a
-                    class="dropdown-item"
-                    href="#"
-                    style="color: black; font-weight: 400"
-                    >Credit</a
-                  >
-                </li>
-                <li>
-                  <a
-                    class="dropdown-item"
-                    href="#"
-                    style="color: black; font-weight: 400"
-                    >Audit</a
-                  >
-                </li>
-                <li>
-                  <a
-                    class="dropdown-item"
-                    href="#"
-                    style="color: black; font-weight: 400"
-                    >Drop</a
-                  >
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div class="course-item">
-            <label for="course1">
-              <a style="color: #0a0909" href="#"
-                >CS304 | Computer Networks | 3-1-2-6-4</a
-              >
-            </label>
-            <p>
-              <strong>Credits:</strong> 4<br />
-              <strong>Status:</strong> Running<br />
-              <strong>Session:</strong> 2024-II<br />
-              <strong>Enrollment:</strong> 102 in Sec.-A<br />
-              <strong>Instructor(s):</strong> Sudeep Mishra, Basant Subba.
-            </p>
-            <div class="dropdown">
-              <ul class="dropdown-menu">
-                <li>
-                  <a
-                    class="dropdown-item"
-                    href="#"
-                    style="color: black; font-weight: 400"
-                    >Credit</a
-                  >
-                </li>
-                <li>
-                  <a
-                    class="dropdown-item"
-                    href="#"
-                    style="color: black; font-weight: 400"
-                    >Audit</a
-                  >
-                </li>
-                <li>
-                  <a
-                    class="dropdown-item"
-                    href="#"
-                    style="color: black; font-weight: 400"
-                    >Drop</a
-                  >
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div class="course-item">
-            <label for="course1">
-              <a style="color: #0a0909" href="#"
-                >CS304 | Computer Networks | 3-1-2-6-4</a
-              >
-            </label>
-            <p>
-              <strong>Credits:</strong> 4<br />
-              <strong>Status:</strong> Running<br />
-              <strong>Session:</strong> 2024-II<br />
-              <strong>Enrollment:</strong> 102 in Sec.-A<br />
-              <strong>Instructor(s):</strong> Sudeep Mishra, Basant Subba.
-            </p>
-            <div class="dropdown">
-              <ul class="dropdown-menu">
-                <li>
-                  <a
-                    class="dropdown-item"
-                    href="#"
-                    style="color: black; font-weight: 400"
-                    >Credit</a
-                  >
-                </li>
-                <li>
-                  <a
-                    class="dropdown-item"
-                    href="#"
-                    style="color: black; font-weight: 400"
-                    >Audit</a
-                  >
-                </li>
-                <li>
-                  <a
-                    class="dropdown-item"
-                    href="#"
-                    style="color: black; font-weight: 400"
-                    >Drop</a
-                  >
-                </li>
-              </ul>
-            </div>
-          </div>
-          dummy data end-->
 
+        <div class="course-container">
           {% for course in courses %}
           <div class="course-item">
             <label>
-              <a style="color: #0a0909" href="{{ url_for('course',course_id=course['course_id'],username=user['username']) }}"
-                >{{ course.course_code }} | {{ course.course_name }} | {{ course.LTPC
-                }}</a
-              >
+              <a style="color: #0a0909" href="course_details.html">
+                {{ course.course_code }} | {{ course.course_name }} | {{ course.LTPC }}
+              </a>
             </label>
             <p>
               <strong>Credits:</strong> {{ course.credits }}<br />
@@ -480,8 +371,7 @@
                     data-course-id="{{ course.id }}"
                     data-action="credit"
                     style="color: black; font-weight: 400"
-                    >Credit</a
-                  >
+                  >Credit</a>
                 </li>
                 <li>
                   <a
@@ -490,8 +380,7 @@
                     data-course-id="{{ course.id }}"
                     data-action="audit"
                     style="color: black; font-weight: 400"
-                    >Audit</a
-                  >
+                  >Audit</a>
                 </li>
                 <li>
                   <a
@@ -500,13 +389,14 @@
                     data-course-id="{{ course.id }}"
                     data-action="drop"
                     style="color: black; font-weight: 400"
-                    >Drop</a
-                  >
+                  >Drop</a>
                 </li>
               </ul>
             </div>
           </div>
           {% endfor %}
+        </div>
+        
         </div>
       </div>
     </main>
