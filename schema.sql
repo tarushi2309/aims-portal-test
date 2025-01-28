@@ -80,13 +80,10 @@ INSERT into user(username,email_id,role) values('Dr. Puneet Goyal','tarushi.tane
 Insert into student(user_id,degree,dep,entry_no,year_of_entry) values(1,'BTECH','COMPUTER SCIENCE AND ENGINEERING','2022csb1135',2022);
 INSERT into faculty(user_id,dep) values(2,'COMPUTER SCIENCE AND ENGINEERING');
 
-INSERT into course(course_name,faculty_id,course_status,LTPC,credits,course_code,sem,admin_approval_status,no_of_enrollments) values('Development Engineering Project',1,'running','3-5-5-3',3,'CP301','2024-II','approved',1);
+INSERT into course(course_name,faculty_id,course_status,LTPC,credits,course_code,sem,admin_approval_status) values('Development Engineering Project',1,'running','3-5-5-3',3,'CP301','2024-II','approved');
 INSERT into student_course(student_id,course_id,status,grade) values(1,1,'pending instructor approval','NA');
 insert into user(username,email_id,role) values('Apurva Mudgal','tanejatarushi23@gmail.com','faculty');
 
 INSERT into faculty(user_id,dep,faculty_advisor) values(3,'COMPUTER SCIENCE AND ENGINEERING',1);
 
 INSERT into course(course_name,faculty_id,course_status,LTPC,credits,course_code,sem,admin_approval_status) values('BTP',1,'running','3-5-5-3',3,'CP301','2024-II','approved');
-
-INSERT into user(username,email_id,role) values('Rhea','2022csb1112@iitrpr.ac.in','admin');
-INSERT into admin(user_id) values(4);

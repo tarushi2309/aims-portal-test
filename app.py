@@ -213,7 +213,7 @@ def courses_available(username):
             cursor.execute('select status from student_course where student_id =%s and course_id =%s',(student['student_id'],course_id,) )
             curr_status=cursor.fetchone()
             if action == 'credit':
-                if curr_status and curr_status['status'] != 'dropped':
+                if curr_status['status'] and curr_status['status']!='dropped':
                     return jsonify({"success":True,"msg":'Already credited'})
                 cursor.execute('update course set no_of_enrollments = no_of_enrollments+1 where course_id = %s',(course_id,))
                 cursor.execute('insert into student_course(student_id,course_id,status,grade) values(%s,%s,%s,%s)',(student['student_id'],course_id,'pending instructor approval','NA',))
