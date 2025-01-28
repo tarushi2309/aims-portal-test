@@ -117,13 +117,13 @@ def signup_main():
 @app.route('/dashboard_student/<username>')
 def dashboard_student(username):
     if session['role']==1:
-        cursor.execute('SELECT * FROM student where user_id = %s',(user['user_id'],))  
+        cursor.execute('SELECT * FROM student where user_id = %s',(user['user_id'],)) 
         student = cursor.fetchone()
-        #cursor.execute('SELECT * FROM faculty where dep=%s',(student['dep'],))
-        #fa=cursor.fetchone()
+        cursor.execute('SELECT u.username FROM faculty f join user u on f.user_id = u.user_id where f.dep=%s and faculty_advisor=%s',(student['dep'],1,))
+        fa=cursor.fetchone()
         cursor.execute('SELECT * FROM student_course sc JOIN course c on sc.course_id = c.course_id where sc.student_id = %s',(student['student_id'],))  
         courses = cursor.fetchall()
-        return render_template("dashboard_student.html",user=user,student=student,courses=courses)
+        return render_template("dashboard_student.html",user=user,student=student,courses=courses,fa=fa['username'])
     else:
         return "You are not authorised to view this page!!"
 
