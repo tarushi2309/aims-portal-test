@@ -43,6 +43,14 @@
 
     <!-- Template Main CSS File -->
     <link href="../static/assets/css/style.css" rel="stylesheet" />
+    <link href="{{ url_for('static', filename='assets/css/style.css') }}" rel="stylesheet" />
+    <script src="{{ url_for('static', filename='assets/vendor/aos/aos.js') }}"></script>
+  <html lang="en">
+    <head>
+        <link href="{{ url_for('static', filename='assets/css/style.css') }}" rel="stylesheet">
+        <link href="{{ url_for('static', filename='assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+        <script src="{{ url_for('static', filename='assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    </head>
   </head>
 
   <body class="bg-light">
@@ -397,7 +405,7 @@
             {% for student in students %}
             <tr>
               <th scope="row">{{loop.index}}</th>
-              <td>{{ student['student_name'] }}</td>
+              <td>{{ student['username'] }}</td>
               <td>{{ student['entry_no']}}</td>
               <td>
                 {% if student['status'] == 'pending instructor approval' %}

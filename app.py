@@ -8,6 +8,7 @@ from werkzeug.utils import secure_filename
 import random
 from datetime import datetime
 import mysql.connector
+from threading import Thread
 
  
 app = Flask(__name__)
@@ -49,6 +50,14 @@ def send_email(sender,receiver,subject,msg):
 
     server.login(sender,"eipn qsmt ffbv zqjm")               # dummy passcode. Sender should be your email id. passcode is app password. Explained in detail in readme file
     server.sendmail(sender,receiver,text)
+
+def send_email_in_background(email_id, otp):
+    send_email(
+        aims_email, 
+        email_id, 
+        'OTP for AIMS Login', 
+        f'Your login OTP is {otp} \n\n This is valid for 5 minutes'
+    )
 
 @app.route('/')
 def login():
@@ -99,7 +108,7 @@ def process_otp(email_id):
         cursor.execute('delete from otp_table where user_id = %s', (email_id,) )
         cursor.execute('insert into otp_table (user_id,otp,created_at) values (%s,%s,%s)',(email_id,otp,datetime.now(),))
         conn.commit()
-        send_email(aims_email,email_id,'OTP for AIMS Login',f'Your login otp is {otp} \n\n This is valid for 5 minutes')
+        Thread(target=send_email_in_background, args=(email_id, otp)).start()
         return render_template('login_otp.html',email_id=email_id)
 
                     
