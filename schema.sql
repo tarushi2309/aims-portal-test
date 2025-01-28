@@ -61,12 +61,6 @@ CREATE TABLE student_course (
 create index stat on student_course(status);
 
 
-CREATE TABLE admin(
-    admin_id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
-    user_id int,
-    FOREIGN KEY (user_id) REFERENCES user(user_id)
-);
-
 CREATE TABLE user_requests (
     request_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
@@ -80,10 +74,12 @@ INSERT into user(username,email_id,role) values('Dr. Puneet Goyal','tarushi.tane
 Insert into student(user_id,degree,dep,entry_no,year_of_entry) values(1,'BTECH','COMPUTER SCIENCE AND ENGINEERING','2022csb1135',2022);
 INSERT into faculty(user_id,dep) values(2,'COMPUTER SCIENCE AND ENGINEERING');
 
-INSERT into course(course_name,faculty_id,course_status,LTPC,credits,course_code,sem,admin_approval_status) values('Development Engineering Project',1,'running','3-5-5-3',3,'CP301','2024-II','approved');
+INSERT into course(course_name,faculty_id,course_status,LTPC,credits,course_code,sem,admin_approval_status,no_of_enrollments) values('Development Engineering Project',1,'running','3-5-5-3',3,'CP301','2024-II','approved',1);
 INSERT into student_course(student_id,course_id,status,grade) values(1,1,'pending instructor approval','NA');
 insert into user(username,email_id,role) values('Apurva Mudgal','tanejatarushi23@gmail.com','faculty');
 
 INSERT into faculty(user_id,dep,faculty_advisor) values(3,'COMPUTER SCIENCE AND ENGINEERING',1);
 
 INSERT into course(course_name,faculty_id,course_status,LTPC,credits,course_code,sem,admin_approval_status) values('BTP',1,'running','3-5-5-3',3,'CP301','2024-II','approved');
+
+insert into user(username,email_id,role) values('Rhea Sanjay','2022csb1112@iitrpr.ac.in','admin');
