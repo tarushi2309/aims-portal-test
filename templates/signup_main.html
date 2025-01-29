@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+  <title>Mentify - Signup as Faculty/Student</title>
+  <meta content="" name="description" />
+  <meta content="" name="keywords" />
+
+  <!-- Favicons -->
+  <link href="../static/assets/img/favicon.png" rel="icon" />
+  <link href="../static/assets/img/apple-touch-icon.png" rel="apple-touch-icon" />
+
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Montserrat:300,400,500,600,700"
+    rel="stylesheet" />
+
+  <!-- Vendor CSS Files -->
+  <link href="../static/assets/vendor/aos/aos.css" rel="stylesheet" />
+  <link href="../static/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="../static/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
+  <link href="../static/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet" />
+  <link href="../static/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet" />
+
+  <!-- Template Main CSS File -->
+  <link href="../static/assets/css/style.css" rel="stylesheet" />
+</head>
+
+</html>
+
+<body>
+  <!-- ======= Header ======= -->
+  <div>
+    <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand AIMS">
+          AIMS :: Academic Information Management System
+        </a>
+      </div>
+    </nav>
+  </div>
+  <!-- End Header -->
+  <!-- <main style="background-color: #2a94d5; padding-top: 10%"> -->
+  <!-- <section id="hero1" style="background-size: cover"> -->
+  <!-- Hero -->
+  <!-- <div class="p-5 text-center" style="margin-top: 10%">
+    <h1 class="mb-3">Who would you like to sign up as?</h1>
+  </div>
+  <form action="/user_category" method="post">
+    <div class="row g-3 justify-content-center align-items-center text-center">
+      <div class="col-sm-3">
+        <div style="background-color: #acdbf8; border-radius: 10px; padding: 4px 4px">
+          <div>
+
+            <h3 class="title">
+              <div style="color: #00304e">
+
+                <button class="btn btn-primary btn-md btn-block" type="submit" name="button"
+                  style="background: transparent" value="student">
+                  Student
+                </button>
+              </div>
+            </h3>
+            
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div style="background-color: #014d7b; border-radius: 10px; padding: 4px">
+          <div style="color: #b2e0fd">
+            <h3 class="title">
+              <div style="color: #b2e0fd">
+
+                <button class="btn btn-primary btn-md btn-block" type="submit" name="button"
+                  style="background: transparent" value="faculty">
+                  Faculty
+                </button>
+              </div>
+            </h3>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </form> -->
+  <div class="container signup-container text-center p-5" style="margin-top: 10%">
+    <h1 class="text-dark mb-4">Who would you like to sign up as?</h1>
+    <form action="/user_category" method="post">
+      <div class="row justify-content-center">
+        <div class="col-md-4 mb-4">
+          <div class="p-5 signup-box student-box">
+            <h3 style="color:black">Student</h3>
+            <button class="btn btn-dark" type="submit" name="button" value="student">Sign up as Student</button>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4">
+          <div class="p-5 signup-box faculty-box">
+            <h3 style="color:black">Faculty</h3>
+            <button class="btn btn-dark" type="submit" name="button" value="faculty">Sign up as Faculty</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</body>

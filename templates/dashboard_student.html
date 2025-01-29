@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    <title>Aims - Login Page</title>
+    <meta content="" name="description" />
+    <meta content="" name="keywords" />
+
+    <!-- Favicons -->
+    <link href="../static/assets/img/favicon.png" rel="icon" />
+    <link
+      href="../static/assets/img/apple-touch-icon.png"
+      rel="apple-touch-icon"
+    />
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Montserrat:300,400,500,600,700"
+      rel="stylesheet"
+    />
+
+    <!-- Vendor CSS Files -->
+    <link href="../static/assets/vendor/aos/aos.css" rel="stylesheet" />
+    <link
+      href="../static/assets/vendor/bootstrap/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="../static/assets/vendor/bootstrap-icons/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link
+      href="../static/assets/vendor/glightbox/css/glightbox.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="../static/assets/vendor/swiper/swiper-bundle.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Template Main CSS File -->
+    <link href="../static/assets/css/style.css" rel="stylesheet" />
+  </head>
+</html>
+
+
+
+
+<body>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIMS Portal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #222;
+            color: #fff;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 18px;
+        }
+
+        nav {
+            display: flex;
+            gap: 15px;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+        }
+        .container {
+            padding: 20px;
+            max-width: 2000px;
+            margin: 0 auto;
+        }
+
+        .readonly-input {
+            background-color: #f8f9fa; /* Light gray background */
+            border: 1px solid #ced4da; /* Border similar to editable inputs */
+            color: #495057; /* Text color */
+            pointer-events: none; /* Prevent interaction */
+            cursor: default; /* Standard cursor */
+            width: 100%; /* Full width */
+            padding: 8px; /* Padding for better appearance */
+            border-radius: 4px; /* Rounded corners */
+        }
+
+        .course-container {
+  display: grid; /* Enable grid layout */
+  grid-template-columns: repeat(3, 1fr); /* Create 3 equal-width columns */
+  gap: 16px; /* Space between cards */
+  justify-items: center; /* Center align cards in each grid cell */
+}
+
+.course-item {
+  background-color: #f9f9f9; /* Light background for cards */
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 16px;
+  width: 300px; /* Fixed width */
+  height: 250px; /* Fixed height */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  text-align: left;
+}
+
+
+        .courses-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+            gap: 16px; /* Space between cards */
+            margin: 0 auto;
+            max-width: 1200px; /* Optional: Set a max width for the grid */
+          }
+
+          .course-item {
+            flex: 0 1 calc(33.333% - 16px); /* Ensure 3 cards fit per row */
+            box-sizing: border-box;
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 16px;
+            text-align: left;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+          }
+
+          .course-item:hover {
+            transform: scale(1.05); /* Slightly enlarge card on hover */
+          }
+
+          .course-item a {
+            font-weight: bold;
+            color: #0a0909;
+            text-decoration: none;
+          }
+
+          .course-item a:hover {
+            color: #007bff; /* Optional: Change color on hover */
+          }
+
+    </style>
+</head>
+<body class="bg-light">
+    <div>
+        <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+            <div class="container-fluid my-container-fluid">
+              <a class="navbar-brand AIMS">
+                AIMS :: Academic Information Management System
+              </a>
+              <ul class="nav nav-underline justify-content-end">
+                <li class="nav-item">
+                  <a
+                    class="nav-link active"
+                    style="
+                      color: white;
+                      font-family: Arial, Helvetica, sans-serif;
+                      font-weight: 300;
+                    "
+                    href=""
+                    >Home</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a
+                    class="nav-link"
+                    style="
+                      color: white;
+                      font-family: Arial, Helvetica, sans-serif;
+                      font-weight: 300;
+                    "
+                    aria-current="page"
+                    href="{{ url_for('courses_available',username=user['username']) }}"
+                    >Courses</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a
+                    class="nav-link"
+                    style="
+                      color: white;
+                      font-family: Arial, Helvetica, sans-serif;
+                      font-weight: 300;
+                    "
+                    href="{{ url_for('logout') }}"
+                    >Logout</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </nav>
+      </div>
+    <div class="container">
+        <div class="student-details">
+            <h2>Student Details</h2>
+            <body>
+                <hr width="100%;" color="grey" size="5">
+            </body>
+            <div class="grid-container">
+                <div>
+                    <label for="full-name">Full Name</label>
+                    <input style="border: 1px solid #bdbcbc;" type="text" id="first-name" value="{{ user['username'] }}" readonly class="readonly-input">
+                </div>
+                <div>
+                    <label for="roll-no">Roll Number</label>
+                    <input style="border: 1px solid #bdbcbc;" type="text" id="roll-no" value="{{ student['entry_no'] }}" readonly class="readonly-input">
+                </div>
+                <div>
+                    <label for="email">Email</label>
+                    <input style="border: 1px solid #bdbcbc;" type="email" id="email" value="{{ user['email_id'] }}" readonly class="readonly-input">
+                </div>
+                <div>
+                    <label for="department">Department</label>
+                    <input style="border: 1px solid #bdbcbc;"type="text" id="department" value="{{ student['dep'] }}" readonly class="readonly-input">
+                </div>
+                <div>
+                    <label for="year">Year of Entry</label>
+                    <input style="border: 1px solid #bdbcbc;"type="text" id="year" value="{{ student['year_of_entry'] }}" readonly class="readonly-input">
+                </div>
+                <div>
+                    <label for="degree">Degree Type</label>
+                    <input style="border: 1px solid #bdbcbc;"type="text" id="degree" value="{{ student['degree'] }}" readonly class="readonly-input">
+                </div>
+                <div>
+                  <label for="degree">Faculty Advisor</label>
+                  <input style="border: 1px solid #bdbcbc;"type="text" id="degree" value="{{ fa }}" readonly class="readonly-input">
+              </div>
+            </div>
+        </div>
+    </div>
+
+
+<!-- My Courses Section -->
+<div class="my-courses" style="color: black;">
+    <h2>My Courses</h2>
+    <hr width="100%" color="grey" size="5" />
+
+    <div class="courses-grid" style="display: flex; flex-wrap: wrap; justify-content: space-evenly;">
+     
+      {% for course in courses %}
+      <div class="course-item">
+        <label>
+          <a href="{{ url_for('course',course_id=course['course_id'],username=user['username']) }}">{{ course.course_code }} | {{ course.course_name }} | {{ course.LTPC }} | ({{course.course_status}})</a>
+        </label>
+        <p>
+          <strong>Credits:</strong> {{ course.credits }}<br>
+          <strong>Status:</strong> {{ course.status }}<br>
+          <strong>Session:</strong> {{ course.sem}}<br>
+          <strong>Grade:</strong> {{ course.grade }}<br>
+        </p>
+      </div>
+      {% endfor %}
+    
+  </div>
+
+<script>
+    // Get references to elements
+    const checkboxes = document.querySelectorAll('.course-checkbox');
+    const actionButton = document.getElementById('actionButton');
+    const dropdownMenu = document.getElementById('dropdownMenu');
+
+    // Enable Action button if any checkbox is selected
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', () => {
+            const isAnyChecked = Array.from(checkboxes).some(checkbox => checkbox.checked);
+            if (isAnyChecked) {
+                actionButton.classList.remove('disabled');
+            } else {
+                actionButton.classList.add('disabled');
+                dropdownMenu.style.display = 'none';
+            }
+        });
+    });
+
+    // Show dropdown menu when Action button is clicked
+    actionButton.addEventListener('click', () => {
+        if (!actionButton.classList.contains('disabled')) {
+            dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
+        }
+    });
+
+    // Close dropdown if clicked outside
+    document.addEventListener('click', (event) => {
+        if (!actionButton.contains(event.target) && !dropdownMenu.contains(event.target)) {
+            dropdownMenu.style.display = 'none';
+        }
+    });
+</script>
+
+</body>
+</html>
+
+</body>

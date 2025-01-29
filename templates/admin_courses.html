@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    <title>Aims - Login Page</title>
+    <meta content="" name="description" />
+    <meta content="" name="keywords" />
+
+    <!-- Favicons -->
+    <link href="../static/assets/img/favicon.png" rel="icon" />
+    <link
+      href="../static/assets/img/apple-touch-icon.png"
+      rel="apple-touch-icon"
+    />
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Montserrat:300,400,500,600,700"
+      rel="stylesheet"
+    />
+
+    <!-- Vendor CSS Files -->
+    <link href="../static/assets/vendor/aos/aos.css" rel="stylesheet" />
+    <link
+      href="../static/assets/vendor/bootstrap/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="../static/assets/vendor/bootstrap-icons/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link
+      href="../static/assets/vendor/glightbox/css/glightbox.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="../static/assets/vendor/swiper/swiper-bundle.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Template Main CSS File -->
+    <link href="../static/assets/css/style.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <!-- ======= Header ======= -->
+    <div>
+      <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+        <div class="container-fluid my-container-fluid">
+          <a class="navbar-brand AIMS">
+            AIMS :: Academic Information Management System
+          </a>
+          <ul class="nav nav-underline justify-content-end">
+            <li class="nav-item">
+              <a
+                class="nav-link active"
+                style="
+                  color: white;
+                  font-family: Arial, Helvetica, sans-serif;
+                  font-weight: 300;
+                "
+                href="{{ url_for('dashboard_admin')}}"
+                >Home</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                style="
+                  color: white;
+                  font-family: Arial, Helvetica, sans-serif;
+                  font-weight: 300;
+                "
+                href="{{ url_for('logout')}}"
+                >Logout</a
+              >
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+    <!-- End Header -->
+
+    <!-- ======= Courses for approval ======= -->
+    <div class="my-courses" style="color: black; margin-top: 20px">
+      <h2>Pending Requests for Course Approval</h2>
+      <hr width="100%" color="grey" size="5" />
+
+      <div
+        class="courses-grid"
+        style="display: flex; flex-wrap: wrap; justify-content: space-evenly"
+      >
+
+        {% for course in courses %}
+        <div class="course-item">
+          <label>
+            <a href="{{ url_for('course',course_id=course['course_id'],username=user['username']) }}"
+              >{{ course.course_code }} | {{ course.course_name }}</a
+            >
+          </label>
+          <p>
+            <strong>Instructor(s): </strong> {{ course.username }}<br />
+            <strong>L-T-P-C: </strong> {{ course.LTPC }}<br />
+            <strong>Department: </strong> {{ course.dep }}<br />
+            <strong>Semester: </strong> {{ course.sem }}<br />
+            <strong>Year: </strong> {{ course.year }} <br />
+          </p>
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                Action
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <li>
+                <a 
+                  class="dropdown-item action-btn" 
+                  href="#" 
+                  data-course-id="{{course['course_id'] }}" 
+                  data-action="approve"
+                >
+                  Approve
+                </a>
+              </li>
+              <li>
+                <a 
+                  class="dropdown-item action-btn" 
+                  href="#" 
+                  data-request-id="{{course['course_id'] }}" 
+                  data-action="reject"
+                >
+                  Reject
+                </a>
+              </li>
+            </ul>
+        </div>
+    </td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+document.body.addEventListener("click", function (event) {
+// Check if an action button was clicked
+if (event.target.classList.contains("action-btn")) {
+event.preventDefault();
+
+// Getuser ID, course ID, and action from data attributes
+const courseId = event.target.getAttribute("data-course-id");
+const action = event.target.getAttribute("data-action");
+
+// Send the data to the backend using fetch
+fetch("/admin/approve_course", {
+method: "POST",
+headers: {
+"Content-Type": "application/json",
+},
+body: JSON.stringify({
+course_id:courseId,
+action: action,
+}),
+})
+.then((response) => response.json())
+.then((data) => {
+          // Optionally remove the row from the table
+          const courseItem = event.target.closest(".course-item");
+          if (courseItem) {
+            courseItem.style.transition = "opacity 0.5s ease-out, transform 0.5s ease-out";
+            courseItem.style.opacity = "0";
+            courseItem.style.transform = "scale(0.9)";
+            setTimeout(() => {
+              courseItem.remove();
+            }, 500);
+        }
+      })
+
+.catch((error) => {
+console.error("Error:", error);
+alert("An error occurred while updating the status.");
+});
+}
+});
+});
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    <title>Aims - Login Page</title>
+    <meta content="" name="description" />
+    <meta content="" name="keywords" />
+
+    <!-- Favicons -->
+    <link href="../static/assets/img/favicon.png" rel="icon" />
+    <link
+      href="../static/assets/img/apple-touch-icon.png"
+      rel="apple-touch-icon"
+    />
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Montserrat:300,400,500,600,700"
+      rel="stylesheet"
+    />
+
+    <!-- Vendor CSS Files -->
+    <link href="../static/assets/vendor/aos/aos.css" rel="stylesheet" />
+    <link
+      href="../static/assets/vendor/bootstrap/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="../static/assets/vendor/bootstrap-icons/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link
+      href="../static/assets/vendor/glightbox/css/glightbox.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="../static/assets/vendor/swiper/swiper-bundle.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Template Main CSS File -->
+    <link href="../static/assets/css/style.css" rel="stylesheet" />
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  </head>
+</html>
+<style>
+  .container {
+            padding: 20px;
+            max-width: 2000px;
+            margin: 0 auto;
+        }
+</style>
+
+<body>
+  <!-- ======= Header ======= -->
+  <div>
+    <nav class="navbar navbar-expand-lg bg-dark navbar-dark" style="padding:0px;">
+      <div class="container-fluid my-container-fluid">
+        <a class="navbar-brand AIMS">
+          AIMS :: Academic Information Management System
+        </a>
+        <ul class="nav nav-underline justify-content-end">
+          <li class="nav-item">
+            <a
+              class="nav-link active"
+              style="
+                color: white;
+                font-family: Arial, Helvetica, sans-serif;
+                font-weight: 300;
+              "
+              href="{{ url_for('dashboard_admin')}}"
+              >Home</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              style="
+                color: white;
+                font-family: Arial, Helvetica, sans-serif;
+                font-weight: 300;
+              "
+              href="{{ url_for('logout')}}"
+              >Logout</a
+            >
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+  <!-- End Header -->
+
+  <h3 style="color: black; text-align: center; margin-top: 50px;">Pending SignUp Approvals</h3>
+  <div class="container">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Full Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Role</th>
+                <th scope="col">Approve/Reject</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- hard coded part for testing 
+            <tr class="course-item">
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto@gmail.com</td>
+                <td>1234</td>
+                <td>btech</td>
+                <td>cse</td>
+                <td>2022</td>
+                <td>
+                   
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                            Action
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <li><a class="dropdown-item action-btn" href="#">Approve</a></li>
+                            <li><a class="dropdown-item action-btn" href="#">Reject</a></li>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+             Dynamic part -->
+            {% for user in user %}
+            <tr class="course-item">
+                <th scope="row">{{ loop.index }}</th>
+                <td>{{ user['username'] }}</td>
+                <td>{{ user['email_id'] }}</td>
+                <td>{{ user['role'] }}</td>
+                <td>
+                  <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                        Action
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <li>
+                        <a 
+                          class="dropdown-item action-btn" 
+                          href="#" 
+                          data-request-id="{{user['request_id'] }}" 
+                          data-action="approve"
+                        >
+                          Approve
+                        </a>
+                      </li>
+                      <li>
+                        <a 
+                          class="dropdown-item action-btn" 
+                          href="#" 
+                          data-request-id="{{user['request_id'] }}" 
+                          data-action="reject"
+                        >
+                          Reject
+                        </a>
+                      </li>
+                    </ul>
+                </div>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+document.body.addEventListener("click", function (event) {
+  // Check if an action button was clicked
+  if (event.target.classList.contains("action-btn")) {
+    event.preventDefault();
+
+    // Getuser ID, course ID, and action from data attributes
+    const requestId = event.target.getAttribute("data-request-id");
+    const action = event.target.getAttribute("data-action");
+    
+    // Send the data to the backend using fetch
+    fetch("/admin/approve_user", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        request_id:requestId,
+        action: action,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+          // Optionally remove the row from the table
+          const courseItem = event.target.closest("tr.course-item");
+          if (courseItem) {
+            courseItem.style.transition = "opacity 0.5s ease-out, transform 0.5s ease-out";
+            courseItem.style.opacity = "0";
+            courseItem.style.transform = "scale(0.9)";
+            setTimeout(() => {
+              courseItem.remove();
+            }, 500);
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        alert("An error occurred while updating the status.");
+      });
+  }
+});
+});
+</script>
+
+
+</body>
+</html>

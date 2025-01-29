@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    <title>Aims - Login Page</title>
+    <meta content="" name="description" />
+    <meta content="" name="keywords" />
+
+    <!-- Favicons -->
+    <link href="../static/assets/img/favicon.png" rel="icon" />
+    <link
+      href="../static/assets/img/apple-touch-icon.png"
+      rel="apple-touch-icon"
+    />
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Montserrat:300,400,500,600,700"
+      rel="stylesheet"
+    />
+
+    <!-- Vendor CSS Files -->
+    <link href="../static/assets/vendor/aos/aos.css" rel="stylesheet" />
+    <link
+      href="../static/assets/vendor/bootstrap/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="../static/assets/vendor/bootstrap-icons/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link
+      href="../static/assets/vendor/glightbox/css/glightbox.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="../static/assets/vendor/swiper/swiper-bundle.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Template Main CSS File -->
+    <link href="../static/assets/css/style.css" rel="stylesheet" />
+  </head>
+
+  <body class="bg-light">
+    <!-- Style sheet -->
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f9f9f9;
+      }
+
+      header {
+        background-color: #222;
+        color: #fff;
+        padding: 10px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      header h1 {
+        margin: 0;
+        font-size: 18px;
+      }
+
+      nav {
+        display: flex;
+        gap: 15px;
+      }
+
+      nav a {
+        color: #fff;
+        text-decoration: none;
+      }
+
+      .logout-btn {
+        background-color: #e74c3c;
+        color: #fff;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      .logout-btn:hover {
+        background-color: #c0392b;
+      }
+
+      .container {
+        padding: 20px;
+        max-width: 2000px;
+        margin: 0 auto;
+      }
+
+      .faculty-details {
+        margin: 15px 10px 10px 10px;
+        background-color: #fff;
+        border-radius: 8px;
+        padding: 10px;
+        box-shadow: 0 2px 8px rgba(20, 18, 18, 0.1);
+        border-bottom: 1px solid #8d8a8a; /* Added border-bottom line */
+      }
+
+      .faculty-details h2 {
+        font-size: 20px;
+        margin-bottom: 20px;
+        color: #444;
+        text-align: center;
+      }
+
+      .grid-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        column-gap: 400px; /* Adjust the space between columns */
+        row-gap: 20px; /* Adjust the space between rows */
+      }
+
+      .grid-container label {
+        font-weight: bold;
+        margin-bottom: 5px;
+        display: block;
+        color: #525050;
+      }
+
+      .grid-container input,
+      .grid-container select {
+        border: none;
+        border-radius: 5px;
+        padding: 8px;
+        width: 100%;
+        background-color: #a8a3a3; /* Dark grey */
+        color: #fff;
+      }
+
+      .grid-container input:focus,
+      .grid-container select:focus {
+        outline: none;
+        border: 2px solid #007bff;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        background-color: #444; /* Slightly lighter grey when focused */
+      }
+
+      .my-courses {
+        margin-top: 10px;
+        background-color: #fff;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        margin-left: 30px; /* Added left margin */
+        margin-right: 30px; /* Added right margin */
+        border-top: 1px solid #b9b4b4; /* Added border-top line */
+      }
+
+      .my-courses h2 {
+        font-size: 22px;
+        margin-bottom: 20px;
+        color: #0a0909;
+        text-align: center;
+      }
+
+      .results-container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+      }
+
+      .course-item {
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 15px;
+        background-color: #f9f9f9;
+      }
+
+      .highlight {
+        background-color: #a9a9a9; /* Light grey background */
+        color: #fff; /* Dark text for visibility */
+        padding: 5px 10px; /* Add padding around the text */
+        border-radius: 5px; /* Rounded corners */
+        display: inline-block; /* Ensures spacing works well */
+        width: 100%; /* Make the box stretch to full width of the parent container */
+        max-width: 500px; /* Limit the maximum width */
+        text-align: center;
+      }
+
+      .centered-label {
+        display: block; /* Makes the label a block element for proper centering */
+        font-weight: bold; /* Optional: make headings bold */
+        margin-bottom: 5px; /* Space between label and text */
+      }
+
+      .course-item p {
+        font-size: 14px;
+        line-height: 1.6;
+        color: #555;
+      }
+
+      .course-item a {
+        color: #007bff;
+        text-decoration: none;
+        font-weight: bold;
+      }
+
+      .course-item a:hover {
+        text-decoration: underline;
+      }
+
+      .course-item input[type="checkbox"] {
+        margin-right: 10px;
+        vertical-align: middle;
+      }
+
+      .course-item strong {
+        font-weight: bold;
+      }
+      .highlight{
+        background-color: #ededed;
+        border: 1px solid #bdbcbc;
+      }
+
+      .course-container {
+  display: grid; /* Enable grid layout */
+  grid-template-columns: repeat(3, 1fr); /* Create 3 equal-width columns */
+  gap: 16px; /* Space between cards */
+  justify-items: center; /* Center align cards in each grid cell */
+}
+
+.course-item {
+  background-color: #f9f9f9; /* Light background for cards */
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 16px;
+  width: 300px; /* Fixed width */
+  height: 250px; /* Fixed height */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  text-align: left;
+}
+
+      .course-item label a {
+        font-weight: bold;
+        font-size: 16px;
+      }
+
+      .dropdown-menu {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .course-item:hover {
+            transform: scale(1.05); /* Slightly enlarge card on hover */
+          }
+    </style>
+
+    <div>
+      <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+        <div class="container-fluid my-container-fluid">
+          <a class="navbar-brand AIMS">
+            AIMS :: Academic Information Management System
+          </a>
+          <ul class="nav nav-underline justify-content-end">
+            <li class="nav-item">
+              <a
+                class="nav-link active"
+                style="
+                  color: white;
+                  font-family: Arial, Helvetica, sans-serif;
+                  font-weight: 300;
+                "
+                href=""
+                >Home</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                style="
+                  color: white;
+                  font-family: Arial, Helvetica, sans-serif;
+                  font-weight: 300;
+                "
+                aria-current="page"
+                href="{{ url_for('create_course',faculty_id=faculty['faculty_id'])}}"
+              >
+                Create Course
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                style="
+                  color: white;
+                  font-family: Arial, Helvetica, sans-serif;
+                  font-weight: 300;
+                "
+                aria-current="page"
+                href="{{ url_for('pending_approvals',faculty_id=faculty['faculty_id']) }}"
+              >
+                Pending Approvals
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                style="
+                  color: white;
+                  font-family: Arial, Helvetica, sans-serif;
+                  font-weight: 300;
+                "
+                href="{{ url_for('logout') }}"
+                >Logout</a
+              >
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+
+    <main>
+      <div class="container">
+        <div class="faculty-details" style="padding: 15px 20px 30px 20px;">
+          <h2 style="color: #0a0909">Faculty Details</h2>
+          <hr width="100%" color="grey" size="5" />
+          <div class="row text-center">
+            <div class="col-md-6">
+              <label for="name" class="centered-label" style="color:#0a0909; font-family: Arial, Helvetica, sans-serif; font-weight: 400;">Name</label>
+              <span id="name" class="highlight" style="color:#0a0909">{{ user['username'] }}</span>
+            </div>
+            <div class="col-md-6">
+              <label for="faculty-id" class="centered-label" style="color:#0a0909; font-family: Arial, Helvetica, sans-serif; font-weight: 400;">Faculty ID</label>
+              <span id="faculty-id" class="highlight" style="color:#0a0909">{{ faculty['faculty_id'] }}</span>
+            </div>
+          </div>
+          <div class="row text-center mt-3">
+            <div class="col-md-6">
+              <label for="email" class="centered-label" style="color:#0a0909; font-family: Arial, Helvetica, sans-serif; font-weight: 400;">Email</label>
+              <span id="email" class="highlight" style="color:#0a0909">{{ user['email_id'] }}</span>
+            </div>
+            <div class="col-md-6">
+              <label for="department" class="centered-label" style="color:#0a0909; font-family: Arial, Helvetica, sans-serif; font-weight: 400;">Department</label>
+              <span id="department" class="highlight" style="color:#0a0909">{{ faculty['dep'] }}</span>
+            </div>
+          </div>
+          <div class="row text-center mt-3">
+            <div class="col-md-6">
+              {% if faculty['faculty_advisor'] == 1 %}
+                <label for="email" class="centered-label" style="color:#0a0909; font-family: Arial, Helvetica, sans-serif; font-weight: 400;">Faculty Advisor</label>
+                <span id="email" class="highlight" style="color:#0a0909">Yes</span>
+              {% endif %}
+            </div>
+          </div>          
+        </div>
+      </div>
+      
+
+      <!-- ======= Courses Available Section ======= -->
+      <div class="my-courses">
+        <h2>My Courses</h2>
+        <hr width="100%" color="grey" size="5" />
+
+        <div
+          class="courses-grid"
+          style="display: flex; flex-wrap: wrap; justify-content: space-evenly"
+        >
+
+        <div class="course-container">
+          {% for course in courses %}
+          <div class="course-item">
+            <label>
+              <a style="color: #0a0909" href="{{ url_for('course',course_id=course['course_id'],username=user['username']) }}">
+                {{ course.course_code }} | {{ course.course_name }} | {{ course.LTPC }}
+              </a>
+            </label>
+            <p>
+              <strong>Credits:</strong> {{ course.credits }}<br />
+              <strong>Status:</strong> {{ course.course_status }}<br />
+              <strong>Session:</strong> {{ course.sem }}<br />
+              <strong>Enrollment:</strong> {{ course.no_of_enrollments }} in Sec.-A<br />
+            </p>
+            <div class="dropdown">
+              <ul class="dropdown-menu">
+                <li>
+                  <a
+                    class="dropdown-item action-btn"
+                    href="#"
+                    data-course-id="{{ course.id }}"
+                    data-action="credit"
+                    style="color: black; font-weight: 400"
+                  >Credit</a>
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item action-btn"
+                    href="#"
+                    data-course-id="{{ course.id }}"
+                    data-action="audit"
+                    style="color: black; font-weight: 400"
+                  >Audit</a>
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item action-btn"
+                    href="#"
+                    data-course-id="{{ course.id }}"
+                    data-action="drop"
+                    style="color: black; font-weight: 400"
+                  >Drop</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        
+        </div>
+      </div>
+    </main>
+
+    <a
+      href="#"
+      class="back-to-top d-flex align-items-center justify-content-center"
+      ><i class="bi bi-arrow-up-short"></i
+    ></a>
+
+    <!-- Vendor JS Files -->
+    <script src="../static/assets/vendor/purecounter/purecounter_vanilla.js"></script>
+    <script src="../static/assets/vendor/aos/aos.js"></script>
+    <script src="../static/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../static/assets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="../static/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="../static/assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="../static/assets/vendor/php-email-form/validate.js"></script>
+
+    <!-- Template Main JS File -->
+    <script src="../static/assets/js/main.js"></script>
+  </body>
+</html>
