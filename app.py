@@ -82,6 +82,7 @@ def process_otp(email_id):
                 user=cursor.fetchone()
                 print(f"user:{user}")
                 if user:
+                    session['user_id']=user['user_id']
                     if user['role']=='student':
                         session['role']=1
                         session['loggedin']=True
@@ -208,8 +209,9 @@ def pending_approvals(faculty_id):
 @app.route('/courses_available/<username>',methods=['GET','POST'])
 def courses_available(username):
     if session['role']==1:
-        cursor.execute('SELECT * FROM student where user_id = %s',(user['user_id'],))  
+        cursor.execute('SELECT * FROM student where user_id = %s',(session['user_id'],))  
         student = cursor.fetchone()
+        print(f'students {student}')
         if request.method=='POST':
             course_id = request.json.get('course_id')
             action = request.json.get('action')
@@ -362,6 +364,7 @@ def logout():
     session.pop('loggedin', None)
     session.pop('id', None)
     session.pop('username', None)
+    session.pop('userid', None)
     session.pop('role',None)
     return redirect(url_for('login'))
 

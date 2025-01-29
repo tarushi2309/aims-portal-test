@@ -179,14 +179,28 @@
 
 
               <script>
-                document.getElementById("signupForm").onsubmit = function (event) {
+                document.getElementById("facultySignupForm").onsubmit = function (event) {
+                    // Prevent form submission if validation fails
+                    const fields = [
+                        { id: "fullName", name: "Full Name" },
+                        { id: "email", name: "Email" },
+                        { id: "facultyid", name: "Faculty ID" },
+                        { id: "department", name: "Department" },
+                    ];
+            
+                    for (let field of fields) {
+                        const value = document.getElementById(field.id).value.trim();
+                        if (!value) {
+                            event.preventDefault(); // Prevent submission
+                            alert(`Please fill out the ${field.name} field.`);
+                            document.getElementById(field.id).focus();
+                            return false;
+                        }
                   const fields = [
                     { id: "fullName", name: "Full Name" },
                     { id: "email", name: "Email" },
-                    { id: "EntryNo", name: "Entry Number" },
-                    { id: "degree", name: "Degree Type" },
+                    { id: "facultyid", name: "Faculty ID" },
                     { id: "department", name: "Department" },
-                    { id: "year", name: "Year of Entry" },
                   ];
               
                   // Validate all fields
@@ -198,34 +212,17 @@
                       document.getElementById(field.id).focus();
                       return false;
                     }
+            
+                    // Show success message upon validation
+                    alert("Registration successful!");
                   }
               
-                  // Show success modal instead of alert
-                  event.preventDefault(); // Prevent form submission for demonstration
-                  showModal("Registration successful! You can login once admin approves the registration.");
-                };
+                  // Show success modal on successful validation
+                  event.preventDefault(); // Prevent submission for demonstration
+                  showModal("Registration successful!");
+                }};
+                </script>            
               
-                // Function to show the modal
-                function showModal(message) {
-                  const modal = document.getElementById("successModal");
-                  const overlay = document.getElementById("modalOverlay");
-                  document.getElementById("modalMessage").textContent = message;
-              
-                  modal.style.display = "block";
-                  overlay.style.display = "block";
-                }
-              
-                // Function to close the modal
-                function closeModal() {
-                  const modal = document.getElementById("successModal");
-                  const overlay = document.getElementById("modalOverlay");
-              
-                  modal.style.display = "none";
-                  overlay.style.display = "none";
-
-                  window.location.href = '/';
-                }
-              </script>
             </div>
           </div>
         </div>
